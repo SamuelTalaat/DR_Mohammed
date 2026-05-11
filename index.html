@@ -290,6 +290,35 @@
     box-shadow: 0 0 20px rgba(220,220,220,0.3);
   }
 
+
+
+  /* HERO BACKGROUND IMAGE - RESPONSIVE FOR MOBILE */
+.hero-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;  /* توسيط الصورة */
+  z-index: -2;
+}
+
+/* تحسين خاص للموبايل */
+@media (max-width: 768px) {
+  .hero-bg-image {
+    object-position: 55% center;  /* يظهر الجزء المهم من الصورة */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-bg-image {
+    object-position: 60% center;
+    object-fit: cover;
+  }
+}
+
+
   /* Language Switcher */
   .lang-switch {
     display: flex;
@@ -2000,7 +2029,7 @@
   <div class="container">
     <div class="about-grid">
       <div class="doctor-image-wrapper reveal">
-        <img class="doctor-img" src="freepik_candid_image_photography_natural_textures_highly_r_13949.jpg" alt="د. محمد عماد الدين">
+        <img class="doctor-img" src="freepik_candid_image_photography_natural_textures_highly_r_13949 - Copy.jpg" alt="د. محمد عماد الدين">
         <div class="doctor-ring"></div>
         <div class="about-badge">
           <span class="badge-num">12+</span>
