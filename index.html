@@ -2,16 +2,17 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>د. محمد عماد الدين | جراح المسالك والرسام الطبي</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>د. محمد عماد الدين | جراحة المسالك - تركيب الدعامات - الرسم الطبي</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Space+Grotesk:wght@300;400;500;600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- Premium Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <style>
   /* ============================================
-     DESIGN SYSTEM — BLACK & SILVER METALLIC (RTL)
+     DESIGN SYSTEM — BLACK & SILVER METALLIC
   ============================================ */
   :root {
     --black: #000000;
@@ -20,19 +21,27 @@
     --surface: #0f0f0f;
     --glass: rgba(255,255,255,0.03);
     --glass-border: rgba(200,200,200,0.12);
-    --silver: #b8b8b8;
-    --silver-light: #d4d4d4;
-    --silver-glow: rgba(200,200,200,0.25);
-    --white: #f5f5f5;
-    --muted: rgba(245,245,245,0.45);
+    --silver: #d4d4d4;
+    --silver-light: #e8e8e8;
+    --silver-glow: rgba(220,220,220,0.2);
+    --white: #fafafa;
+    --muted: rgba(250,250,250,0.55);
     --accent: #6c6c6c;
     
-    --font-arabic: 'Cairo', 'Playfair Display', serif;
-    --font-body: 'Space Grotesk', 'Cairo', sans-serif;
-    --font-mono: 'DM Mono', monospace;
+    /* Gradients */
+    --grad-1: linear-gradient(135deg, #bac7db 0%, #0a0a0a 50%, #141414 100%);
+    --grad-2: linear-gradient(135deg, #bac7db 0%, #0d0d0d 50%, #1a1a1a 100%);
+    --grad-3: linear-gradient(135deg, #626d79 0%, #141414 50%, #0f0f10 100%);
+    --grad-4: radial-gradient(circle at 30% 50%, #181819, #626d79);
+    
+    /* Fonts */
+    --font-arabic-premium: 'Tajawal', 'Cormorant Garamond', 'Playfair Display', serif;
+    --font-english-premium: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+    --font-body-premium: 'Space Grotesk', 'Tajawal', sans-serif;
+    --font-mono-premium: 'DM Mono', monospace;
     
     --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
-    --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   * {
@@ -50,17 +59,28 @@
   body {
     background: var(--black);
     color: var(--white);
-    font-family: var(--font-arabic);
-    font-weight: 300;
-    line-height: 1.7;
+    font-family: var(--font-body-premium);
+    font-weight: 400;
+    line-height: 1.8;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
 
+  /* Section Gradients */
+  #about { background: var(--grad-1); }
+  #stats { background: var(--grad-2); }
+  #services { background: var(--grad-3); }
+  #staff { background: var(--grad-1); }
+  #portfolio { background: var(--grad-2); }
+  #experience { background: var(--grad-4); }
+  #testimonials { background: var(--grad-3); }
+  #booking { background: var(--grad-1); }
+  footer { background: var(--grad-2); }
+
   /* English mode (LTR) */
   body[dir="ltr"] {
     text-align: left;
-    font-family: 'Space Grotesk', 'Cairo', sans-serif;
+    font-family: var(--font-body-premium);
   }
   body[dir="ltr"] .ar-only { display: none !important; }
   body[dir="ltr"] .en-only { display: block !important; }
@@ -68,13 +88,13 @@
   body[dir="rtl"] .en-only { display: none !important; }
 
   ::selection {
-    background: rgba(200,200,200,0.2);
+    background: rgba(220,220,220,0.25);
     color: var(--silver-light);
   }
 
   ::-webkit-scrollbar { width: 3px; }
   ::-webkit-scrollbar-track { background: var(--deep); }
-  ::-webkit-scrollbar-thumb { background: var(--silver); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb { background: var(--silver); border-radius: 3px; }
 
   /* Particle Canvas */
   #cosmos {
@@ -98,8 +118,8 @@
       0deg,
       transparent,
       transparent 2px,
-      rgba(255,255,255,0.008) 2px,
-      rgba(255,255,255,0.008) 4px
+      rgba(255,255,255,0.003) 2px,
+      rgba(255,255,255,0.003) 4px
     );
   }
 
@@ -118,14 +138,14 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    border: 1px solid rgba(200,200,200,0.3);
+    border: 1px solid rgba(220,220,220,0.3);
     transition: all 0.3s ease;
     box-shadow: 0 5px 20px rgba(0,0,0,0.3);
   }
   .display-mode-toggle:hover {
     transform: scale(1.1);
     border-color: var(--silver);
-    box-shadow: 0 0 20px rgba(200,200,200,0.3);
+    box-shadow: 0 0 20px rgba(220,220,220,0.3);
   }
   .display-mode-toggle i {
     font-size: 1.5rem;
@@ -193,22 +213,28 @@
   }
 
   nav.scrolled {
-    background: rgba(0,0,0,0.85);
+    background: rgba(0,0,0,0.88);
     backdrop-filter: blur(24px) saturate(180%);
     border-bottom-color: var(--glass-border);
   }
 
   .nav-logo {
-    font-family: var(--font-arabic);
-    font-size: 1.2rem;
+    font-family: var(--font-english-premium);
+    font-size: 1.4rem;
     font-weight: 600;
     letter-spacing: 0.02em;
     color: var(--white);
     text-decoration: none;
   }
+  body[dir="rtl"] .nav-logo {
+    font-family: var(--font-arabic-premium);
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
 
   .nav-logo span { 
     color: var(--silver-light);
+    font-weight: 700;
   }
 
   .nav-links {
@@ -218,7 +244,7 @@
   }
 
   .nav-links a {
-    font-family: var(--font-mono);
+    font-family: var(--font-mono-premium);
     font-size: 0.7rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -248,7 +274,7 @@
     padding: 10px 28px;
     border: 1px solid var(--silver);
     border-radius: 40px;
-    font-family: var(--font-mono);
+    font-family: var(--font-mono-premium);
     font-size: 0.68rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -261,10 +287,10 @@
   .nav-cta:hover {
     background: var(--silver);
     color: var(--black);
-    box-shadow: 0 0 20px rgba(200,200,200,0.3);
+    box-shadow: 0 0 20px rgba(220,220,220,0.3);
   }
 
-  /* Language Switcher Button */
+  /* Language Switcher */
   .lang-switch {
     display: flex;
     gap: 10px;
@@ -280,7 +306,7 @@
     padding: 6px 14px;
     border-radius: 30px;
     transition: all 0.3s;
-    font-family: var(--font-mono);
+    font-family: var(--font-mono-premium);
   }
   .lang-btn.active {
     background: var(--silver);
@@ -293,7 +319,7 @@
   }
 
   /* ============================================
-     HERO SECTION — WITH PROFESSIONAL BACKGROUND IMAGE
+     HERO SECTION
   ============================================ */
   #hero {
     position: relative;
@@ -309,7 +335,6 @@
     overflow: hidden;
   }
 
-  /* Hero Background Image */
   .hero-bg-image {
     position: absolute;
     top: 0;
@@ -320,7 +345,6 @@
     z-index: -2;
   }
 
-  /* Dark Overlay for text readability */
   .hero-overlay {
     position: absolute;
     top: 0;
@@ -328,9 +352,9 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, 
-      rgba(0,0,0,0.75) 0%, 
-      rgba(0,0,0,0.65) 40%,
-      rgba(0,0,0,0.55) 100%);
+      rgba(0,0,0,0.55) 0%, 
+      rgba(0,0,0,0.45) 40%,
+      rgba(0,0,0,0.35) 100%);
     z-index: -1;
   }
 
@@ -341,7 +365,7 @@
     transform: translate(-50%, -60%);
     width: 900px;
     height: 600px;
-    background: radial-gradient(ellipse at center, rgba(200,200,200,0.07) 0%, rgba(100,100,100,0.02) 50%, transparent 70%);
+    background: radial-gradient(ellipse at center, rgba(220,220,220,0.1) 0%, rgba(100,100,100,0.03) 50%, transparent 70%);
     pointer-events: none;
     animation: breathe 8s ease-in-out infinite;
     z-index: 0;
@@ -350,11 +374,11 @@
   .hero-line-top {
     position: relative;
     z-index: 2;
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.35em;
+    font-family: var(--font-mono-premium);
+    font-size: 0.7rem;
+    letter-spacing: 0.45em;
     text-transform: uppercase;
-    color: var(--silver);
+    color: var(--silver-light);
     opacity: 0;
     animation: fadeSlideUp 1s 0.4s var(--ease-expo) forwards;
     margin-bottom: 24px;
@@ -366,7 +390,7 @@
   .hero-line-top::before,
   .hero-line-top::after {
     content: '';
-    width: 50px;
+    width: 55px;
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--silver), transparent);
   }
@@ -374,35 +398,57 @@
   .hero-name {
     position: relative;
     z-index: 2;
-    font-family: 'Playfair Display', 'Cairo', serif;
-    font-size: clamp(3.5rem, 10vw, 7rem);
-    font-weight: 500;
-    line-height: 1.1;
+    font-family: var(--font-english-premium);
+    font-size: clamp(4rem, 10vw, 7.5rem);
+    font-weight: 700;
+    line-height: 1.2;
     letter-spacing: -0.02em;
     color: var(--white);
     opacity: 0;
     animation: fadeSlideUp 1.2s 0.6s var(--ease-expo) forwards;
-    margin-bottom: 12px;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    margin-bottom: 16px;
+    text-shadow: 0 2px 30px rgba(0,0,0,0.5);
+  }
+  body[dir="rtl"] .hero-name {
+    font-family: var(--font-arabic-premium);
+    font-weight: 800;
   }
 
   .hero-name-em {
     font-style: italic;
     color: var(--silver-light);
-    font-weight: 600;
+    font-weight: 800;
   }
 
   .hero-title {
     position: relative;
     z-index: 2;
-    font-family: var(--font-mono);
-    font-size: clamp(0.6rem, 1.5vw, 0.8rem);
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
+    font-family: var(--font-mono-premium);
+    font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+    font-weight: 500;
+    letter-spacing: 0.08em;
     color: var(--muted);
     opacity: 0;
     animation: fadeSlideUp 1.2s 0.85s var(--ease-expo) forwards;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
+  }
+
+  .hero-stent-badge {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    background: rgba(220,220,220,0.1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(220,220,220,0.25);
+    padding: 8px 24px;
+    border-radius: 50px;
+    font-family: var(--font-mono-premium);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--silver-light);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeSlideUp 1.2s 0.95s var(--ease-expo) forwards;
   }
 
   .hero-divider {
@@ -415,28 +461,32 @@
   }
 
   @keyframes growLine {
-    to { height: 55px; opacity: 1; }
+    to { height: 60px; opacity: 1; }
   }
 
   .hero-desc {
     position: relative;
     z-index: 2;
-    font-family: 'Playfair Display', 'Cairo', serif;
-    font-size: clamp(1rem, 2.5vw, 1.4rem);
-    font-weight: 400;
+    font-family: var(--font-english-premium);
+    font-size: clamp(1.1rem, 2.8vw, 1.5rem);
+    font-weight: 500;
     font-style: italic;
-    color: var(--muted);
-    max-width: 650px;
+    color: rgba(255,255,255,0.92);
+    max-width: 700px;
     opacity: 0;
     animation: fadeSlideUp 1.2s 1.2s var(--ease-expo) forwards;
     margin-bottom: 56px;
+    text-shadow: 0 1px 15px rgba(0,0,0,0.3);
+  }
+  body[dir="rtl"] .hero-desc {
+    font-family: var(--font-arabic-premium);
   }
 
   .hero-actions {
     position: relative;
     z-index: 2;
     display: flex;
-    gap: 20px;
+    gap: 24px;
     flex-wrap: wrap;
     justify-content: center;
     opacity: 0;
@@ -444,21 +494,21 @@
   }
 
   .btn-primary {
-    padding: 16px 42px;
-    background: linear-gradient(135deg, #6a6a6a, #3a3a3a);
+    padding: 16px 45px;
+    background: linear-gradient(135deg, #7a7a7a, #3a3a3a);
     color: var(--white);
-    font-family: var(--font-mono);
+    font-family: var(--font-mono-premium);
     font-size: 0.7rem;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     text-decoration: none;
     border: none;
     cursor: pointer;
-    border-radius: 40px;
+    border-radius: 50px;
     transition: all 0.45s var(--ease-expo);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 0 10px rgba(200,200,200,0.2);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
   }
 
   .btn-primary::before {
@@ -473,21 +523,21 @@
   .btn-primary:hover::before { transform: translateX(200%) skewX(-20deg); }
   .btn-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 20px 50px rgba(200,200,200,0.35);
-    background: linear-gradient(135deg, #888, #555);
+    box-shadow: 0 20px 50px rgba(220,220,220,0.3);
+    background: linear-gradient(135deg, #999, #555);
   }
 
   .btn-secondary {
-    padding: 16px 42px;
+    padding: 16px 45px;
     background: transparent;
     color: var(--white);
-    font-family: var(--font-mono);
+    font-family: var(--font-mono-premium);
     font-size: 0.7rem;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     text-decoration: none;
-    border: 1px solid rgba(200,200,200,0.4);
-    border-radius: 40px;
+    border: 1px solid rgba(220,220,220,0.4);
+    border-radius: 50px;
     cursor: pointer;
     transition: all 0.4s var(--ease-expo);
     backdrop-filter: blur(8px);
@@ -497,8 +547,8 @@
     border-color: var(--silver);
     color: var(--silver);
     transform: translateY(-3px);
-    background: rgba(200,200,200,0.1);
-    box-shadow: 0 10px 30px rgba(200,200,200,0.15);
+    background: rgba(220,220,220,0.1);
+    box-shadow: 0 10px 30px rgba(220,220,220,0.15);
   }
 
   .hero-scroll-indicator {
@@ -516,7 +566,7 @@
   }
 
   .hero-scroll-indicator span {
-    font-family: var(--font-mono);
+    font-family: var(--font-mono-premium);
     font-size: 0.55rem;
     letter-spacing: 0.25em;
     color: var(--muted);
@@ -525,9 +575,9 @@
 
   .scroll-line {
     width: 1px;
-    height: 50px;
+    height: 55px;
     background: linear-gradient(to bottom, var(--silver), transparent);
-    animation: scrollPulse 2s ease-in-out infinite;
+    animation: scrollPulse 2.2s ease-in-out infinite;
   }
 
   @keyframes scrollPulse {
@@ -536,13 +586,13 @@
   }
 
   @keyframes fadeSlideUp {
-    from { opacity: 0; transform: translateY(35px); }
+    from { opacity: 0; transform: translateY(40px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
   @keyframes breathe {
-    0%, 100% { opacity: 0.4; transform: translate(-50%,-60%) scale(1); }
-    50% { opacity: 0.8; transform: translate(-50%,-60%) scale(1.08); }
+    0%, 100% { opacity: 0.5; transform: translate(-50%,-60%) scale(1); }
+    50% { opacity: 0.9; transform: translate(-50%,-60%) scale(1.05); }
   }
 
   /* ============================================
@@ -551,9 +601,9 @@
   section { position: relative; z-index: 1; }
 
   .container {
-    max-width: 1280px;
+    max-width: 1300px;
     margin: 0 auto;
-    padding: 0 48px;
+    padding: 0 56px;
   }
 
   .section-header {
@@ -562,21 +612,25 @@
   }
 
   .section-eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.4em;
+    font-family: var(--font-mono-premium);
+    font-size: 0.68rem;
+    letter-spacing: 0.45em;
     text-transform: uppercase;
     color: var(--silver);
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     display: block;
   }
 
   .section-title {
-    font-family: 'Playfair Display', 'Cairo', serif;
-    font-size: clamp(2.5rem, 5vw, 4.2rem);
-    font-weight: 500;
-    line-height: 1.2;
+    font-family: var(--font-english-premium);
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 600;
+    line-height: 1.3;
     color: var(--white);
+  }
+  body[dir="rtl"] .section-title {
+    font-family: var(--font-arabic-premium);
+    font-weight: 700;
   }
 
   .section-title em { 
@@ -586,7 +640,7 @@
 
   .reveal {
     opacity: 0;
-    transform: translateY(45px);
+    transform: translateY(50px);
     transition: opacity 0.9s var(--ease-expo), transform 0.9s var(--ease-expo);
   }
 
@@ -596,11 +650,10 @@
   }
 
   /* ============================================
-     ABOUT — DOCTOR IMAGE (CIRCULAR)
+     ABOUT — DOCTOR IMAGE
   ============================================ */
   #about {
     padding: 140px 0;
-    background: linear-gradient(to bottom, var(--black), var(--deep));
   }
 
   .about-grid {
@@ -613,7 +666,7 @@
   .doctor-image-wrapper {
     position: relative;
     width: 100%;
-    max-width: 380px;
+    max-width: 400px;
     margin: 0 auto;
   }
 
@@ -622,13 +675,13 @@
     aspect-ratio: 1/1;
     object-fit: cover;
     border-radius: 50%;
-    box-shadow: 0 0 0 2px rgba(200,200,200,0.2), 0 25px 50px rgba(0,0,0,0.5);
+    box-shadow: 0 0 0 3px rgba(220,220,220,0.2), 0 30px 60px rgba(0,0,0,0.5);
     transition: all 0.5s var(--ease-expo);
   }
 
   .doctor-img:hover {
     transform: scale(1.02);
-    box-shadow: 0 0 0 4px rgba(200,200,200,0.3), 0 30px 60px rgba(0,0,0,0.6);
+    box-shadow: 0 0 0 5px rgba(220,220,220,0.3), 0 35px 70px rgba(0,0,0,0.6);
   }
 
   .doctor-ring {
@@ -638,23 +691,23 @@
     right: -15px;
     bottom: -15px;
     border-radius: 50%;
-    border: 1px solid rgba(200,200,200,0.25);
+    border: 1px solid rgba(220,220,220,0.25);
     pointer-events: none;
     transition: all 0.5s;
   }
 
   .doctor-image-wrapper:hover .doctor-ring {
-    border-color: rgba(200,200,200,0.5);
-    top: -18px;
-    left: -18px;
-    right: -18px;
-    bottom: -18px;
+    border-color: rgba(220,220,220,0.5);
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
   }
 
   .about-badge {
     position: absolute;
-    bottom: -24px;
-    right: -24px;
+    bottom: -20px;
+    right: -20px;
     width: 130px;
     height: 130px;
     background: linear-gradient(135deg, #2a2a2a, #111);
@@ -664,61 +717,83 @@
     justify-content: center;
     flex-direction: column;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-    border: 1px solid rgba(200,200,200,0.2);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    border: 1px solid rgba(220,220,220,0.2);
     backdrop-filter: blur(8px);
   }
 
   .about-badge .badge-num {
-    font-family: 'Playfair Display', 'Cairo', serif;
+    font-family: var(--font-english-premium);
     font-size: 2.2rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--silver);
     line-height: 1;
   }
+  body[dir="rtl"] .about-badge .badge-num {
+    font-family: var(--font-arabic-premium);
+  }
 
   .about-badge .badge-label {
-    font-family: var(--font-mono);
+    font-family: var(--font-mono-premium);
     font-size: 0.5rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(200,200,200,0.7);
+    color: rgba(220,220,220,0.7);
     margin-top: 6px;
   }
 
   .about-content h2 {
-    font-family: 'Playfair Display', 'Cairo', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 500;
-    line-height: 1.2;
+    font-family: var(--font-english-premium);
+    font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+    font-weight: 600;
+    line-height: 1.3;
     color: var(--white);
     margin-bottom: 32px;
+  }
+  body[dir="rtl"] .about-content h2 {
+    font-family: var(--font-arabic-premium);
+    font-weight: 700;
   }
 
   .about-content p {
     font-size: 1rem;
     line-height: 1.9;
-    color: rgba(245,245,245,0.7);
-    margin-bottom: 20px;
+    color: rgba(250,250,250,0.75);
+    margin-bottom: 22px;
   }
 
   .about-content p strong {
     color: var(--white);
-    font-weight: 500;
+    font-weight: 600;
+  }
+
+  .stent-highlight {
+    display: inline-block;
+    background: rgba(220,220,220,0.08);
+    border-right: 3px solid var(--silver);
+    padding: 6px 18px 6px 0;
+    margin: 12px 0;
+    font-weight: 600;
+    color: var(--silver-light);
+  }
+  body[dir="ltr"] .stent-highlight {
+    border-right: none;
+    border-left: 3px solid var(--silver);
+    padding: 6px 0 6px 18px;
   }
 
   .about-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    margin-top: 32px;
+    margin-top: 36px;
   }
 
   .tag {
-    padding: 6px 20px;
-    border: 1px solid rgba(200,200,200,0.2);
-    border-radius: 40px;
-    font-family: var(--font-mono);
+    padding: 6px 22px;
+    border: 1px solid rgba(220,220,220,0.2);
+    border-radius: 50px;
+    font-family: var(--font-mono-premium);
     font-size: 0.6rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
@@ -730,7 +805,7 @@
   .tag:hover {
     border-color: var(--silver);
     color: var(--silver);
-    background: rgba(200,200,200,0.08);
+    background: rgba(220,220,220,0.08);
   }
 
   /* ============================================
@@ -738,10 +813,8 @@
   ============================================ */
   #stats {
     padding: 100px 0;
-    background: var(--deep);
     border-top: 1px solid var(--glass-border);
     border-bottom: 1px solid var(--glass-border);
-    position: relative;
   }
 
   .stats-grid {
@@ -752,7 +825,7 @@
 
   .stat-item {
     text-align: center;
-    padding: 30px;
+    padding: 35px 30px;
     border-left: 1px solid var(--glass-border);
     transition: all 0.4s;
   }
@@ -765,24 +838,27 @@
   body[dir="ltr"] .stat-item:last-child { border-left: none; }
 
   .stat-item:hover {
-    background: rgba(200,200,200,0.03);
+    background: rgba(220,220,220,0.03);
     transform: translateY(-5px);
   }
 
   .stat-number {
-    font-family: 'Playfair Display', 'Cairo', serif;
+    font-family: var(--font-english-premium);
     font-size: clamp(4rem, 8vw, 6.5rem);
-    font-weight: 500;
+    font-weight: 700;
     color: var(--white);
     line-height: 1;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     display: block;
+  }
+  body[dir="rtl"] .stat-number {
+    font-family: var(--font-arabic-premium);
   }
 
   .stat-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
+    font-family: var(--font-mono-premium);
+    font-size: 0.68rem;
+    letter-spacing: 0.32em;
     text-transform: uppercase;
     color: var(--muted);
     margin-bottom: 12px;
@@ -791,18 +867,17 @@
 
   .stat-desc {
     font-size: 0.8rem;
-    color: rgba(245,245,245,0.35);
-    line-height: 1.5;
-    max-width: 220px;
+    color: rgba(250,250,250,0.4);
+    line-height: 1.55;
+    max-width: 230px;
     margin: 0 auto;
   }
 
   /* ============================================
-     SERVICES
+     SERVICES — WITH IMAGES
   ============================================ */
   #services {
     padding: 140px 0;
-    background: var(--black);
   }
 
   .services-grid {
@@ -811,12 +886,12 @@
     gap: 1px;
     background: var(--glass-border);
     border: 1px solid var(--glass-border);
-    border-radius: 8px;
+    border-radius: 20px;
     overflow: hidden;
   }
 
   .service-card {
-    background: #080808;
+    background: #0a0a0a;
     padding: 56px 48px;
     position: relative;
     overflow: hidden;
@@ -827,47 +902,115 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(200,200,200,0.08), transparent);
+    background: linear-gradient(135deg, rgba(220,220,220,0.05), transparent);
     opacity: 0;
     transition: opacity 0.5s;
   }
 
   .service-card:hover::before { opacity: 1; }
-  .service-card:hover { background: #0c0c0c; }
+  .service-card:hover { background: #0f0f0f; }
+
+/* Service Images - LARGER SIZE */
+.service-img-wrapper {
+  position: relative;
+  width: 140px;        /* زادت من 100px */
+  height: 140px;       /* زادت من 100px */
+  margin: 0 auto 25px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid rgba(220,220,220,0.2);
+  transition: all 0.4s;
+}
+
+.service-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.service-img-wrapper:hover {
+  border-color: var(--silver);
+  box-shadow: 0 0 25px rgba(220,220,220,0.4);
+}
+
+.service-img-wrapper:hover .service-img {
+  transform: scale(1.05);
+}
+
+.service-img-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  color: var(--silver);
+  font-size: 0.8rem;
+  gap: 10px;
+}
+
+.service-img-overlay i {
+  font-size: 1.8rem;   /* تكبير الأيقونة */
+}
+
+.service-img-wrapper:hover .service-img-overlay {
+  opacity: 1;
+}
+
+  .service-img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.75);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    color: var(--silver);
+    font-size: 0.7rem;
+    gap: 8px;
+  }
+
+  .service-img-wrapper:hover .service-img-overlay {
+    opacity: 1;
+  }
 
   .service-num {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.25em;
+    font-family: var(--font-mono-premium);
+    font-size: 0.62rem;
+    letter-spacing: 0.28em;
     color: var(--silver);
     margin-bottom: 32px;
     display: block;
   }
 
-  .service-icon {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 28px;
-    opacity: 0.7;
-    transition: all 0.4s;
-  }
-
-  .service-card:hover .service-icon { 
-    opacity: 1;
-    filter: drop-shadow(0 0 8px rgba(200,200,200,0.5));
-  }
-
   .service-title {
-    font-family: 'Playfair Display', 'Cairo', serif;
-    font-size: 1.5rem;
-    font-weight: 500;
+    font-family: var(--font-english-premium);
+    font-size: 1.6rem;
+    font-weight: 600;
     line-height: 1.3;
     color: var(--white);
-    margin-bottom: 16px;
+    margin-bottom: 18px;
+  }
+  body[dir="rtl"] .service-title {
+    font-family: var(--font-arabic-premium);
+    font-weight: 700;
   }
 
   .service-desc {
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     line-height: 1.8;
     color: var(--muted);
   }
@@ -876,16 +1019,19 @@
     position: absolute;
     bottom: 40px;
     right: 40px;
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     border: 1px solid var(--glass-border);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(12px);
     transition: all 0.45s var(--ease-expo);
+    color: var(--silver);
+    font-size: 1.2rem;
+    text-decoration: none;
   }
 
   .service-card:hover .service-arrow {
@@ -895,11 +1041,110 @@
   }
 
   /* ============================================
+     STAFF SECTION
+  ============================================ */
+  #staff {
+    padding: 140px 0;
+  }
+
+  .staff-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  .staff-card {
+    background: rgba(10,10,10,0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(220,220,220,0.1);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.5s var(--ease-expo);
+    text-align: center;
+  }
+
+  .staff-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(220,220,220,0.3);
+    box-shadow: 0 30px 50px rgba(0,0,0,0.4);
+  }
+
+  .staff-img-placeholder {
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: rgba(220,220,220,0.3);
+  }
+
+  .staff-info {
+    padding: 28px 24px 32px;
+  }
+
+  .staff-name {
+    font-family: var(--font-english-premium);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  body[dir="rtl"] .staff-name {
+    font-family: var(--font-arabic-premium);
+  }
+
+  .staff-title {
+    font-family: var(--font-mono-premium);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--silver);
+    margin-bottom: 16px;
+    display: inline-block;
+    background: rgba(220,220,220,0.1);
+    padding: 4px 16px;
+    border-radius: 30px;
+  }
+
+  .staff-bio {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .staff-social {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .staff-social a {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(220,220,220,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+
+  .staff-social a:hover {
+    border-color: var(--silver);
+    color: var(--silver);
+    background: rgba(220,220,220,0.1);
+  }
+
+  /* ============================================
      PORTFOLIO
   ============================================ */
   #portfolio {
     padding: 140px 0;
-    background: var(--deep);
   }
 
   .portfolio-filters {
@@ -908,7 +1153,7 @@
     justify-content: center;
     margin-bottom: 60px;
     border: 1px solid var(--glass-border);
-    border-radius: 50px;
+    border-radius: 60px;
     overflow: hidden;
     width: fit-content;
     margin-left: auto;
@@ -916,13 +1161,13 @@
   }
 
   .filter-btn {
-    padding: 12px 32px;
+    padding: 12px 36px;
     background: transparent;
     border: none;
     border-right: 1px solid var(--glass-border);
     color: var(--muted);
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-family: var(--font-mono-premium);
+    font-size: 0.68rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     cursor: pointer;
@@ -969,7 +1214,7 @@
   .portfolio-item-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 60%, transparent 100%);
+    background: linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.6) 60%, transparent 100%);
     opacity: 0;
     transition: opacity 0.5s;
     display: flex;
@@ -980,8 +1225,8 @@
   .portfolio-item:hover .portfolio-item-overlay { opacity: 1; }
 
   .portfolio-item-cat {
-    font-family: var(--font-mono);
-    font-size: 0.55rem;
+    font-family: var(--font-mono-premium);
+    font-size: 0.58rem;
     letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--silver);
@@ -990,26 +1235,32 @@
   }
 
   .portfolio-item-title {
-    font-family: 'Playfair Display', 'Cairo', serif;
+    font-family: var(--font-english-premium);
     font-size: 1rem;
     color: var(--white);
     line-height: 1.3;
   }
+  body[dir="rtl"] .portfolio-item-title {
+    font-family: var(--font-arabic-premium);
+  }
 
   .portfolio-item-num {
-    font-family: 'Playfair Display', 'Cairo', serif;
+    font-family: var(--font-english-premium);
     font-size: 4rem;
     font-weight: 300;
-    color: rgba(200,200,200,0.12);
+    color: rgba(220,220,220,0.12);
     line-height: 1;
     margin-bottom: 20px;
   }
 
   .portfolio-item-label {
-    font-family: 'Playfair Display', 'Cairo', serif;
+    font-family: var(--font-english-premium);
     font-size: 0.9rem;
-    color: rgba(245,245,245,0.5);
+    color: rgba(250,250,250,0.5);
     font-style: italic;
+  }
+  body[dir="rtl"] .portfolio-item-label {
+    font-family: var(--font-arabic-premium);
   }
 
   /* ============================================
@@ -1017,12 +1268,11 @@
   ============================================ */
   #experience {
     padding: 140px 0;
-    background: var(--black);
   }
 
   .timeline {
     position: relative;
-    max-width: 850px;
+    max-width: 900px;
     margin: 0 auto;
   }
 
@@ -1038,7 +1288,7 @@
 
   .timeline-item {
     display: grid;
-    grid-template-columns: 1fr 48px 1fr;
+    grid-template-columns: 1fr 56px 1fr;
     gap: 0;
     margin-bottom: 70px;
     align-items: start;
@@ -1050,45 +1300,47 @@
   body[dir="rtl"] .timeline-item:nth-child(even) .timeline-center { order: 0; grid-column: 2; }
   body[dir="rtl"] .timeline-item:nth-child(even) .timeline-empty { grid-column: 1; order: -1; }
 
-  body[dir="ltr"] .timeline-item:nth-child(odd) .timeline-content { grid-column: 3; text-align: left; }
+  body[dir="ltr"] .timeline-item:nth-child(odd) .timeline-content { grid-column: 3; text-align: left; order: 1; }
   body[dir="ltr"] .timeline-item:nth-child(odd) .timeline-empty { grid-column: 1; }
   body[dir="ltr"] .timeline-item:nth-child(even) .timeline-content { grid-column: 1; text-align: right; order: -1; }
+  body[dir="ltr"] .timeline-item:nth-child(even) .timeline-center { order: 0; grid-column: 2; }
+  body[dir="ltr"] .timeline-item:nth-child(even) .timeline-empty { grid-column: 3; }
 
   .timeline-center {
     grid-column: 2;
     display: flex;
     justify-content: center;
-    padding-top: 8px;
+    padding-top: 10px;
   }
 
   .timeline-dot {
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     background: var(--silver);
-    box-shadow: 0 0 20px rgba(200,200,200,0.6);
+    box-shadow: 0 0 25px rgba(220,220,220,0.7);
     position: relative;
   }
 
   .timeline-dot::before {
     content: '';
     position: absolute;
-    inset: -5px;
+    inset: -6px;
     border-radius: 50%;
-    border: 1px solid rgba(200,200,200,0.4);
-    animation: pulse-ring 2s ease-in-out infinite;
+    border: 1px solid rgba(220,220,220,0.4);
+    animation: pulse-ring 2.5s ease-in-out infinite;
   }
 
   @keyframes pulse-ring {
     0%, 100% { transform: scale(1); opacity: 0.6; }
-    50% { transform: scale(1.5); opacity: 0; }
+    50% { transform: scale(1.6); opacity: 0; }
   }
 
-  .timeline-content { padding: 0 28px; }
+  .timeline-content { padding: 0 32px; }
 
   .timeline-year {
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
+    font-family: var(--font-mono-premium);
+    font-size: 0.65rem;
     letter-spacing: 0.25em;
     color: var(--silver);
     text-transform: uppercase;
@@ -1097,16 +1349,20 @@
   }
 
   .timeline-role {
-    font-family: 'Playfair Display', 'Cairo', serif;
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-family: var(--font-english-premium);
+    font-size: 1.25rem;
+    font-weight: 600;
     color: var(--white);
     margin-bottom: 8px;
     line-height: 1.3;
   }
+  body[dir="rtl"] .timeline-role {
+    font-family: var(--font-arabic-premium);
+    font-weight: 700;
+  }
 
   .timeline-org {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     color: var(--muted);
     line-height: 1.6;
   }
@@ -1116,17 +1372,18 @@
   ============================================ */
   #testimonials {
     padding: 140px 0;
-    background: var(--deep);
     overflow: hidden;
   }
 
   .testimonial-slider {
-    max-width: 950px;
+    max-width: 1000px;
     margin: 0 auto;
     position: relative;
   }
 
-  .testimonial-track { overflow: hidden; }
+  .testimonial-track {
+    overflow: hidden;
+  }
 
   .testimonial-slides {
     display: flex;
@@ -1135,61 +1392,72 @@
 
   .testimonial-slide {
     min-width: 100%;
-    padding: 0 48px;
+    padding: 0 56px;
     text-align: center;
   }
 
   .quote-mark {
-    font-family: 'Playfair Display', 'Cairo', serif;
-    font-size: 7rem;
-    line-height: 0.5;
+    font-family: var(--font-english-premium);
+    font-size: 8rem;
+    line-height: 0.4;
     color: var(--silver);
     opacity: 0.2;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
     display: block;
+  }
+  body[dir="rtl"] .quote-mark {
+    font-family: var(--font-arabic-premium);
   }
 
   .testimonial-quote {
-    font-family: 'Playfair Display', 'Cairo', serif;
+    font-family: var(--font-english-premium);
     font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-    font-weight: 400;
+    font-weight: 500;
     font-style: italic;
     color: var(--white);
     line-height: 1.65;
     margin-bottom: 48px;
+  }
+  body[dir="rtl"] .testimonial-quote {
+    font-family: var(--font-arabic-premium);
+    font-weight: 500;
   }
 
   .testimonial-author {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 18px;
   }
 
   .author-avatar {
-    width: 52px;
-    height: 52px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
-    background: rgba(200,200,200,0.1);
+    background: rgba(220,220,220,0.1);
     border: 1px solid var(--silver);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Playfair Display', 'Cairo', serif;
-    font-size: 1rem;
+    font-family: var(--font-english-premium);
+    font-size: 1.1rem;
+    font-weight: 600;
     color: var(--silver);
+  }
+  body[dir="rtl"] .author-avatar {
+    font-family: var(--font-arabic-premium);
   }
 
   .author-name {
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-family: var(--font-body-premium);
+    font-size: 0.95rem;
+    font-weight: 600;
     color: var(--white);
   }
 
   .author-role {
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
+    font-family: var(--font-mono-premium);
+    font-size: 0.6rem;
     letter-spacing: 0.15em;
     color: var(--silver);
     text-transform: uppercase;
@@ -1199,13 +1467,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 28px;
+    gap: 32px;
     margin-top: 60px;
   }
 
   .slider-btn {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     border: 1px solid var(--glass-border);
     background: rgba(0,0,0,0.6);
@@ -1216,22 +1484,23 @@
     justify-content: center;
     transition: all 0.35s;
     backdrop-filter: blur(8px);
+    font-size: 1.2rem;
   }
 
   .slider-btn:hover {
     border-color: var(--silver);
     color: var(--silver);
-    background: rgba(200,200,200,0.1);
+    background: rgba(220,220,220,0.1);
   }
 
   .slider-dots {
     display: flex;
-    gap: 12px;
+    gap: 14px;
   }
 
   .dot {
-    width: 7px;
-    height: 7px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background: var(--glass-border);
     cursor: pointer;
@@ -1240,8 +1509,8 @@
 
   .dot.active {
     background: var(--silver);
-    width: 28px;
-    border-radius: 4px;
+    width: 32px;
+    border-radius: 5px;
   }
 
   /* ============================================
@@ -1249,7 +1518,6 @@
   ============================================ */
   #booking {
     padding: 140px 0;
-    background: var(--black);
   }
 
   .booking-wrapper {
@@ -1260,58 +1528,62 @@
   }
 
   .booking-info h3 {
-    font-family: 'Playfair Display', 'Cairo', serif;
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-family: var(--font-english-premium);
+    font-size: 1.3rem;
+    font-weight: 600;
     color: var(--muted);
-    margin-bottom: 16px;
+    margin-bottom: 18px;
+  }
+  body[dir="rtl"] .booking-info h3 {
+    font-family: var(--font-arabic-premium);
   }
 
   .booking-info p {
-    font-size: 0.92rem;
+    font-size: 0.95rem;
     line-height: 1.8;
-    color: rgba(245,245,245,0.5);
+    color: rgba(250,250,250,0.55);
     margin-bottom: 48px;
   }
 
   .contact-methods {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 18px;
   }
 
   .contact-method {
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding: 20px 24px;
+    gap: 22px;
+    padding: 22px 28px;
     background: rgba(15,15,15,0.8);
     border: 1px solid var(--glass-border);
-    border-radius: 12px;
+    border-radius: 16px;
     text-decoration: none;
     transition: all 0.35s var(--ease-expo);
   }
 
   .contact-method:hover {
     border-color: var(--silver);
-    background: rgba(200,200,200,0.05);
-    transform: translateX(6px);
+    background: rgba(220,220,220,0.05);
+    transform: translateX(8px);
   }
 
   .method-icon {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
-    background: rgba(200,200,200,0.08);
-    border: 1px solid rgba(200,200,200,0.2);
+    background: rgba(220,220,220,0.08);
+    border: 1px solid rgba(220,220,220,0.2);
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 1.3rem;
   }
 
   .method-label {
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
+    font-family: var(--font-mono-premium);
+    font-size: 0.6rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--silver);
@@ -1320,31 +1592,31 @@
   }
 
   .method-value {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: var(--white);
   }
 
   .booking-form {
     background: rgba(10,10,10,0.8);
     border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    padding: 48px;
+    border-radius: 20px;
+    padding: 52px;
     backdrop-filter: blur(12px);
   }
 
   .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 24px;
   }
 
   .form-group {
-    margin-bottom: 24px;
+    margin-bottom: 26px;
   }
 
   .form-group label {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
+    font-family: var(--font-mono-premium);
+    font-size: 0.62rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--muted);
@@ -1356,12 +1628,12 @@
   .form-group textarea,
   .form-group select {
     width: 100%;
-    padding: 14px 18px;
+    padding: 15px 20px;
     background: rgba(255,255,255,0.02);
     border: 1px solid var(--glass-border);
-    border-radius: 8px;
+    border-radius: 10px;
     color: var(--white);
-    font-family: var(--font-body);
+    font-family: var(--font-body-premium);
     font-size: 0.85rem;
     outline: none;
     transition: all 0.3s;
@@ -1371,72 +1643,72 @@
   .form-group textarea:focus,
   .form-group select:focus {
     border-color: var(--silver);
-    background: rgba(200,200,200,0.03);
+    background: rgba(220,220,220,0.03);
   }
 
   .form-group textarea {
     resize: vertical;
-    min-height: 100px;
+    min-height: 110px;
   }
 
   .form-submit {
     width: 100%;
-    padding: 16px;
-    background: linear-gradient(135deg, #555, #2a2a2a);
+    padding: 18px;
+    background: linear-gradient(135deg, #5a5a5a, #2a2a2a);
     border: none;
-    border-radius: 40px;
+    border-radius: 50px;
     color: var(--white);
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-family: var(--font-mono-premium);
+    font-size: 0.72rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.45s var(--ease-expo);
-    margin-top: 12px;
+    margin-top: 15px;
   }
 
   .form-submit:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(200,200,200,0.25);
-    background: linear-gradient(135deg, #777, #444);
+    box-shadow: 0 20px 45px rgba(220,220,220,0.25);
+    background: linear-gradient(135deg, #7a7a7a, #444);
   }
 
   /* ============================================
      FOOTER
   ============================================ */
   footer {
-    padding: 70px 0 40px;
-    background: var(--deep);
+    padding: 80px 0 45px;
     border-top: 1px solid var(--glass-border);
-    position: relative;
-    z-index: 1;
   }
 
   .footer-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 40px;
+    padding-bottom: 45px;
     border-bottom: 1px solid var(--glass-border);
-    margin-bottom: 40px;
+    margin-bottom: 45px;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 25px;
   }
 
   .footer-logo {
-    font-family: 'Playfair Display', 'Cairo', serif;
-    font-size: 1.6rem;
-    font-weight: 500;
+    font-family: var(--font-english-premium);
+    font-size: 1.8rem;
+    font-weight: 700;
     color: var(--white);
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+  }
+  body[dir="rtl"] .footer-logo {
+    font-family: var(--font-arabic-premium);
   }
 
   .footer-logo span { color: var(--silver); }
 
   .footer-tagline {
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
+    font-family: var(--font-mono-premium);
+    font-size: 0.6rem;
     letter-spacing: 0.2em;
     color: var(--muted);
     text-transform: uppercase;
@@ -1444,12 +1716,12 @@
 
   .footer-social {
     display: flex;
-    gap: 16px;
+    gap: 18px;
   }
 
   .social-link {
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     border: 1px solid var(--glass-border);
     display: flex;
@@ -1458,13 +1730,14 @@
     color: var(--muted);
     text-decoration: none;
     transition: all 0.35s;
-    font-size: 0.85rem;
+    font-size: 1rem;
   }
 
   .social-link:hover {
     border-color: var(--silver);
     color: var(--silver);
-    background: rgba(200,200,200,0.1);
+    background: rgba(220,220,220,0.1);
+    transform: translateY(-3px);
   }
 
   .footer-bottom {
@@ -1472,32 +1745,32 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 25px;
   }
 
   .footer-copy {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
+    font-family: var(--font-mono-premium);
+    font-size: 0.62rem;
     letter-spacing: 0.12em;
-    color: rgba(245,245,245,0.25);
+    color: rgba(250,250,250,0.3);
   }
 
   .footer-gurs {
     display: flex;
     align-items: center;
     gap: 12px;
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
+    font-family: var(--font-mono-premium);
+    font-size: 0.62rem;
     letter-spacing: 0.12em;
     color: var(--muted);
   }
 
   .gurs-badge {
-    padding: 4px 12px;
-    border: 1px solid rgba(200,200,200,0.3);
+    padding: 5px 14px;
+    border: 1px solid rgba(220,220,220,0.3);
     border-radius: 30px;
     color: var(--silver);
-    font-size: 0.55rem;
+    font-size: 0.58rem;
     letter-spacing: 0.18em;
   }
 
@@ -1509,7 +1782,7 @@
     position: fixed;
     inset: 0;
     z-index: 9000;
-    background: rgba(0,0,0,0.97);
+    background: rgba(0,0,0,0.98);
     backdrop-filter: blur(24px);
     align-items: center;
     justify-content: center;
@@ -1523,44 +1796,47 @@
     background: none;
     border: 1px solid rgba(255,255,255,0.15);
     border-radius: 50%;
-    width: 52px;
-    height: 52px;
+    width: 56px;
+    height: 56px;
     color: white;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     cursor: pointer;
     transition: all 0.35s;
   }
 
   #modal-content {
-    max-width: 750px;
+    max-width: 800px;
     width: 100%;
     text-align: center;
   }
 
   #modal-cat {
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
+    font-family: var(--font-mono-premium);
+    font-size: 0.65rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--silver);
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
   }
 
   #modal-title {
-    font-family: 'Playfair Display', 'Cairo', serif;
-    font-size: 2rem;
-    font-weight: 500;
+    font-family: var(--font-english-premium);
+    font-size: 2.2rem;
+    font-weight: 600;
     color: white;
     margin-bottom: 24px;
     line-height: 1.3;
+  }
+  body[dir="rtl"] #modal-title {
+    font-family: var(--font-arabic-premium);
   }
 
   #modal-desc {
     font-size: 0.95rem;
     line-height: 1.9;
-    color: rgba(245,245,245,0.6);
-    max-width: 600px;
+    color: rgba(250,250,250,0.65);
+    max-width: 650px;
     margin: 0 auto;
   }
 
@@ -1573,12 +1849,12 @@
     border: none;
     cursor: pointer;
     color: var(--white);
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
 
-  @media (max-width: 900px) {
-    .container { padding: 0 24px; }
-    nav { padding: 0 24px; }
+  @media (max-width: 1000px) {
+    .container { padding: 0 28px; }
+    nav { padding: 0 28px; }
     .nav-links { display: none; }
     .nav-cta { display: none; }
     .menu-toggle { display: block; }
@@ -1587,15 +1863,16 @@
     .stat-item { border-left: none !important; border-right: none !important; border-bottom: 1px solid var(--glass-border); }
     .stat-item:last-child { border-bottom: none; }
     .services-grid { grid-template-columns: 1fr; }
+    .staff-grid { grid-template-columns: repeat(2, 1fr); }
     .booking-wrapper { grid-template-columns: 1fr; }
-    .timeline-item { display: block; margin-bottom: 48px; padding-right: 30px; border-right: 1px solid var(--silver-glow); position: relative; }
-    body[dir="ltr"] .timeline-item { padding-right: 0; padding-left: 30px; border-right: none; border-left: 1px solid var(--silver-glow); }
+    .timeline-item { display: block; margin-bottom: 50px; padding-right: 32px; border-right: 1px solid var(--silver-glow); position: relative; }
+    body[dir="ltr"] .timeline-item { padding-right: 0; padding-left: 32px; border-right: none; border-left: 1px solid var(--silver-glow); }
     .timeline-line { display: none; }
     .timeline-center { display: none; }
     .timeline-content { padding: 0; text-align: right !important; }
     body[dir="ltr"] .timeline-content { text-align: left !important; }
-    .timeline-dot { position: absolute; right: -7px; top: 6px; }
-    body[dir="ltr"] .timeline-dot { right: auto; left: -7px; }
+    .timeline-dot { position: absolute; right: -8px; top: 8px; }
+    body[dir="ltr"] .timeline-dot { right: auto; left: -8px; }
     .timeline-empty { display: none; }
     .footer-top { flex-direction: column; text-align: center; }
     .footer-bottom { flex-direction: column; text-align: center; }
@@ -1604,23 +1881,31 @@
     .display-mode-toggle {
       bottom: 20px;
       right: 20px;
-      width: 45px;
-      height: 45px;
+      width: 48px;
+      height: 48px;
     }
     .lang-switch {
       margin-left: 0;
     }
+    .testimonial-slide { padding: 0 28px; }
+  }
+
+  @media (max-width: 700px) {
+    .staff-grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 600px) {
-    .booking-form { padding: 28px 20px; }
+    .booking-form { padding: 32px 24px; }
     .hero-actions { flex-direction: column; align-items: center; width: 100%; }
     .btn-primary, .btn-secondary { width: 100%; text-align: center; }
     .hero-name { font-size: 2.2rem; }
     .service-arrow { display: none; }
+    .hero-stent-badge { font-size: 0.55rem; padding: 5px 16px; }
+    .quote-mark { font-size: 5rem; }
+    .testimonial-quote { font-size: 1rem; }
+    .service-card { padding: 40px 28px; }
   }
 
-  /* English specific adjustments */
   body[dir="ltr"] .nav-links a::after {
     transform-origin: left;
   }
@@ -1632,7 +1917,7 @@
     right: auto;
     left: 30px;
   }
-  @media (max-width: 900px) {
+  @media (max-width: 1000px) {
     body[dir="ltr"] .display-mode-toggle {
       right: auto;
       left: 20px;
@@ -1650,6 +1935,7 @@
   <ul class="nav-links">
     <li><a href="#about" class="ar-only">من أنا</a><a href="#about" class="en-only">About</a></li>
     <li><a href="#services" class="ar-only">الخبرات</a><a href="#services" class="en-only">Expertise</a></li>
+    <li><a href="#staff" class="ar-only">الفريق</a><a href="#staff" class="en-only">Team</a></li>
     <li><a href="#portfolio" class="ar-only">أعمالي</a><a href="#portfolio" class="en-only">Portfolio</a></li>
     <li><a href="#experience" class="ar-only">المسيرة</a><a href="#experience" class="en-only">Journey</a></li>
     <li><a href="#testimonials" class="ar-only">التوصيات</a><a href="#testimonials" class="en-only">Recognition</a></li>
@@ -1668,13 +1954,13 @@
 </nav>
 
 <!-- Display Mode Toggle Button -->
-<!-- <div class="display-mode-toggle" id="displayModeToggle" title="تغيير طريقة العرض / Change Display Mode">
+<div class="display-mode-toggle" id="displayModeToggle" title="تغيير طريقة العرض / Change Display Mode">
   <i class="fas fa-th-large"></i>
-</div> -->
+</div>
 
-<!-- HERO with Professional Background Image -->
+<!-- HERO -->
 <section id="hero">
-  <img class="hero-bg-image" src="ChatGPT Image May 10, 2026, 09_47_26 PM.png" alt="Medical Background">
+  <img class="hero-bg-image" src="Gemini_Generated_Image_lvzwuglvzwuglvzw.png" alt="Medical Background">
   <div class="hero-overlay"></div>
   <div class="hero-bg-glow"></div>
   
@@ -1686,6 +1972,9 @@
   
   <p class="hero-title ar-only">مدرس المسالك البولية · جراح ترميم · رسام طبي</p>
   <p class="hero-title en-only">Lecturer of Urology · Reconstructive Surgeon · Medical Illustrator</p>
+  
+  <div class="hero-stent-badge ar-only"><i class="fas fa-microscope"></i> متخصص في تركيب الدعامات</div>
+  <div class="hero-stent-badge en-only"><i class="fas fa-microscope"></i> Specialist in Stent Placement</div>
   
   <div class="hero-divider"></div>
   
@@ -1706,7 +1995,7 @@
   </div>
 </section>
 
-<!-- ABOUT with Circular Doctor Image -->
+<!-- ABOUT -->
 <section id="about">
   <div class="container">
     <div class="about-grid">
@@ -1722,23 +2011,20 @@
       <div class="about-content reveal">
         <span class="section-eyebrow ar-only">نبذة</span>
         <span class="section-eyebrow en-only">About</span>
-        <h2 class="ar-only">جراح.<br><em style="color:#b8b8b8">فنان.</em><br>معلم.</h2>
-        <h2 class="en-only">Surgeon.<br><em style="color:#b8b8b8">Artist.</em><br>Educator.</h2>
-        <p class="ar-only"><strong>د. محمد عماد الدين</strong> أستاذ مساعد المسالك البولية بجامعة بني سويف، متخصص في جراحة مجرى البول والجهاز التناسلي المعقدة. ما يميزه هو الدمج النادر بين الدقة الجراحية والرؤية الفنية.</p>
-        <p class="en-only"><strong>Dr. Mohamed Emad</strong> is an Assistant Professor of Urology at Beni-Suef University, specializing in complex urethral and genital reconstruction. What sets him apart is the rare fusion of surgical precision and artistic vision.</p>
-        <p class="ar-only">بصفته <strong>الرسام الرسمي لجمعية GURS</strong> — الجمعية العالمية لجراحي المسالك والتناسلية — يحول الإجراءات الجراحية المعقدة إلى رسوم توضيحية يدوية، مما يجعل العمليات المعقدة واضحة وقابلة للتعليم.</p>
-        <p class="en-only">As the <strong>Official Illustrator of GURS</strong> — the Society of Genitourinary Reconstructive Surgeons — he translates intricate surgical procedures into hand-drawn visual narratives, making complex operations clear and teachable.</p>
-        <p class="ar-only">أعماله الفنية زينت غلاف <strong>مجلة الطب الجنسي</strong> وتم الاستشهاد بها عالمياً.</p>
-        <p class="en-only">His artwork has graced the cover of <strong>The Journal of Sexual Medicine</strong> and is referenced globally.</p>
+        <h2 class="ar-only">جراح.<br><em style="color:#d4d4d4">فنان.</em><br>معلم.</h2>
+        <h2 class="en-only">Surgeon.<br><em style="color:#d4d4d4">Artist.</em><br>Educator.</h2>
+        <p class="ar-only"><strong>د. محمد عماد الدين</strong> أستاذ مساعد المسالك البولية بجامعة بني سويف، متخصص في جراحة مجرى البول والجهاز التناسلي المعقدة.</p>
+        <p class="en-only"><strong>Dr. Mohamed Emad</strong> is an Assistant Professor of Urology at Beni-Suef University, specializing in complex urethral and genital reconstruction.</p>
+        <p class="ar-only">بصفته <strong>الرسام الرسمي لجمعية GURS</strong>، يحول الإجراءات الجراحية المعقدة إلى رسوم توضيحية يدوية.</p>
+        <p class="en-only">As the <strong>Official Illustrator of GURS</strong>, he translates intricate surgical procedures into hand-drawn visual narratives.</p>
+        <div class="stent-highlight ar-only"><i class="fas fa-microscope"></i> <strong>متخصص في تركيب الدعامات</strong> – دعامات الحالب والمجاري البولية بأحدث التقنيات.</div>
+        <div class="stent-highlight en-only"><i class="fas fa-microscope"></i> <strong>Specialist in Stent Placement</strong> – Ureteral and urinary tract stents with state-of-the-art techniques.</div>
         <div class="about-tags">
-          <span class="tag ar-only">جراحة مجرى البول</span>
-          <span class="tag en-only">Urethral Reconstruction</span>
-          <span class="tag ar-only">الغرسات القضيبية</span>
-          <span class="tag en-only">Penile Prosthetics</span>
-          <span class="tag ar-only">الرسم الطبي</span>
-          <span class="tag en-only">Medical Illustration</span>
-          <span class="tag ar-only">الرسام الرسمي لـ GURS</span>
-          <span class="tag en-only">GURS Official Illustrator</span>
+          <span class="tag ar-only">جراحة مجرى البول</span><span class="tag en-only">Urethral Reconstruction</span>
+          <span class="tag ar-only">الغرسات القضيبية</span><span class="tag en-only">Penile Prosthetics</span>
+          <span class="tag ar-only">تركيب الدعامات</span><span class="tag en-only">Stent Placement</span>
+          <span class="tag ar-only">الرسم الطبي</span><span class="tag en-only">Medical Illustration</span>
+          <span class="tag ar-only">الرسام الرسمي لـ GURS</span><span class="tag en-only">GURS Official Illustrator</span>
         </div>
       </div>
     </div>
@@ -1749,32 +2035,15 @@
 <section id="stats">
   <div class="container">
     <div class="stats-grid">
-      <div class="stat-item reveal">
-        <span class="stat-number"><span class="counter" data-target="450">0</span>+</span>
-        <span class="stat-label ar-only">حالة جراحية ترميمية</span>
-        <span class="stat-label en-only">Reconstructive Cases</span>
-        <p class="stat-desc ar-only">ترميم مجرى البول، إحليل تحتي، غرسات، DSD</p>
-        <p class="stat-desc en-only">Urethroplasty, hypospadias, prosthesis, DSD</p>
-      </div>
-      <div class="stat-item reveal">
-        <span class="stat-number"><span class="counter" data-target="120">0</span>+</span>
-        <span class="stat-label ar-only">رسم توضيحي جراحي</span>
-        <span class="stat-label en-only">Medical Illustrations</span>
-        <p class="stat-desc ar-only">منشورة في مجلات ومؤتمرات عالمية</p>
-        <p class="stat-desc en-only">Published in journals & global conferences</p>
-      </div>
-      <div class="stat-item reveal">
-        <span class="stat-number"><span class="counter" data-target="50">0</span>+</span>
-        <span class="stat-label ar-only">محاضرة وورشة عمل</span>
-        <span class="stat-label en-only">Lectures & Workshops</span>
-        <p class="stat-desc ar-only">تعليم جراحي دولي</p>
-        <p class="stat-desc en-only">International surgical education</p>
-      </div>
+      <div class="stat-item reveal"><span class="stat-number"><span class="counter" data-target="450">0</span>+</span><span class="stat-label ar-only">حالة جراحية ترميمية</span><span class="stat-label en-only">Reconstructive Cases</span><p class="stat-desc ar-only">ترميم مجرى البول، إحليل تحتي، غرسات، DSD</p><p class="stat-desc en-only">Urethroplasty, hypospadias, prosthesis, DSD</p></div>
+      <div class="stat-item reveal"><span class="stat-number"><span class="counter" data-target="120">0</span>+</span><span class="stat-label ar-only">رسم توضيحي جراحي</span><span class="stat-label en-only">Medical Illustrations</span><p class="stat-desc ar-only">منشورة في مجلات ومؤتمرات عالمية</p><p class="stat-desc en-only">Published in journals & global conferences</p></div>
+      <div class="stat-item reveal"><span class="stat-number"><span class="counter" data-target="50">0</span>+</span><span class="stat-label ar-only">محاضرة وورشة عمل</span><span class="stat-label en-only">Lectures & Workshops</span><p class="stat-desc ar-only">تعليم جراحي دولي</p><p class="stat-desc en-only">International surgical education</p></div>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
+<!-- SERVICES — WITH IMAGES (UPDATED WITH YOUR IMAGE) -->
+<!-- SERVICES — WITH LARGER IMAGES -->
 <section id="services">
   <div class="container">
     <div class="section-header reveal">
@@ -1784,10 +2053,123 @@
       <h2 class="section-title en-only">Areas of <em>Mastery</em></h2>
     </div>
     <div class="services-grid reveal">
-      <div class="service-card"><span class="service-num">01</span><svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="#b8b8b8" stroke-width="1.3"><circle cx="24" cy="24" r="18"/><path d="M24 14v10l6 6" stroke-linecap="round"/></svg><h3 class="service-title ar-only">جراحة المسالك الترميمية</h3><h3 class="service-title en-only">Reconstructive Urology</h3><p class="service-desc ar-only">ترميم مجرى البول والجهاز التناسلي المعقد. تخصص في رأب الإحليل وإصلاح الناسور.</p><p class="service-desc en-only">Complex urethral and genital reconstruction. Specialist in urethroplasty, hypospadias repair.</p><div class="service-arrow">→</div></div>
-      <div class="service-card"><span class="service-num">02</span><svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="#b8b8b8" stroke-width="1.3"><rect x="8" y="20" width="32" height="8" rx="4"/><circle cx="24" cy="24" r="3" fill="#b8b8b8" opacity="0.3"/></svg><h3 class="service-title ar-only">جراحة الغرسات الذكرية</h3><h3 class="service-title en-only">Prosthetic Urology</h3><p class="service-desc ar-only">زراعة المضخات القضيبية والمصرة البولية الصناعية. أكثر من 100 حالة تقنيات رائدة.</p><p class="service-desc en-only">Inflatable penile prostheses and artificial urinary sphincters. Over 100 cases.</p><div class="service-arrow">→</div></div>
-      <div class="service-card"><span class="service-num">03</span><svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="#b8b8b8" stroke-width="1.3"><path d="M24 8c-8.837 0-16 7.163-16 16s7.163 16 16 16 16-7.163 16-16-7.163-16-16-16z"/><path d="M24 16v8M20 20h8" stroke-linecap="round"/></svg><h3 class="service-title ar-only">جراحة المسالك التجميلية</h3><h3 class="service-title en-only">Aesthetic Urology</h3><p class="service-desc ar-only">علاج انحناء القضيب، إعادة بناء الحشفة — الجمع بين المهارة الجراحية والحس الجمالي.</p><p class="service-desc en-only">Penile curvature correction, glans reconstruction — combining surgical skill with aesthetics.</p><div class="service-arrow">→</div></div>
-      <div class="service-card"><span class="service-num">04</span><svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="#b8b8b8" stroke-width="1.3"><path d="M8 36L24 12l16 24"/><path d="M14 28h20" stroke-linecap="round"/><circle cx="36" cy="14" r="4"/></svg><h3 class="service-title ar-only">الرسم الطبي والتعليم</h3><h3 class="service-title en-only">Medical Illustration & Education</h3><p class="service-desc ar-only">الرسام الرسمي لـ GURS. ورش عمل حية تحول الخطوات المعقدة إلى قصص بصرية تعليمية.</p><p class="service-desc en-only">Official GURS illustrator. Live workshops transforming complex steps into visual narratives.</p><div class="service-arrow">→</div></div>
+      
+      <!-- Service 1 - Reconstructive Urology (with your image) -->
+      <div class="service-card" data-service-id="0">
+        <div class="service-img-wrapper" onclick="triggerImageUpload(0)">
+          <img class="service-img" id="service-img-0" src="Gemini_Generated_Image_btqsl5btqsl5btqs.png" alt="جراحة المسالك الترميمية">
+          <div class="service-img-overlay">
+            <i class="fas fa-camera"></i>
+            <span class="ar-only">تغيير الصورة</span>
+            <span class="en-only">Change Image</span>
+          </div>
+        </div>
+        <span class="service-num">01</span>
+        <h3 class="service-title ar-only">جراحة المسالك الترميمية</h3>
+        <h3 class="service-title en-only">Reconstructive Urology</h3>
+        <p class="service-desc ar-only">ترميم مجرى البول والجهاز التناسلي المعقد. تخصص في رأب الإحليل وإصلاح الناسور.</p>
+        <p class="service-desc en-only">Complex urethral and genital reconstruction. Specialist in urethroplasty.</p>
+        <div class="service-arrow"><i class="fas fa-arrow-left"></i></div>
+      </div>
+      
+      <!-- Service 2 - Prosthetic Urology -->
+      <div class="service-card" data-service-id="1">
+        <div class="service-img-wrapper" onclick="triggerImageUpload(1)">
+          <img class="service-img" id="service-img-1" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 140'%3E%3Crect width='140' height='140' fill='%231a1a1a'/%3E%3Ctext x='70' y='78' text-anchor='middle' fill='%23d4d4d4' font-size='14'%3E%3C/text%3E%3C/svg%3E" alt="جراحة الغرسات الذكرية">
+          <div class="service-img-overlay">
+            <i class="fas fa-camera"></i>
+            <span class="ar-only">تغيير الصورة</span>
+            <span class="en-only">Change Image</span>
+          </div>
+        </div>
+        <span class="service-num">02</span>
+        <h3 class="service-title ar-only">جراحة الغرسات الذكرية</h3>
+        <h3 class="service-title en-only">Prosthetic Urology</h3>
+        <p class="service-desc ar-only">زراعة المضخات القضيبية والمصرة البولية الصناعية. أكثر من 100 حالة.</p>
+        <p class="service-desc en-only">Inflatable penile prostheses and artificial urinary sphincters.</p>
+        <div class="service-arrow"><i class="fas fa-arrow-left"></i></div>
+      </div>
+      
+      <!-- Service 3 - Stent Placement -->
+      <div class="service-card" data-service-id="2">
+        <div class="service-img-wrapper" onclick="triggerImageUpload(2)">
+          <img class="service-img" id="service-img-2" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 140'%3E%3Crect width='140' height='140' fill='%231a1a1a'/%3E%3Ctext x='70' y='78' text-anchor='middle' fill='%23d4d4d4' font-size='14'%3E%3C/text%3E%3C/svg%3E" alt="تركيب الدعامات">
+          <div class="service-img-overlay">
+            <i class="fas fa-camera"></i>
+            <span class="ar-only">تغيير الصورة</span>
+            <span class="en-only">Change Image</span>
+          </div>
+        </div>
+        <span class="service-num">03</span>
+        <h3 class="service-title ar-only">تركيب الدعامات</h3>
+        <h3 class="service-title en-only">Stent Placement</h3>
+        <p class="service-desc ar-only">تركيب دعامات الحالب والمجاري البولية بأحدث التقنيات. متخصص في الحالات المعقدة.</p>
+        <p class="service-desc en-only">Ureteral and urinary tract stent placement with advanced techniques.</p>
+        <div class="service-arrow"><i class="fas fa-arrow-left"></i></div>
+      </div>
+      
+      <!-- Service 4 - Medical Illustration -->
+      <div class="service-card" data-service-id="3">
+        <div class="service-img-wrapper" onclick="triggerImageUpload(3)">
+          <img class="service-img" id="service-img-3" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 140'%3E%3Crect width='140' height='140' fill='%231a1a1a'/%3E%3Ctext x='70' y='78' text-anchor='middle' fill='%23d4d4d4' font-size='14'%3E%3C/text%3E%3C/svg%3E" alt="الرسم الطبي">
+          <div class="service-img-overlay">
+            <i class="fas fa-camera"></i>
+            <span class="ar-only">تغيير الصورة</span>
+            <span class="en-only">Change Image</span>
+          </div>
+        </div>
+        <span class="service-num">04</span>
+        <h3 class="service-title ar-only">الرسم الطبي والتعليم</h3>
+        <h3 class="service-title en-only">Medical Illustration & Education</h3>
+        <p class="service-desc ar-only">الرسام الرسمي لـ GURS. ورش عمل حية تحول الخطوات المعقدة إلى قصص بصرية.</p>
+        <p class="service-desc en-only">Official GURS illustrator. Live workshops transforming complex steps into visuals.</p>
+        <div class="service-arrow"><i class="fas fa-arrow-left"></i></div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- STAFF SECTION -->
+<section id="staff">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-eyebrow ar-only">فريقنا</span>
+      <span class="section-eyebrow en-only">Our Team</span>
+      <h2 class="section-title ar-only">خبراء <em>موثوقون</em></h2>
+      <h2 class="section-title en-only">Trusted <em>Experts</em></h2>
+    </div>
+    <div class="staff-grid reveal">
+      <div class="staff-card">
+        <div class="staff-img-placeholder"><i class="fas fa-user-md"></i></div>
+        <div class="staff-info">
+          <h3 class="staff-name ar-only">د. أحمد ياسر</h3><h3 class="staff-name en-only">Dr. Ahmed Yasser</h3>
+          <div class="staff-title ar-only">استشاري المسالك البولية</div><div class="staff-title en-only">Consultant Urologist</div>
+          <p class="staff-bio ar-only">خبرة 15 عاماً في جراحة المناظير وعلاج حصوات الكلى والحالب.</p>
+          <p class="staff-bio en-only">15 years of experience in endoscopic surgery and kidney stone treatment.</p>
+          <div class="staff-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div>
+        </div>
+      </div>
+      <div class="staff-card">
+        <div class="staff-img-placeholder"><i class="fas fa-user-md"></i></div>
+        <div class="staff-info">
+          <h3 class="staff-name ar-only">د. نورا خالد</h3><h3 class="staff-name en-only">Dr. Nora Khaled</h3>
+          <div class="staff-title ar-only">أخصائية التخدير والعناية المركزة</div><div class="staff-title en-only">Anesthesiology Specialist</div>
+          <p class="staff-bio ar-only">متخصصة في التخدير الموضعي والعام لجراحات المسالك المعقدة.</p>
+          <p class="staff-bio en-only">Specialized in local and general anesthesia for complex urological surgeries.</p>
+          <div class="staff-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div>
+        </div>
+      </div>
+      <div class="staff-card">
+        <div class="staff-img-placeholder"><i class="fas fa-user-md"></i></div>
+        <div class="staff-info">
+          <h3 class="staff-name ar-only">د. عمرو سامي</h3><h3 class="staff-name en-only">Dr. Amr Sami</h3>
+          <div class="staff-title ar-only">أخصائي جراحة الأوعية الدموية</div><div class="staff-title en-only">Vascular Surgery Specialist</div>
+          <p class="staff-bio ar-only">خبرة في جراحات الأوعية الدموية الدقيقة وتركيب الدعامات الوريدية.</p>
+          <p class="staff-bio en-only">Expert in microvascular surgery and venous stent placement.</p>
+          <div class="staff-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1796,16 +2178,13 @@
 <section id="portfolio">
   <div class="container">
     <div class="section-header reveal">
-      <span class="section-eyebrow ar-only">أعمالي</span>
-      <span class="section-eyebrow en-only">Portfolio</span>
-      <h2 class="section-title ar-only">أعمال <em>مختارة</em></h2>
-      <h2 class="section-title en-only">Selected <em>Works</em></h2>
+      <span class="section-eyebrow ar-only">أعمالي</span><span class="section-eyebrow en-only">Portfolio</span>
+      <h2 class="section-title ar-only">أعمال <em>مختارة</em></h2><h2 class="section-title en-only">Selected <em>Works</em></h2>
     </div>
     <div class="portfolio-filters reveal">
       <button class="filter-btn active" onclick="filterPortfolio('all', this)" data-cat="all">الكل / All</button>
       <button class="filter-btn" onclick="filterPortfolio('illustration', this)" data-cat="illustration">رسوم / Illustrations</button>
       <button class="filter-btn" onclick="filterPortfolio('case', this)" data-cat="case">حالات / Cases</button>
-      <button class="filter-btn" onclick="filterPortfolio('education', this)" data-cat="education">تعليم / Education</button>
     </div>
     <div class="portfolio-grid reveal" id="portfolio-grid">
       <div class="portfolio-item" data-cat="illustration" onclick="openModal(0)"><div class="portfolio-item-inner"><div class="portfolio-item-num">01</div><div class="portfolio-item-label ar-only">وضع خزان المضخة القضيبية</div><div class="portfolio-item-label en-only">Ectopic Reservoir Placement</div></div><div class="portfolio-item-overlay"><div><span class="portfolio-item-cat ar-only">رسم طبي</span><span class="portfolio-item-cat en-only">Medical Illustration</span><div class="portfolio-item-title ar-only">وضع الخزان تحت العضلة المائلة</div><div class="portfolio-item-title en-only">Ectopic Reservoir Placement</div></div></div></div>
@@ -1814,30 +2193,25 @@
       <div class="portfolio-item" data-cat="case" onclick="openModal(3)"><div class="portfolio-item-inner"><div class="portfolio-item-num">04</div><div class="portfolio-item-label ar-only">إغلاق الناسور بعد الإحليل التحتي</div><div class="portfolio-item-label en-only">Post Hypospadias Fistula Closure</div></div><div class="portfolio-item-overlay"><div><span class="portfolio-item-cat ar-only">حالة جراحية</span><span class="portfolio-item-cat en-only">Surgical Case</span><div class="portfolio-item-title ar-only">إغلاق الناسور الإحليلي</div><div class="portfolio-item-title en-only">Hypospadias Fistula Closure</div></div></div></div>
       <div class="portfolio-item" data-cat="illustration" onclick="openModal(4)"><div class="portfolio-item-inner"><div class="portfolio-item-num">05</div><div class="portfolio-item-label ar-only">بضع الكهف ذو الثماني نقاط</div><div class="portfolio-item-label en-only">Eight-dot Extended Corporotomy</div></div><div class="portfolio-item-overlay"><div><span class="portfolio-item-cat ar-only">رسم طبي</span><span class="portfolio-item-cat en-only">Medical Illustration</span><div class="portfolio-item-title ar-only">لزراعة المضخة القضيبية المرنة</div><div class="portfolio-item-title en-only">Extended Corporotomy</div></div></div></div>
       <div class="portfolio-item" data-cat="case" onclick="openModal(5)"><div class="portfolio-item-inner"><div class="portfolio-item-num">06</div><div class="portfolio-item-label ar-only">حالات ترميم مجرى البول الأنثوي</div><div class="portfolio-item-label en-only">Female Urethroplasty Series</div></div><div class="portfolio-item-overlay"><div><span class="portfolio-item-cat ar-only">سلسلة حالات جراحية</span><span class="portfolio-item-cat en-only">Surgical Case Series</span><div class="portfolio-item-title ar-only">ترميم مجرى البول عند السيدات</div><div class="portfolio-item-title en-only">Female Urethroplasty</div></div></div></div>
-      <div class="portfolio-item" data-cat="case" onclick="openModal(6)"><div class="portfolio-item-inner"><div class="portfolio-item-num">07</div><div class="portfolio-item-label ar-only">بتر الحشفة + إحليل تحتي علاجي المنشأ</div><div class="portfolio-item-label en-only">Glans Amputation + Iatrogenic Hypospadias</div></div><div class="portfolio-item-overlay"><div><span class="portfolio-item-cat ar-only">ترميم معقد</span><span class="portfolio-item-cat en-only">Complex Reconstruction</span><div class="portfolio-item-title ar-only">إعادة بناء الحشفة</div><div class="portfolio-item-title en-only">Glans Reconstruction</div></div></div></div>
-      <div class="portfolio-item" data-cat="illustration" onclick="openModal(7)"><div class="portfolio-item-inner"><div class="portfolio-item-num">08</div><div class="portfolio-item-label ar-only">تقنية شد دوالي الخصية</div><div class="portfolio-item-label en-only">Varicocelectomy Technique</div></div><div class="portfolio-item-overlay"><div><span class="portfolio-item-cat ar-only">رسم طبي</span><span class="portfolio-item-cat en-only">Medical Illustration</span><div class="portfolio-item-title ar-only">استئصال دوالي الخصية</div><div class="portfolio-item-title en-only">Varicocelectomy</div></div></div></div>
-      <div class="portfolio-item" data-cat="education" onclick="openModal(8)"><div class="portfolio-item-inner"><div class="portfolio-item-num">09</div><div class="portfolio-item-label ar-only">ورشة عمل ترقيع الغشاء المخاطي الفموي</div><div class="portfolio-item-label en-only">Buccal Graft Workshop — Luxor</div></div><div class="portfolio-item-overlay"><div><span class="portfolio-item-cat ar-only">ورشة عمل حية</span><span class="portfolio-item-cat en-only">Live Workshop</span><div class="portfolio-item-title ar-only">ترقيع الغشاء المخاطي الفموي للحالب</div><div class="portfolio-item-title en-only">Buccal Graft Workshop</div></div></div></div>
     </div>
   </div>
 </section>
 
-<!-- EXPERIENCE / TIMELINE -->
+<!-- EXPERIENCE -->
 <section id="experience">
   <div class="container">
     <div class="section-header reveal">
-      <span class="section-eyebrow ar-only">المسيرة المهنية</span>
-      <span class="section-eyebrow en-only">Journey</span>
-      <h2 class="section-title ar-only"><em>مسار</em> التميز</h2>
-      <h2 class="section-title en-only">The <em>Path</em> Forward</h2>
+      <span class="section-eyebrow ar-only">المسيرة المهنية</span><span class="section-eyebrow en-only">Journey</span>
+      <h2 class="section-title ar-only"><em>مسار</em> التميز</h2><h2 class="section-title en-only">The <em>Path</em> Forward</h2>
     </div>
     <div class="timeline reveal">
       <div class="timeline-line"></div>
       <div class="timeline-item"><div class="timeline-content"><span class="timeline-year">2015</span><div class="timeline-role ar-only">بكالوريوس الطب والجراحة</div><div class="timeline-role en-only">Medical Degree</div><div class="timeline-org">جامعة بني سويف / Beni-Suef University</div></div><div class="timeline-center"><div class="timeline-dot"></div></div><div class="timeline-empty"></div></div>
-      <div class="timeline-item"><div class="timeline-empty"></div><div class="timeline-center"><div class="timeline-dot"></div></div><div class="timeline-content"><span class="timeline-year">2017</span><div class="timeline-role ar-only">الإقامة في المسالك البولية</div><div class="timeline-role en-only">Urology Residency</div><div class="timeline-org">مستشفى جامعة بني سويف / Beni-Suef University Hospital</div></div></div>
-      <div class="timeline-item"><div class="timeline-content"><span class="timeline-year">2019</span><div class="timeline-role ar-only">مدرس مساعد المسالك البولية</div><div class="timeline-role en-only">Assistant Lecturer of Urology</div><div class="timeline-org">جامعة بني سويف / Beni-Suef University</div></div><div class="timeline-center"><div class="timeline-dot"></div></div><div class="timeline-empty"></div></div>
-      <div class="timeline-item"><div class="timeline-empty"></div><div class="timeline-center"><div class="timeline-dot"></div></div><div class="timeline-content"><span class="timeline-year">2024</span><div class="timeline-role ar-only">غلاف مجلة Sexual Medicine</div><div class="timeline-role en-only">Journal of Sexual Medicine — Cover</div><div class="timeline-org">رسام الغلاف، المجلد 21، العدد 10 / Cover Illustrator, Vol. 21, No. 10</div></div></div>
-      <div class="timeline-item"><div class="timeline-content"><span class="timeline-year">2025</span><div class="timeline-role ar-only">مدرس المسالك البولية</div><div class="timeline-role en-only">Lecturer of Urology</div><div class="timeline-org">جامعة بني سويف / Beni-Suef University</div></div><div class="timeline-center"><div class="timeline-dot"></div></div><div class="timeline-empty"></div></div>
-      <div class="timeline-item"><div class="timeline-empty"></div><div class="timeline-center"><div class="timeline-dot"></div></div><div class="timeline-content"><span class="timeline-year">2026</span><div class="timeline-role ar-only">الرسام الرسمي لـ GURS</div><div class="timeline-role en-only">GURS Official Illustrator</div><div class="timeline-org">الجمعية العالمية لجراحي المسالك والتناسلية / Society of Genitourinary Reconstructive Surgeons</div></div></div>
+      <div class="timeline-item"><div class="timeline-empty"></div><div class="timeline-center"><div class="timeline-dot"></div></div><div class="timeline-content"><span class="timeline-year">2017</span><div class="timeline-role ar-only">الإقامة في المسالك البولية</div><div class="timeline-role en-only">Urology Residency</div><div class="timeline-org">مستشفى جامعة بني سويف</div></div></div>
+      <div class="timeline-item"><div class="timeline-content"><span class="timeline-year">2019</span><div class="timeline-role ar-only">مدرس مساعد المسالك البولية</div><div class="timeline-role en-only">Assistant Lecturer of Urology</div><div class="timeline-org">جامعة بني سويف</div></div><div class="timeline-center"><div class="timeline-dot"></div></div><div class="timeline-empty"></div></div>
+      <div class="timeline-item"><div class="timeline-empty"></div><div class="timeline-center"><div class="timeline-dot"></div></div><div class="timeline-content"><span class="timeline-year">2024</span><div class="timeline-role ar-only">غلاف مجلة Sexual Medicine</div><div class="timeline-role en-only">Journal of Sexual Medicine — Cover</div><div class="timeline-org">رسام الغلاف، المجلد 21، العدد 10</div></div></div>
+      <div class="timeline-item"><div class="timeline-content"><span class="timeline-year">2025</span><div class="timeline-role ar-only">مدرس المسالك البولية</div><div class="timeline-role en-only">Lecturer of Urology</div><div class="timeline-org">جامعة بني سويف</div></div><div class="timeline-center"><div class="timeline-dot"></div></div><div class="timeline-empty"></div></div>
+      <div class="timeline-item"><div class="timeline-empty"></div><div class="timeline-center"><div class="timeline-dot"></div></div><div class="timeline-content"><span class="timeline-year">2026</span><div class="timeline-role ar-only">الرسام الرسمي لـ GURS</div><div class="timeline-role en-only">GURS Official Illustrator</div><div class="timeline-org">الجمعية العالمية لجراحي المسالك والتناسلية</div></div></div>
     </div>
   </div>
 </section>
@@ -1846,10 +2220,8 @@
 <section id="testimonials">
   <div class="container">
     <div class="section-header reveal">
-      <span class="section-eyebrow ar-only">التقدير</span>
-      <span class="section-eyebrow en-only">Recognition</span>
-      <h2 class="section-title ar-only">ماذا يقول عني <em>الخبراء</em></h2>
-      <h2 class="section-title en-only">What <em>Experts</em> Say</h2>
+      <span class="section-eyebrow ar-only">التقدير</span><span class="section-eyebrow en-only">Recognition</span>
+      <h2 class="section-title ar-only">ماذا يقول عني <em>الخبراء</em></h2><h2 class="section-title en-only">What <em>Experts</em> Say</h2>
     </div>
     <div class="testimonial-slider reveal">
       <div class="testimonial-track">
@@ -1859,70 +2231,30 @@
           <div class="testimonial-slide"><span class="quote-mark">"</span><p class="testimonial-quote ar-only">رسوم توضيحية رائعة! هذا المقال سيسهل فهمي لإدارة الانتصاب المؤلم.</p><p class="testimonial-quote en-only">Fantastic illustrations! This article will greatly facilitate my understanding of priapism management.</p><div class="testimonial-author"><div class="author-avatar">TS</div><div><div class="author-name">International Medical Community</div><div class="author-role">Zoladex_PCA</div></div></div></div>
         </div>
       </div>
-      <div class="slider-controls">
-        <button class="slider-btn" onclick="prevSlide()">←</button>
-        <div class="slider-dots" id="slider-dots">
-          <div class="dot active" onclick="goToSlide(0)"></div>
-          <div class="dot" onclick="goToSlide(1)"></div>
-          <div class="dot" onclick="goToSlide(2)"></div>
-        </div>
-        <button class="slider-btn" onclick="nextSlide()">→</button>
-      </div>
+      <div class="slider-controls"><button class="slider-btn" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button><div class="slider-dots" id="slider-dots"><div class="dot active" onclick="goToSlide(0)"></div><div class="dot" onclick="goToSlide(1)"></div><div class="dot" onclick="goToSlide(2)"></div></div><button class="slider-btn" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button></div>
     </div>
   </div>
 </section>
 
-<!-- BOOKING / CONTACT -->
+<!-- BOOKING -->
 <section id="booking">
   <div class="container">
     <div class="section-header reveal">
-      <span class="section-eyebrow ar-only">احجز</span>
-      <span class="section-eyebrow en-only">Book</span>
-      <h2 class="section-title ar-only">لنعمل <em>معاً</em></h2>
-      <h2 class="section-title en-only">Let's Work <em>Together</em></h2>
+      <span class="section-eyebrow ar-only">احجز</span><span class="section-eyebrow en-only">Book</span>
+      <h2 class="section-title ar-only">لنعمل <em>معاً</em></h2><h2 class="section-title en-only">Let's Work <em>Together</em></h2>
     </div>
     <div class="booking-wrapper">
-      <div class="booking-info reveal">
-        <h3 class="ar-only">ابدأ استشارتك</h3>
-        <h3 class="en-only">Begin your consultation</h3>
-        <p class="ar-only">سواء كنت مريضاً تبحث عن رعاية ترميمية، أو جراحاً يحتاج رسوماً توضيحية، أو مؤسسة تخطط لورشة عمل — الدكتور عماد يرحب بالتعاون العالمي.</p>
-        <p class="en-only">Whether you're a patient seeking reconstructive care, a surgeon needing illustrations, or an institution planning a workshop — Dr. Emad welcomes global collaboration.</p>
-        <div class="contact-methods">
-          <a href="tel:+201027870022" class="contact-method"><div class="method-icon"><i class="fas fa-phone-alt"></i></div><div><span class="method-label">Phone</span><span class="method-value">+2-010-2787-0022</span></div></a>
-          <a href="mailto:mohamedemadeldin@med.bsu.edu.eg" class="contact-method"><div class="method-icon"><i class="fas fa-envelope"></i></div><div><span class="method-label">Email</span><span class="method-value">mohamedemadeldin@med.bsu.edu.eg</span></div></a>
-          <a href="https://wa.me/201027870022" class="contact-method" target="_blank"><div class="method-icon"><i class="fab fa-whatsapp"></i></div><div><span class="method-label">WhatsApp</span><span class="method-value ar-only">تواصل مباشر</span><span class="method-value en-only">Chat Directly</span></div></a>
-        </div>
-      </div>
-      <div class="booking-form reveal">
-        <div class="form-row">
-          <div class="form-group"><label class="ar-only">الاسم الأول</label><label class="en-only">First Name</label><input type="text" placeholder="Your first name"></div>
-          <div class="form-group"><label class="ar-only">اسم العائلة</label><label class="en-only">Last Name</label><input type="text" placeholder="Your last name"></div>
-        </div>
-        <div class="form-group"><label class="ar-only">البريد الإلكتروني</label><label class="en-only">Email</label><input type="email" placeholder="your@email.com"></div>
-        <div class="form-group"><label class="ar-only">رقم الهاتف / واتساب</label><label class="en-only">Phone / WhatsApp</label><input type="tel" placeholder="+20 ..."></div>
-        <div class="form-group"><label class="ar-only">نوع الاستفسار</label><label class="en-only">Inquiry Type</label><select><option selected disabled class="ar-only">اختر نوع الاستشارة</option><option selected disabled class="en-only">Select consultation type</option><option>Patient Consultation / استشارة مريض</option><option>Medical Illustration Commission / رسم طبي</option><option>Workshop Invitation / ورشة عمل</option><option>Research Collaboration / تعاون بحثي</option></select></div>
-        <div class="form-group"><label class="ar-only">الرسالة</label><label class="en-only">Message</label><textarea placeholder="Describe your inquiry..."></textarea></div>
-        <button class="form-submit" onclick="handleFormSubmit(event)"><span class="ar-only">إرسال الطلب</span><span class="en-only">Send Request</span></button>
-      </div>
+      <div class="booking-info reveal"><h3 class="ar-only">ابدأ استشارتك</h3><h3 class="en-only">Begin your consultation</h3><p class="ar-only">سواء كنت مريضاً أو جراحاً أو مؤسسة — الدكتور عماد يرحب بالتعاون العالمي.</p><p class="en-only">Whether you're a patient, surgeon, or institution — Dr. Emad welcomes global collaboration.</p>
+      <div class="contact-methods"><a href="tel:+201027870022" class="contact-method"><div class="method-icon"><i class="fas fa-phone-alt"></i></div><div><span class="method-label">Phone</span><span class="method-value">+2-010-2787-0022</span></div></a><a href="mailto:mohamedemadeldin@med.bsu.edu.eg" class="contact-method"><div class="method-icon"><i class="fas fa-envelope"></i></div><div><span class="method-label">Email</span><span class="method-value">mohamedemadeldin@med.bsu.edu.eg</span></div></a><a href="https://wa.me/201027870022" class="contact-method" target="_blank"><div class="method-icon"><i class="fab fa-whatsapp"></i></div><div><span class="method-label">WhatsApp</span><span class="method-value ar-only">تواصل مباشر</span><span class="method-value en-only">Chat Directly</span></div></a></div></div>
+      <div class="booking-form reveal"><div class="form-row"><div class="form-group"><label class="ar-only">الاسم الأول</label><label class="en-only">First Name</label><input type="text"></div><div class="form-group"><label class="ar-only">اسم العائلة</label><label class="en-only">Last Name</label><input type="text"></div></div><div class="form-group"><label class="ar-only">البريد الإلكتروني</label><label class="en-only">Email</label><input type="email"></div><div class="form-group"><label class="ar-only">رقم الهاتف</label><label class="en-only">Phone</label><input type="tel"></div><div class="form-group"><label class="ar-only">نوع الاستفسار</label><label class="en-only">Inquiry Type</label><select><option selected disabled>اختر</option><option>استشارة مريض</option><option>رسم طبي</option><option>تركيب دعامات</option><option>ورشة عمل</option></select></div><div class="form-group"><label class="ar-only">الرسالة</label><label class="en-only">Message</label><textarea placeholder="..."></textarea></div><button class="form-submit" onclick="handleFormSubmit(event)"><span class="ar-only">إرسال الطلب</span><span class="en-only">Send Request</span></button></div></div>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="container">
-    <div class="footer-top">
-      <div><span class="footer-logo ar-only">د. محمد <span>عماد الدين</span></span><span class="footer-logo en-only">Dr. Mohamed <span>Emad</span></span><div class="footer-tagline ar-only">المسالك البولية · الترميم · الرسم الطبي</div><div class="footer-tagline en-only">Urology · Reconstruction · Illustration</div></div>
-      <div class="footer-social">
-        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-        <a href="https://wa.me/201027870022" class="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p class="footer-copy">© 2026 د. محمد عماد الدين · جامعة بني سويف، مصر</p>
-      <div class="footer-gurs"><span class="ar-only">عضو رسمي</span><span class="en-only">Official Member</span><span class="gurs-badge">GURS</span></div>
-    </div>
+    <div class="footer-top"><div><span class="footer-logo ar-only">د. محمد <span>عماد الدين</span></span><span class="footer-logo en-only">Dr. Mohamed <span>Emad</span></span><div class="footer-tagline ar-only">المسالك البولية · الترميم · تركيب الدعامات · الرسم الطبي</div><div class="footer-tagline en-only">Urology · Reconstruction · Stent Placement · Illustration</div></div><div class="footer-social"><a href="#" class="social-link"><i class="fab fa-twitter"></i></a><a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a><a href="#" class="social-link"><i class="fab fa-instagram"></i></a><a href="https://wa.me/201027870022" class="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a></div></div>
+    <div class="footer-bottom"><p class="footer-copy">© 2026 د. محمد عماد الدين — جراحة المسالك وتركيب الدعامات والرسم الطبي</p><div class="footer-gurs"><span class="ar-only">عضو رسمي</span><span class="en-only">Official Member</span><span class="gurs-badge">GURS</span></div></div>
   </div>
 </footer>
 
@@ -1932,97 +2264,88 @@
 // Particle Canvas
 (function(){const c=document.getElementById('cosmos'),ctx=c.getContext('2d');let W,H,p=[],m={x:-9999,y:-9999};function r(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}function cp(){return{x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*0.1,vy:(Math.random()-0.5)*0.1,r:Math.random()*1+0.3,alpha:Math.random()*0.4+0.1}}function i(){r();p=Array.from({length:100},cp)}function d(){ctx.clearRect(0,0,W,H);for(let i=0;i<p.length;i++)for(let j=i+1;j<p.length;j++){const dx=p[i].x-p[j].x,dy=p[i].y-p[j].y,dist=Math.hypot(dx,dy);if(dist<100){ctx.beginPath();ctx.strokeStyle=`rgba(200,200,200,${0.03*(1-dist/100)})`;ctx.lineWidth=0.5;ctx.moveTo(p[i].x,p[i].y);ctx.lineTo(p[j].x,p[j].y);ctx.stroke()}}p.forEach(pa=>{const dx=pa.x-m.x,dy=pa.y-m.y,md=Math.hypot(dx,dy);if(md<100){const f=(100-md)/100*0.3;pa.vx+=dx/md*f;pa.vy+=dy/md*f}pa.vx*=0.99;pa.vy*=0.99;pa.x+=pa.vx;pa.y+=pa.vy;if(pa.x<0)pa.x=W;if(pa.x>W)pa.x=0;if(pa.y<0)pa.y=H;if(pa.y>H)pa.y=0;ctx.beginPath();ctx.fillStyle=`rgba(220,220,220,${pa.alpha})`;ctx.arc(pa.x,pa.y,pa.r,0,Math.PI*2);ctx.fill()});requestAnimationFrame(d)}window.addEventListener('resize',r);window.addEventListener('mousemove',e=>{m.x=e.clientX;m.y=e.clientY});i();d()})();
 
-// Nav scroll effect
 window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60)});
 
-// Reveal on scroll
 const observer=new IntersectionObserver(e=>{e.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}})},{threshold:0.1});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
-// Counter animation
 const counterObserver=new IntersectionObserver(e=>{e.forEach(entry=>{if(entry.isIntersecting){const el=entry.target,target=parseInt(el.dataset.target),duration=1800,step=target/(duration/16);let cur=0;const t=setInterval(()=>{cur=Math.min(cur+step,target);el.textContent=Math.floor(cur);if(cur>=target)clearInterval(t)},16);counterObserver.unobserve(el)}})},{threshold:0.5});document.querySelectorAll('.counter').forEach(c=>counterObserver.observe(c));
 
-// Testimonial slider
-let slideIndex=0;const slides=document.getElementById('testimonial-slides');function updateSlider(){slides.style.transform=`translateX(-${slideIndex*100}%)`;document.querySelectorAll('.dot').forEach((d,i)=>{d.classList.toggle('active',i===slideIndex)})}function nextSlide(){slideIndex=(slideIndex+1)%3;updateSlider()}function prevSlide(){slideIndex=(slideIndex-1+3)%3;updateSlider()}function goToSlide(i){slideIndex=i;updateSlider()}setInterval(nextSlide,5000);
+let slideIndex=0;const slides=document.getElementById('testimonial-slides');const totalSlides=document.querySelectorAll('.testimonial-slide').length;
+function updateSlider(){slides.style.transform=`translateX(-${slideIndex*100}%)`;document.querySelectorAll('.dot').forEach((d,i)=>{d.classList.toggle('active',i===slideIndex)})}
+function nextSlide(){slideIndex=(slideIndex+1)%totalSlides;updateSlider()}
+function prevSlide(){slideIndex=(slideIndex-1+totalSlides)%totalSlides;updateSlider()}
+function goToSlide(i){slideIndex=i;updateSlider()}
+setInterval(nextSlide,5000);
 
-// Portfolio filter
 function filterPortfolio(cat,btn){document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.portfolio-item').forEach(item=>{if(cat==='all'||item.dataset.cat===cat)item.style.display='';else item.style.display='none'})}
 
-// Modal data
 const pData=[
-  {catAr:'رسم طبي',catEn:'Medical Illustration',titleAr:'وضع خزان المضخة القضيبية تحت العضلة المائلة الخارجية',titleEn:'Ectopic Sub-External Oblique Muscle Reservoir Placement',descAr:'رسم توضيحي مفصل مرسوم يدوياً يصور تقنية جديدة لوضع خزان المضخة القضيبية النفاخة في الفراغ تحت العضلة المائلة الخارجية.',descEn:'A detailed hand-drawn illustration depicting the novel placement technique for inflatable penile prosthesis reservoir in the sub-external oblique muscle space.'},
-  {catAr:'رسم طبي',catEn:'Medical Illustration',titleAr:'تخفيف الضغط القضيبي الصفني لعلاج الانتصاب المؤلم المستعصي',titleEn:'Penoscrotal Decompression for Resistant Priapism',descAr:'رسم توضيحي تشريحي للنهج القضيبي الصفني لتخفيف الضغط الجسمي في حالات الانتصاب المؤلم الإقفاري المقاوم.',descEn:'Anatomical illustration of the penoscrotal approach for corporal decompression in cases of refractory ischemic priapism.'},
-  {catAr:'غلاف مجلة Sexual Medicine',catEn:'Journal Cover — The Journal of Sexual Medicine',titleAr:'خياطة تثبيت الحشفة البعيدة المزدوجة',titleEn:'Double Distal Corporal Anchoring Stitch',descAr:'ظهر على غلاف مجلة الطب الجنسي (المجلد 21، العدد 10). يوضح إدارة هجرة غرسات القضيب الجانبية.',descEn:'Featured on the cover of JSM Vol.21, No.10. Illustrates management of lateral penile implant migration.'},
-  {catAr:'حالة جراحية',catEn:'Surgical Case',titleAr:'إغلاق الناسور بعد الإحليل التحتي',titleEn:'Post Hypospadias Fistula Closure',descAr:'سلسلة رسوم توثيقية للإدارة الجراحية للناسور الإحليلي الجلدي.',descEn:'Illustration series documenting surgical management of urethrocutaneous fistula following hypospadias repair.'},
-  {catAr:'رسم طبي',catEn:'Medical Illustration',titleAr:'بضع الكهف الممتد ذو الثماني نقاط',titleEn:'Eight-dot Extended Corporotomy',descAr:'تقنية تعليم جديدة لشق متماثل ممتد لوضع المضخة القضيبية المرنة.',descEn:'Novel marking technique for symmetrical extended incision for malleable prosthesis placement.'},
-  {catAr:'سلسلة حالات جراحية',catEn:'Surgical Case Series',titleAr:'ترميم مجرى البول الأنثوي',titleEn:'Female Urethroplasty',descAr:'سلسلة حالات لترميم تضيق مجرى البول الأنثوي مع رسوم توضيحية تشريحية.',descEn:'Case series of female urethral stricture reconstruction with anatomical illustrations.'},
-  {catAr:'ترميم معقد',catEn:'Complex Reconstruction',titleAr:'بتر الحشفة + إحليل تحتي علاجي المنشأ',titleEn:'Post Circumcision Amputated Glans + Iatrogenic Hypospadias',descAr:'خطة ترميم على مرحلتين مع حصاد الطعم المخاطي الفموي وترميم الحشفة.',descEn:'Two-stage reconstruction plan with buccal graft harvesting and glansplasty.'},
-  {catAr:'رسم طبي',catEn:'Medical Illustration',titleAr:'استئصال دوالي الخصية — تقنية السحب',titleEn:'Varicocelectomy — Pulling Technique',descAr:'نهج جراحي دقيق لاستئصال دوالي الخصية يسلط الضوء على تراكيب الحبل المنوي.',descEn:'Microsurgical varicocelectomy approach highlighting spermatic cord structures.'},
-  {catAr:'ورشة عمل حية',catEn:'Live Workshop',titleAr:'ترقيع الغشاء المخاطي الفموي للحالب — الأقصر 2023',titleEn:'Buccal Graft Ureteric Reconstruction — Luxor 2023',descAr:'لوحات مرسومة يدوياً في الوقت الفعلي لتعليم ترقيع الغشاء المخاطي الفموي للحالب.',descEn:'Hand-drawn boards created in real-time to teach buccal mucosal graft ureteric augmentation.'}
+  {catAr:'رسم طبي',catEn:'Medical Illustration',titleAr:'وضع خزان المضخة القضيبية تحت العضلة المائلة الخارجية',titleEn:'Ectopic Reservoir Placement',descAr:'رسم توضيحي مفصل يصور تقنية جديدة لوضع خزان المضخة القضيبية.',descEn:'Detailed illustration of novel reservoir placement technique.'},
+  {catAr:'رسم طبي',catEn:'Medical Illustration',titleAr:'تخفيف الضغط القضيبي الصفني',titleEn:'Penoscrotal Decompression',descAr:'رسم توضيحي لعلاج الانتصاب المؤلم المستعصي.',descEn:'Anatomical illustration for priapism decompression.'},
+  {catAr:'غلاف مجلة Sexual Medicine',catEn:'Journal Cover',titleAr:'خياطة تثبيت الحشفة المزدوجة',titleEn:'Double Distal Anchoring Stitch',descAr:'ظهر على غلاف مجلة الطب الجنسي.',descEn:'Featured on JSM cover.'},
+  {catAr:'حالة جراحية',catEn:'Surgical Case',titleAr:'إغلاق الناسور بعد الإحليل التحتي',titleEn:'Hypospadias Fistula Closure',descAr:'إدارة جراحية للناسور الإحليلي.',descEn:'Surgical management of urethrocutaneous fistula.'},
+  {catAr:'رسم طبي',catEn:'Medical Illustration',titleAr:'بضع الكهف الممتد',titleEn:'Extended Corporotomy',descAr:'تقنية جديدة لزراعة المضخة القضيبية.',descEn:'Novel technique for penile prosthesis.'},
+  {catAr:'حالة جراحية',catEn:'Surgical Case',titleAr:'ترميم مجرى البول الأنثوي',titleEn:'Female Urethroplasty',descAr:'ترميم تضيق مجرى البول عند السيدات.',descEn:'Female urethral stricture reconstruction.'}
 ];
-function openModal(i){const d=pData[i];document.getElementById('modal-cat').textContent = document.body.dir === 'rtl' ? d.catAr : d.catEn;document.getElementById('modal-title').textContent = document.body.dir === 'rtl' ? d.titleAr : d.titleEn;document.getElementById('modal-desc').textContent = document.body.dir === 'rtl' ? d.descAr : d.descEn;document.getElementById('modal').style.display='flex';document.body.style.overflow='hidden'}function closeModal(){document.getElementById('modal').style.display='none';document.body.style.overflow=''}document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+function openModal(i){const d=pData[i];document.getElementById('modal-cat').textContent = document.body.dir==='rtl'?d.catAr:d.catEn;document.getElementById('modal-title').textContent = document.body.dir==='rtl'?d.titleAr:d.titleEn;document.getElementById('modal-desc').textContent = document.body.dir==='rtl'?d.descAr:d.descEn;document.getElementById('modal').style.display='flex';document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('modal').style.display='none';document.body.style.overflow=''}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 
-// Form submit handler
-function handleFormSubmit(e){e.preventDefault();const btn=e.target;const originalText = btn.innerHTML;btn.innerHTML='Sending...';setTimeout(()=>{btn.innerHTML='✓ Request Sent';setTimeout(()=>{btn.innerHTML=originalText},2000)},1200)}
+function handleFormSubmit(e){e.preventDefault();const btn=e.target;const originalText=btn.innerHTML;btn.innerHTML='Sending...';setTimeout(()=>{btn.innerHTML='✓ Request Sent';setTimeout(()=>{btn.innerHTML=originalText},2000)},1200)}
 
-// Mobile nav toggle
-function toggleMobileNav(){const l=document.querySelector('.nav-links');const c=document.querySelector('.nav-cta');if(l.style.display==='flex'){l.style.display='none';if(c)c.style.display='none'}else{l.style.cssText='display:flex;flex-direction:column;position:fixed;top:80px;left:0;right:0;background:rgba(0,0,0,0.98);backdrop-filter:blur(24px);padding:40px 24px;gap:28px;z-index:999;border-bottom:1px solid rgba(200,200,200,0.1)';l.querySelectorAll('a').forEach(a=>a.style.cssText='color:rgba(245,245,245,0.8);font-size:0.9rem;');if(c)c.style.display='none'}}
+function toggleMobileNav(){const l=document.querySelector('.nav-links'),c=document.querySelector('.nav-cta');if(l.style.display==='flex'){l.style.display='none';if(c)c.style.display='none'}else{l.style.cssText='display:flex;flex-direction:column;position:fixed;top:80px;left:0;right:0;background:rgba(0,0,0,0.98);backdrop-filter:blur(24px);padding:40px 24px;gap:28px;z-index:999;border-bottom:1px solid rgba(200,200,200,0.1)';l.querySelectorAll('a').forEach(a=>a.style.cssText='color:rgba(245,245,245,0.8);font-size:0.9rem;');if(c)c.style.display='none'}}
 
-// Language Switcher
-const langButtons = document.querySelectorAll('.lang-btn');
-function setLanguage(lang) {
-    if (lang === 'en') {
-        document.body.dir = "ltr";
-        document.body.style.textAlign = "left";
-    } else {
-        document.body.dir = "rtl";
-        document.body.style.textAlign = "right";
+const langButtons=document.querySelectorAll('.lang-btn');
+function setLanguage(lang){if(lang==='en'){document.body.dir="ltr";document.body.style.textAlign="left"}else{document.body.dir="rtl";document.body.style.textAlign="right"}langButtons.forEach(btn=>{if(btn.dataset.lang===lang)btn.classList.add('active');else btn.classList.remove('active')});localStorage.setItem('preferred_lang',lang);if(document.getElementById('modal').style.display==='flex')closeModal()}
+langButtons.forEach(btn=>{btn.addEventListener('click',()=>setLanguage(btn.dataset.lang))});
+setLanguage('ar');
+
+let currentMode='grid';const toggleBtn=document.getElementById('displayModeToggle');const toggleIcon=toggleBtn.querySelector('i');
+function setDisplayMode(mode){document.body.classList.remove('grid-mode','list-mode');document.body.classList.add(mode+'-mode');currentMode=mode;localStorage.setItem('portfolioDisplayMode',mode);toggleIcon.className=mode==='grid'?'fas fa-th-large':'fas fa-list-ul'}
+toggleBtn.addEventListener('click',()=>{setDisplayMode(currentMode==='grid'?'list':'grid')});
+const savedMode=localStorage.getItem('portfolioDisplayMode');setDisplayMode(savedMode==='list'?'list':'grid');
+
+// Image Upload for Services
+function triggerImageUpload(serviceId) {
+  const fileInput = document.createElement('input');
+  fileInput.type = 'file';
+  fileInput.accept = 'image/*';
+  fileInput.style.display = 'none';
+  document.body.appendChild(fileInput);
+  
+  fileInput.click();
+  
+  fileInput.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const img = document.getElementById(`service-img-${serviceId}`);
+        if (img) {
+          img.src = event.target.result;
+          const saved = JSON.parse(localStorage.getItem('serviceImages') || '{}');
+          saved[serviceId] = event.target.result;
+          localStorage.setItem('serviceImages', JSON.stringify(saved));
+        }
+      };
+      reader.readAsDataURL(file);
     }
-    langButtons.forEach(btn => {
-        if (btn.dataset.lang === lang) btn.classList.add('active');
-        else btn.classList.remove('active');
-    });
-    localStorage.setItem('preferred_lang', lang);
-    if (document.getElementById('modal').style.display === 'flex') {
-        closeModal();
-    }
-}
-langButtons.forEach(btn => {
-    btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
-});
-const savedLang = localStorage.getItem('preferred_lang') || 'ar';
-setLanguage(savedLang);
-
-// Display Mode Toggle (Grid / List)
-let currentMode = 'grid';
-const toggleBtn = document.getElementById('displayModeToggle');
-const toggleIcon = toggleBtn.querySelector('i');
-
-function setDisplayMode(mode) {
-    document.body.classList.remove('grid-mode', 'list-mode');
-    document.body.classList.add(mode + '-mode');
-    currentMode = mode;
-    localStorage.setItem('portfolioDisplayMode', mode);
-    if (mode === 'grid') {
-        toggleIcon.className = 'fas fa-th-large';
-    } else {
-        toggleIcon.className = 'fas fa-list-ul';
-    }
+    document.body.removeChild(fileInput);
+  });
 }
 
-toggleBtn.addEventListener('click', () => {
-    if (currentMode === 'grid') {
-        setDisplayMode('list');
-    } else {
-        setDisplayMode('grid');
+function loadSavedServiceImages() {
+  const saved = JSON.parse(localStorage.getItem('serviceImages') || '{}');
+  for (let id in saved) {
+    const img = document.getElementById(`service-img-${id}`);
+    if (img && saved[id]) {
+      img.src = saved[id];
     }
-});
-
-const savedMode = localStorage.getItem('portfolioDisplayMode');
-if (savedMode && (savedMode === 'grid' || savedMode === 'list')) {
-    setDisplayMode(savedMode);
-} else {
-    setDisplayMode('grid');
+  }
 }
+
+document.addEventListener('DOMContentLoaded', loadSavedServiceImages);
 </script>
 </body>
 </html>
