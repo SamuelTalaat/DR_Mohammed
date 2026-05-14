@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
@@ -53,6 +53,7 @@
   #about { background: var(--grad-1); }
   #stats { background: var(--grad-2); }
   #services { background: var(--grad-3); }
+  #surgery-video { background: var(--grad-4); }
   #staff { background: var(--grad-1); }
   #portfolio { background: var(--grad-2); }
   #experience { background: var(--grad-4); }
@@ -96,6 +97,13 @@
     max-width: 1300px;
     margin: 40px auto;
     padding: 0 24px;
+    /* --- NEW: Premium Dashboard Background --- */
+    background: rgba(5, 5, 10, 0.65);
+    backdrop-filter: blur(8px);
+    border-radius: 32px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+    border: 1px solid rgba(220,220,220,0.08);
+    padding-bottom: 40px;
   }
 
   .dashboard-header {
@@ -105,6 +113,9 @@
     margin-bottom: 30px;
     flex-wrap: wrap;
     gap: 20px;
+    padding-top: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .dashboard-title {
@@ -118,6 +129,7 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     margin-bottom: 40px;
+    padding: 0 20px;
   }
 
   .stat-card {
@@ -129,6 +141,42 @@
     text-align: center;
     transition: all 0.3s;
   }
+
+  /* Mobile Admin Button - Hidden by default, shows only on mobile/tablet */
+.mobile-admin-btn {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(220,220,220,0.3);
+  color: var(--silver);
+  font-size: 1.3rem;
+  cursor: pointer;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.mobile-admin-btn:hover {
+  transform: scale(1.1);
+  border-color: var(--silver);
+  background: rgba(220,220,220,0.15);
+  color: var(--white);
+}
+
+/* Show button only on mobile/tablet (max-width: 768px) */
+@media (max-width: 768px) {
+  .mobile-admin-btn {
+    display: flex;
+  }
+}
 
   .stat-card:hover {
     transform: translateY(-5px);
@@ -156,6 +204,7 @@
     border: 1px solid rgba(220,220,220,0.1);
     border-radius: 20px;
     overflow-x: auto;
+    margin: 0 20px;
   }
 
   .bookings-table table {
@@ -204,11 +253,36 @@
     cursor: pointer;
     color: var(--silver);
     transition: all 0.3s;
+    text-decoration: none;
+    font-size: 0.78rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
   }
 
   .action-btn:hover {
     border-color: var(--silver);
     background: rgba(220,220,220,0.1);
+  }
+
+  .wa-btn {
+    border-color: rgba(37,211,102,0.4);
+    color: #25d366;
+  }
+  .wa-btn:hover {
+    background: rgba(37,211,102,0.15);
+    border-color: #25d366;
+    color: #25d366;
+  }
+  
+  .delete-btn {
+    border-color: rgba(220,53,69,0.4);
+    color: #dc3545;
+  }
+  .delete-btn:hover {
+    background: rgba(220,53,69,0.15);
+    border-color: #dc3545;
+    color: #dc3545;
   }
 
   .dashboard-logout {
@@ -233,64 +307,171 @@
     color: var(--white);
     font-family: var(--font-body-premium);
     width: 250px;
+    margin: 0 20px 20px 20px;
+  }
+  
+  /* Highlight for confirmed booking row */
+  .highlight-row {
+    outline: 2px solid #28a745;
+    outline-offset: -1px;
+    box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.5);
+    background: rgba(40, 167, 69, 0.08);
+    transition: all 0.3s ease;
+  }
+  
+  .copy-btn {
+    background: transparent;
+    border: none;
+    color: var(--silver);
+    cursor: pointer;
+    font-size: 0.8rem;
+    margin-left: 5px;
+    padding: 2px 5px;
+    border-radius: 4px;
+  }
+  .copy-btn:hover {
+    background: rgba(220,220,220,0.2);
+    color: var(--white);
   }
 
-  /* Login Modal */
-  .login-modal {
+  /* WhatsApp Confirmation Modal */
+  #waModal {
+    display: none;
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0;
+    z-index: 20000;
+    background: rgba(0,0,0,0.88);
+    backdrop-filter: blur(16px);
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  #waModal.open { display: flex; }
+  .wa-modal-box {
+    background: #0f0f0f;
+    border: 1px solid rgba(37,211,102,0.35);
+    border-radius: 20px;
+    padding: 36px 40px;
+    max-width: 480px;
     width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.95);
-    backdrop-filter: blur(20px);
-    z-index: 10000;
+    text-align: center;
+    box-shadow: 0 0 60px rgba(37,211,102,0.12);
+  }
+  .wa-modal-icon { font-size: 3rem; color: #25d366; margin-bottom: 14px; }
+  .wa-modal-title { font-family: var(--font-arabic-premium); font-size: 1.25rem; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+  .wa-modal-sub { font-size: 0.83rem; color: var(--muted); margin-bottom: 22px; line-height: 1.7; }
+  .wa-modal-msg {
+    background: rgba(37,211,102,0.05);
+    border: 1px solid rgba(37,211,102,0.18);
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-size: 0.82rem;
+    color: rgba(250,250,250,0.82);
+    text-align: right;
+    direction: rtl;
+    line-height: 1.95;
+    margin-bottom: 26px;
+    white-space: pre-wrap;
+  }
+  .wa-modal-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .login-box {
-    background: rgba(20,20,20,0.9);
-    border: 1px solid rgba(220,220,220,0.2);
-    border-radius: 24px;
-    padding: 40px;
-    width: 350px;
-    text-align: center;
-  }
-
-  .login-box h2 {
-    font-family: var(--font-english-premium);
-    margin-bottom: 30px;
-  }
-
-  .login-box input {
-    width: 100%;
-    padding: 15px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(220,220,220,0.2);
-    border-radius: 40px;
-    color: var(--white);
-    margin-bottom: 20px;
+    gap: 10px;
+    background: #25d366;
+    color: #000;
+    font-family: var(--font-body-premium);
+    font-weight: 700;
     font-size: 1rem;
-  }
-
-  .login-box button {
-    width: 100%;
-    padding: 12px;
-    background: linear-gradient(135deg, #6a6a6a, #3a3a3a);
+    padding: 14px 36px;
+    border-radius: 50px;
+    text-decoration: none;
     border: none;
-    border-radius: 40px;
-    color: white;
     cursor: pointer;
-    font-size: 1rem;
+    width: 100%;
+    margin-bottom: 12px;
+    transition: all 0.3s;
   }
-
-  .login-error {
-    color: #dc3545;
-    margin-top: 15px;
+  .wa-modal-btn:hover { background: #1ebe5d; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(37,211,102,0.3); }
+  .wa-modal-close {
+    background: transparent;
+    border: 1px solid rgba(220,220,220,0.18);
+    color: var(--muted);
     font-size: 0.8rem;
+    padding: 10px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s;
   }
+  .wa-modal-close:hover { border-color: var(--silver); color: var(--white); }
+
+  /* ── Premium Login Modal ── */
+  .login-modal {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.96);
+    backdrop-filter: blur(32px) saturate(120%); z-index: 10000;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .login-bg-particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .login-bg-particles::before, .login-bg-particles::after {
+    content: ''; position: absolute; border-radius: 50%; filter: blur(80px);
+    opacity: 0.07; animation: loginOrbit 12s ease-in-out infinite alternate;
+  }
+  .login-bg-particles::before { width:500px;height:500px; background:radial-gradient(circle,#c8c8c8,transparent); top:-100px;left:-100px; }
+  .login-bg-particles::after  { width:400px;height:400px; background:radial-gradient(circle,#888888,transparent); bottom:-80px;right:-80px; animation-delay:-6s; }
+  @keyframes loginOrbit { from{transform:translate(0,0) scale(1)} to{transform:translate(60px,40px) scale(1.15)} }
+  .login-card {
+    position: relative; width: 420px; max-width: calc(100vw - 40px);
+    background: linear-gradient(160deg, rgba(22,22,22,0.98) 0%, rgba(12,12,12,0.99) 100%);
+    border: 1px solid rgba(220,220,220,0.12); border-radius: 28px; padding: 52px 48px 44px;
+    text-align: center;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.04) inset, 0 1px 0 rgba(255,255,255,0.08) inset;
+    animation: loginCardIn 0.5s var(--ease-expo) both;
+  }
+  @keyframes loginCardIn { from{opacity:0;transform:translateY(30px) scale(0.96)} to{opacity:1;transform:translateY(0) scale(1)} }
+  .login-glow { position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:200px;height:2px;background:linear-gradient(90deg,transparent,rgba(220,220,220,0.5),transparent);border-radius:2px; }
+  .login-logo-wrap { margin-bottom:28px;display:flex;justify-content:center; }
+  .login-icon-ring {
+    width:68px;height:68px;border-radius:50%;border:1px solid rgba(220,220,220,0.18);
+    background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;
+    animation:loginRingPulse 3s ease-in-out infinite;
+  }
+  @keyframes loginRingPulse { 0%,100%{box-shadow:0 0 0 0 rgba(200,200,200,0.0)} 50%{box-shadow:0 0 0 10px rgba(200,200,200,0.06)} }
+  .login-eyebrow { font-family:var(--font-mono-premium);font-size:0.6rem;letter-spacing:0.28em;color:var(--muted);margin-bottom:14px;text-transform:uppercase; }
+  .login-title { font-family:var(--font-english-premium);font-size:2rem;font-weight:700;color:var(--white);line-height:1.15;margin-bottom:10px; }
+  .login-title span { color:var(--silver);font-style:italic;font-weight:400;font-size:1.4rem; }
+  .login-subtitle { font-size:0.78rem;color:var(--muted);margin-bottom:36px;line-height:1.6; }
+  .login-field-wrap { margin-bottom:10px; }
+  .login-field {
+    position:relative;display:flex;align-items:center;background:rgba(255,255,255,0.04);
+    border:1px solid rgba(220,220,220,0.14);border-radius:14px;overflow:hidden;
+    transition:border-color 0.3s,box-shadow 0.3s;
+  }
+  .login-field:focus-within { border-color:rgba(220,220,220,0.4);box-shadow:0 0 0 4px rgba(200,200,200,0.06); }
+  .login-field-icon { padding:0 14px 0 20px;color:var(--muted);font-size:0.85rem;flex-shrink:0; }
+  .login-field-input {
+    flex:1;background:transparent;border:none;outline:none;color:var(--white);
+    font-family:var(--font-body-premium);font-size:0.95rem;padding:16px 0;letter-spacing:0.05em;
+  }
+  .login-field-input::placeholder { color:rgba(250,250,250,0.25);letter-spacing:0; }
+  .login-eye-btn { background:none;border:none;color:var(--muted);padding:0 18px;cursor:pointer;font-size:0.85rem;transition:color 0.2s;flex-shrink:0; }
+  .login-eye-btn:hover { color:var(--silver); }
+  .login-error-new { color:#e05c6a;font-size:0.75rem;min-height:20px;margin-bottom:20px;font-family:var(--font-mono-premium);letter-spacing:0.04em; }
+  .login-submit-btn {
+    width:100%;padding:16px 28px;
+    background:linear-gradient(135deg,rgba(180,180,180,0.15) 0%,rgba(100,100,100,0.08) 100%);
+    border:1px solid rgba(220,220,220,0.3);border-radius:14px;color:var(--white);
+    font-family:var(--font-body-premium);font-size:0.92rem;font-weight:600;letter-spacing:0.06em;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;gap:12px;
+    transition:all 0.35s var(--ease-expo);position:relative;overflow:hidden;margin-bottom:26px;
+  }
+  .login-submit-btn:hover { border-color:rgba(220,220,220,0.6);background:linear-gradient(135deg,rgba(200,200,200,0.2) 0%,rgba(120,120,120,0.12) 100%);transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,0.4); }
+  .login-submit-btn:active { transform:translateY(0); }
+  .login-btn-arrow { font-size:0.8rem;transition:transform 0.3s; }
+  .login-submit-btn:hover .login-btn-arrow { transform:translateX(4px); }
+  .login-footer-note { font-family:var(--font-mono-premium);font-size:0.58rem;letter-spacing:0.14em;color:rgba(250,250,250,0.2);text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:7px; }
+  .login-footer-note::before,.login-footer-note::after { content:'';flex:1;height:1px;background:rgba(220,220,220,0.08);max-width:60px; }
+  .login-error { display: none; }
 
   /* Display Mode Toggle Button */
   .display-mode-toggle {
@@ -737,6 +918,24 @@
     text-transform: uppercase;
   }
 
+    /* Dashboard Premium Background with the same image (kept original place too) */
+  .dashboard-container {
+    background: linear-gradient(rgba(39, 39, 39, 0.92), rgba(27, 26, 26, 0.96)), url('Gemini_Generated_Image_btqsl5btqsl5btqs.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: local;
+  }
+
+
+    /* Login Modal Premium Background with the same image */
+  .login-modal {
+    background: linear-gradient(rgba(39, 39, 39, 0.92), rgba(27, 26, 26, 0.96)), url('Gemini_Generated_Image_btqsl5btqsl5btqs.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
   .scroll-line {
     width: 1px;
     height: 55px;
@@ -825,20 +1024,60 @@
   .service-arrow { position: absolute; bottom: 40px; right: 40px; width: 40px; height: 40px; border: 1px solid var(--glass-border); border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(12px); transition: all 0.45s; color: var(--silver); font-size: 1.2rem; }
   .service-card:hover .service-arrow { opacity: 1; transform: translateY(0); border-color: var(--silver); }
 
-  /* Staff */
+  /* Surgery Video Section */
+  #surgery-video { padding: 140px 0; background: var(--grad-4); }
+  .video-section-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .video-wrapper { position: relative; border-radius: 20px; overflow: hidden; border: 1px solid rgba(220,220,220,0.15); box-shadow: 0 40px 80px rgba(0,0,0,0.6); background: #0a0a0a; aspect-ratio: 16/9; }
+  .video-wrapper video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .video-play-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.45); cursor: pointer; transition: background 0.4s; }
+  .video-play-overlay:hover { background: rgba(0,0,0,0.25); }
+  .video-play-btn { width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--silver); background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; transition: all 0.4s var(--ease-expo); }
+  .video-play-btn i { color: var(--white); font-size: 1.8rem; margin-right: -4px; }
+  .video-play-overlay:hover .video-play-btn { transform: scale(1.1); background: rgba(220,220,220,0.15); border-color: var(--white); box-shadow: 0 0 40px rgba(220,220,220,0.3); }
+  .video-glow { position: absolute; inset: 0; border-radius: 20px; box-shadow: inset 0 0 40px rgba(220,220,220,0.05); pointer-events: none; }
+  .video-badge { position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); border: 1px solid rgba(220,220,220,0.2); border-radius: 40px; padding: 8px 18px; font-family: var(--font-mono-premium); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--silver); display: flex; align-items: center; gap: 8px; }
+  .video-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #ef4444; animation: live-blink 1.5s ease-in-out infinite; }
+  @keyframes live-blink { 0%,100% { opacity: 1; } 50% { opacity: 0.2; } }
+  .video-content { }
+  .video-eyebrow { font-family: var(--font-mono-premium); font-size: 0.68rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--silver); margin-bottom: 20px; display: block; }
+  .video-title { font-family: var(--font-english-premium); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 600; line-height: 1.3; color: var(--white); margin-bottom: 28px; }
+  body[dir="rtl"] .video-title { font-family: var(--font-arabic-premium); font-weight: 700; }
+  .video-title em { font-style: italic; color: var(--silver-light); }
+  .video-desc { font-size: 1rem; line-height: 1.9; color: rgba(250,250,250,0.7); margin-bottom: 40px; }
+  .video-features { display: flex; flex-direction: column; gap: 18px; }
+  .video-feature { display: flex; align-items: flex-start; gap: 18px; }
+  body[dir="ltr"] .video-feature { flex-direction: row; }
+  .video-feature-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(220,220,220,0.06); border: 1px solid rgba(220,220,220,0.15); display: flex; align-items: center; justify-content: center; color: var(--silver); font-size: 1.1rem; flex-shrink: 0; }
+  .video-feature-text h4 { font-family: var(--font-english-premium); font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+  body[dir="rtl"] .video-feature-text h4 { font-family: var(--font-arabic-premium); }
+  .video-feature-text p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+  @media (max-width: 1000px) { .video-section-inner { grid-template-columns: 1fr; gap: 50px; } }
+
+  /* Staff — Full-width banner style */
   #staff { padding: 140px 0; }
-  .staff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-  .staff-card { background: rgba(10,10,10,0.8); backdrop-filter: blur(10px); border: 1px solid rgba(220,220,220,0.1); border-radius: 24px; overflow: hidden; transition: all 0.5s; text-align: center; }
-  .staff-card:hover { transform: translateY(-10px); border-color: rgba(220,220,220,0.3); box-shadow: 0 30px 50px rgba(0,0,0,0.4); }
-  .staff-img-placeholder { width: 100%; height: 300px; background: linear-gradient(135deg, #1a1a1a, #0a0a0a); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: rgba(220,220,220,0.3); }
-  .staff-info { padding: 28px 24px 32px; }
-  .staff-name { font-family: var(--font-english-premium); font-size: 1.4rem; font-weight: 600; color: var(--white); margin-bottom: 8px; }
-  body[dir="rtl"] .staff-name { font-family: var(--font-arabic-premium); }
-  .staff-title { font-family: var(--font-mono-premium); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--silver); margin-bottom: 16px; display: inline-block; background: rgba(220,220,220,0.1); padding: 4px 16px; border-radius: 30px; }
-  .staff-bio { font-size: 0.85rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
-  .staff-social { display: flex; justify-content: center; gap: 16px; }
-  .staff-social a { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(220,220,220,0.2); display: flex; align-items: center; justify-content: center; color: var(--muted); transition: all 0.3s; text-decoration: none; }
-  .staff-social a:hover { border-color: var(--silver); color: var(--silver); background: rgba(220,220,220,0.1); }
+  .staff-banner { position: relative; width: 100%; border-radius: 24px; overflow: hidden; border: 1px solid rgba(220,220,220,0.15); box-shadow: 0 40px 80px rgba(0,0,0,0.5); }
+  .staff-banner-img { width: 100%; height: 600px; object-fit: cover; display: block; filter: brightness(0.55); transition: filter 0.6s; }
+  .staff-banner:hover .staff-banner-img { filter: brightness(0.65); }
+  .staff-banner-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.45) 50%, rgba(0,0,0,0.15) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 60px; }
+  .staff-banner-label { font-family: var(--font-mono-premium); font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--silver); margin-bottom: 18px; display: flex; align-items: center; gap: 14px; }
+  .staff-banner-label::before { content: ''; display: inline-block; width: 40px; height: 1px; background: var(--silver); }
+  body[dir="ltr"] .staff-banner-label::before { display: none; }
+  body[dir="ltr"] .staff-banner-label::after { content: ''; display: inline-block; width: 40px; height: 1px; background: var(--silver); }
+  .staff-banner-title { font-family: var(--font-english-premium); font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 600; color: var(--white); margin-bottom: 20px; line-height: 1.3; }
+  body[dir="rtl"] .staff-banner-title { font-family: var(--font-arabic-premium); font-weight: 700; }
+  .staff-banner-desc { font-size: 1rem; line-height: 1.85; color: rgba(250,250,250,0.72); max-width: 780px; margin-bottom: 36px; }
+  .staff-banner-members { display: flex; flex-wrap: wrap; gap: 14px; }
+  .staff-member-chip { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.06); backdrop-filter: blur(10px); border: 1px solid rgba(220,220,220,0.18); border-radius: 50px; padding: 10px 22px; transition: all 0.35s; cursor: default; }
+  .staff-member-chip:hover { background: rgba(220,220,220,0.12); border-color: rgba(220,220,220,0.4); transform: translateY(-2px); }
+  .chip-avatar { width: 32px; height: 32px; border-radius: 50%; background: rgba(220,220,220,0.15); border: 1px solid rgba(220,220,220,0.3); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono-premium); font-size: 0.65rem; color: var(--silver); font-weight: 600; flex-shrink: 0; }
+  .chip-info { }
+  .chip-name { font-family: var(--font-body-premium); font-size: 0.82rem; font-weight: 600; color: var(--white); line-height: 1.2; }
+  .chip-role { font-family: var(--font-mono-premium); font-size: 0.58rem; letter-spacing: 0.1em; color: var(--silver); text-transform: uppercase; }
+  .staff-upload-hint { position: absolute; top: 24px; left: 24px; background: rgba(0,0,0,0.7); border: 1px solid rgba(220,220,220,0.2); border-radius: 40px; padding: 8px 18px; font-family: var(--font-mono-premium); font-size: 0.6rem; letter-spacing: 0.1em; color: var(--muted); cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 8px; backdrop-filter: blur(8px); }
+  body[dir="ltr"] .staff-upload-hint { left: auto; right: 24px; }
+  .staff-upload-hint:hover { border-color: var(--silver); color: var(--silver); }
+  @media (max-width: 1000px) { .staff-banner-img { height: 500px; } .staff-banner-overlay { padding: 40px; } }
+  @media (max-width: 700px) { .staff-banner-img { height: 420px; } .staff-banner-overlay { padding: 28px; } .staff-banner-members { gap: 10px; } }
 
   /* Portfolio */
   #portfolio { padding: 140px 0; }
@@ -917,6 +1156,75 @@
   .form-submit { width: 100%; padding: 18px; background: linear-gradient(135deg, #5a5a5a, #2a2a2a); border: none; border-radius: 50px; color: var(--white); font-family: var(--font-mono-premium); font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: all 0.45s; margin-top: 15px; }
   .form-submit:hover { transform: translateY(-3px); box-shadow: 0 20px 45px rgba(220,220,220,0.25); background: linear-gradient(135deg, #7a7a7a, #444); }
   .booking-success { background: rgba(40,167,69,0.2); border: 1px solid #28a745; color: #28a745; padding: 12px; border-radius: 10px; margin-top: 20px; text-align: center; display: none; }
+  /* Country Code Selector Styles */
+  /* ── Professional Phone Input ── */
+  .phone-group {
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+    position: relative;
+    border: 1px solid rgba(220,220,220,0.18);
+    border-radius: 14px;
+    overflow: visible;
+    background: rgba(255,255,255,0.03);
+    transition: border-color 0.3s;
+  }
+  .phone-group:focus-within {
+    border-color: rgba(220,220,220,0.5);
+    box-shadow: 0 0 0 3px rgba(200,200,200,0.07);
+  }
+  .country-picker { position: relative; flex-shrink: 0; border-right: 1px solid rgba(220,220,220,0.12); }
+  .country-picker-btn {
+    display: flex; align-items: center; gap: 8px; padding: 0 14px;
+    height: 100%; min-height: 52px; cursor: pointer; background: transparent;
+    border: none; color: var(--white); font-family: var(--font-body-premium);
+    font-size: 0.88rem; white-space: nowrap; transition: background 0.2s;
+    border-radius: 13px 0 0 13px; user-select: none;
+  }
+  .country-picker-btn:hover { background: rgba(255,255,255,0.05); }
+  .country-picker-btn .flag { font-size: 1.25rem; line-height: 1; }
+  .country-picker-btn .dial { font-size: 0.82rem; color: var(--silver); letter-spacing: 0.03em; }
+  .country-picker-btn .caret { font-size: 0.55rem; color: var(--muted); margin-left: 2px; transition: transform 0.25s; }
+  .country-picker.open .caret { transform: rotate(180deg); }
+  .country-dropdown {
+    display: none; position: absolute; top: calc(100% + 8px); left: 0;
+    z-index: 5000; width: 280px; background: #111111;
+    border: 1px solid rgba(220,220,220,0.15); border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04);
+    overflow: hidden; animation: dropFade 0.18s var(--ease-expo);
+  }
+  @keyframes dropFade { from{opacity:0;transform:translateY(-8px) scale(0.97)} to{opacity:1;transform:translateY(0) scale(1)} }
+  .country-picker.open .country-dropdown { display: block; }
+  .country-search-wrap { padding: 12px 14px 10px; border-bottom: 1px solid rgba(220,220,220,0.08); }
+  .country-search {
+    width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(220,220,220,0.12);
+    border-radius: 8px; padding: 9px 12px; color: var(--white);
+    font-family: var(--font-body-premium); font-size: 0.8rem; outline: none; transition: border-color 0.2s;
+  }
+  .country-search::placeholder { color: var(--muted); }
+  .country-search:focus { border-color: rgba(220,220,220,0.35); }
+  .country-list { max-height: 220px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(180,180,180,0.2) transparent; padding: 6px 0; }
+  .country-list::-webkit-scrollbar { width: 4px; }
+  .country-list::-webkit-scrollbar-thumb { background: rgba(180,180,180,0.2); border-radius: 4px; }
+  .country-option { display: flex; align-items: center; gap: 12px; padding: 10px 16px; cursor: pointer; transition: background 0.15s; }
+  .country-option:hover { background: rgba(255,255,255,0.06); }
+  .country-option.selected { background: rgba(220,220,220,0.08); }
+  .country-option .opt-flag { font-size: 1.2rem; line-height: 1; flex-shrink: 0; }
+  .country-option .opt-name { font-size: 0.82rem; color: rgba(250,250,250,0.8); flex: 1; }
+  .country-option .opt-code { font-size: 0.75rem; color: var(--muted); font-family: var(--font-mono-premium); flex-shrink: 0; }
+  .phone-number {
+    flex-grow: 1; background: transparent !important; border: none !important;
+    border-radius: 0 13px 13px 0 !important; padding: 0 18px !important;
+    font-size: 0.9rem; outline: none; color: var(--white); min-height: 52px; box-shadow: none !important;
+  }
+  .phone-number::placeholder { color: rgba(250,250,250,0.28); }
+  @media (max-width: 600px) {
+    .phone-group { flex-direction: column; border-radius: 14px; }
+    .country-picker { border-right: none; border-bottom: 1px solid rgba(220,220,220,0.12); }
+    .country-picker-btn { border-radius: 13px 13px 0 0; min-height: 48px; }
+    .phone-number { border-radius: 0 0 13px 13px !important; }
+    .country-dropdown { width: 100%; }
+  }
 
   /* Footer */
   footer { padding: 80px 0 45px; border-top: 1px solid var(--glass-border); }
@@ -999,7 +1307,7 @@
   @media (max-width: 1000px) { body[dir="ltr"] .display-mode-toggle { right: auto; left: 20px; } }
 </style>
 </head>
-<body dir="rtl">
+<body dir="ltr">
 
 <canvas id="cosmos"></canvas>
 
@@ -1009,14 +1317,15 @@
   <ul class="nav-links">
     <li><a href="#" data-page="home" class="ar-only">الرئيسية</a><a href="#" data-page="home" class="en-only">Home</a></li>
     <li><a href="#services" class="ar-only">الخبرات</a><a href="#services" class="en-only">Expertise</a></li>
+    <li><a href="#surgery-video" class="ar-only">جراحاتي</a><a href="#surgery-video" class="en-only">Surgery</a></li>
     <li><a href="#staff" class="ar-only">الفريق</a><a href="#staff" class="en-only">Team</a></li>
     <li><a href="#portfolio" class="ar-only">أعمالي</a><a href="#portfolio" class="en-only">Portfolio</a></li>
     <li><a href="#booking" class="ar-only">احجز</a><a href="#booking" class="en-only">Book</a></li>
   </ul>
   <div style="display: flex; align-items: center; gap: 15px;">
     <div class="lang-switch">
-      <button class="lang-btn active" data-lang="ar">عربي</button>
-      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="ar">عربي</button>
+      <button class="lang-btn active" data-lang="en">EN</button>
     </div>
     <a href="#booking" class="nav-cta ar-only">احجز استشارة</a>
     <a href="#booking" class="nav-cta en-only">Book Now</a>
@@ -1028,13 +1337,52 @@
   <i class="fas fa-th-large"></i>
 </div>
 
-<!-- Dashboard Login Modal -->
+<!-- WhatsApp Confirmation Modal -->
+<div id="waModal">
+  <div class="wa-modal-box">
+    <div class="wa-modal-icon"><i class="fab fa-whatsapp"></i></div>
+    <div class="wa-modal-title">إرسال تأكيد الحجز</div>
+    <div class="wa-modal-sub" id="waModalSub">الرسالة التالية ستُرسل إلى العميل عبر واتساب</div>
+    <div class="wa-modal-msg" id="waModalMsg"></div>
+    <a id="waModalLink" href="#" target="_blank" class="wa-modal-btn" onclick="document.getElementById('waModal').classList.remove('open')">
+      <i class="fab fa-whatsapp"></i> فتح واتساب وإرسال الرسالة
+    </a>
+    <button class="wa-modal-close" onclick="document.getElementById('waModal').classList.remove('open')">إغلاق</button>
+  </div>
+</div>
+
+<!-- Dashboard Login Modal — Premium -->
 <div id="dashboardLoginModal" class="login-modal" style="display: none;">
-  <div class="login-box">
-    <h2>Dashboard Login</h2>
-    <input type="password" id="dashboardPassword" placeholder="Enter Password">
-    <button onclick="loginToDashboard()">Login</button>
-    <p id="loginError" class="login-error"></p>
+  <div class="login-bg-particles"></div>
+  <div class="login-card">
+    <div class="login-glow"></div>
+    <div class="login-logo-wrap">
+      <div class="login-icon-ring">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <path d="M16 3L29 10V22L16 29L3 22V10L16 3Z" stroke="rgba(220,220,220,0.6)" stroke-width="1.2" fill="none"/>
+          <path d="M16 8L24 12.5V21.5L16 26L8 21.5V12.5L16 8Z" fill="rgba(220,220,220,0.08)" stroke="rgba(220,220,220,0.3)" stroke-width="0.8"/>
+          <circle cx="16" cy="16" r="3.5" fill="rgba(220,220,220,0.7)"/>
+        </svg>
+      </div>
+    </div>
+    <div class="login-eyebrow">ADMIN ACCESS</div>
+    <h2 class="login-title">Dr. Emad<br><span>Control Panel</span></h2>
+    <p class="login-subtitle">Secure access to your booking dashboard</p>
+    <div class="login-field-wrap">
+      <div class="login-field">
+        <i class="fas fa-lock login-field-icon"></i>
+        <input type="password" id="dashboardPassword" class="login-field-input" placeholder="Enter password" onkeydown="if(event.key==='Enter')loginToDashboard()">
+        <button class="login-eye-btn" type="button" onclick="toggleLoginPwVis()">
+          <i class="fas fa-eye" id="loginEyeIcon"></i>
+        </button>
+      </div>
+    </div>
+    <p id="loginError" class="login-error-new"></p>
+    <button class="login-submit-btn" onclick="loginToDashboard()">
+      <span>Access Dashboard</span>
+      <i class="fas fa-arrow-right login-btn-arrow"></i>
+    </button>
+    <div class="login-footer-note">Protected &amp; Encrypted</div>
   </div>
 </div>
 
@@ -1072,7 +1420,7 @@
 <!-- HOME PAGE (main website) -->
 <div id="home-page" class="page active-page">
   <section id="hero">
-    <img class="hero-bg-image" src="Gemini_Generated_Image_lvzwuglvzwuglvzw.png" alt="Medical Background">
+    <img class="hero-bg-image" src="ChatGPT Image May 14, 2026, 05_20_16 AM.png" alt="Medical Background">
     <div class="hero-overlay"></div>
     <div class="hero-bg-glow"></div>
     <div class="hero-line-top ar-only">الرسام الرسمي لـ GURS · جامعة بني سويف</div>
@@ -1101,15 +1449,266 @@
 
   <section id="services"><div class="container"><div class="section-header reveal"><span class="section-eyebrow ar-only">الخبرات</span><span class="section-eyebrow en-only">Expertise</span><h2 class="section-title ar-only">مجالات <em>الإتقان</em></h2><h2 class="section-title en-only">Areas of <em>Mastery</em></h2></div><div class="services-grid reveal"><div class="service-card" data-service-id="0"><div class="service-img-wrapper" onclick="triggerImageUpload(0)"><img class="service-img" id="service-img-0" src="Gemini_Generated_Image_btqsl5btqsl5btqs.png" alt="جراحة المسالك الترميمية"><div class="service-img-overlay"><i class="fas fa-camera"></i><span class="ar-only">تغيير الصورة</span><span class="en-only">Change Image</span></div></div><span class="service-num">01</span><h3 class="service-title ar-only">جراحة المسالك الترميمية</h3><h3 class="service-title en-only">Reconstructive Urology</h3><p class="service-desc ar-only">ترميم مجرى البول والجهاز التناسلي المعقد. تخصص في رأب الإحليل وإصلاح الناسور.</p><p class="service-desc en-only">Complex urethral and genital reconstruction. Specialist in urethroplasty.</p><div class="service-arrow"><i class="fas fa-arrow-left"></i></div></div><div class="service-card" data-service-id="1"><div class="service-img-wrapper" onclick="triggerImageUpload(1)"><img class="service-img" id="service-img-1" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 140'%3E%3Crect width='140' height='140' fill='%231a1a1a'/%3E%3Ctext x='70' y='78' text-anchor='middle' fill='%23d4d4d4' font-size='14'%3E%3C/text%3E%3C/svg%3E" alt="جراحة الغرسات الذكرية"><div class="service-img-overlay"><i class="fas fa-camera"></i><span class="ar-only">تغيير الصورة</span><span class="en-only">Change Image</span></div></div><span class="service-num">02</span><h3 class="service-title ar-only">جراحة الغرسات الذكرية</h3><h3 class="service-title en-only">Prosthetic Urology</h3><p class="service-desc ar-only">زراعة المضخات القضيبية والمصرة البولية الصناعية. أكثر من 100 حالة.</p><p class="service-desc en-only">Inflatable penile prostheses and artificial urinary sphincters.</p><div class="service-arrow"><i class="fas fa-arrow-left"></i></div></div><div class="service-card" data-service-id="2"><div class="service-img-wrapper" onclick="triggerImageUpload(2)"><img class="service-img" id="service-img-2" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 140'%3E%3Crect width='140' height='140' fill='%231a1a1a'/%3E%3Ctext x='70' y='78' text-anchor='middle' fill='%23d4d4d4' font-size='14'%3E%3C/text%3E%3C/svg%3E" alt="تركيب الدعامات"><div class="service-img-overlay"><i class="fas fa-camera"></i><span class="ar-only">تغيير الصورة</span><span class="en-only">Change Image</span></div></div><span class="service-num">03</span><h3 class="service-title ar-only">تركيب الدعامات</h3><h3 class="service-title en-only">Stent Placement</h3><p class="service-desc ar-only">تركيب دعامات الحالب والمجاري البولية بأحدث التقنيات. متخصص في الحالات المعقدة.</p><p class="service-desc en-only">Ureteral and urinary tract stent placement with advanced techniques.</p><div class="service-arrow"><i class="fas fa-arrow-left"></i></div></div><div class="service-card" data-service-id="3"><div class="service-img-wrapper" onclick="triggerImageUpload(3)"><img class="service-img" id="service-img-3" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 140'%3E%3Crect width='140' height='140' fill='%231a1a1a'/%3E%3Ctext x='70' y='78' text-anchor='middle' fill='%23d4d4d4' font-size='14'%3E%3C/text%3E%3C/svg%3E" alt="الرسم الطبي"><div class="service-img-overlay"><i class="fas fa-camera"></i><span class="ar-only">تغيير الصورة</span><span class="en-only">Change Image</span></div></div><span class="service-num">04</span><h3 class="service-title ar-only">الرسم الطبي والتعليم</h3><h3 class="service-title en-only">Medical Illustration & Education</h3><p class="service-desc ar-only">الرسام الرسمي لـ GURS. ورش عمل حية تحول الخطوات المعقدة إلى قصص بصرية.</p><p class="service-desc en-only">Official GURS illustrator. Live workshops transforming complex steps into visuals.</p><div class="service-arrow"><i class="fas fa-arrow-left"></i></div></div></div></div></section>
 
-  <section id="staff"><div class="container"><div class="section-header reveal"><span class="section-eyebrow ar-only">فريقنا</span><span class="section-eyebrow en-only">Our Team</span><h2 class="section-title ar-only">خبراء <em>موثوقون</em></h2><h2 class="section-title en-only">Trusted <em>Experts</em></h2></div><div class="staff-grid reveal"><div class="staff-card"><div class="staff-img-placeholder"><i class="fas fa-user-md"></i></div><div class="staff-info"><h3 class="staff-name ar-only">د. أحمد ياسر</h3><h3 class="staff-name en-only">Dr. Ahmed Yasser</h3><div class="staff-title ar-only">استشاري المسالك البولية</div><div class="staff-title en-only">Consultant Urologist</div><p class="staff-bio ar-only">خبرة 15 عاماً في جراحة المناظير وعلاج حصوات الكلى والحالب.</p><p class="staff-bio en-only">15 years of experience in endoscopic surgery and kidney stone treatment.</p><div class="staff-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div></div><div class="staff-card"><div class="staff-img-placeholder"><i class="fas fa-user-md"></i></div><div class="staff-info"><h3 class="staff-name ar-only">د. نورا خالد</h3><h3 class="staff-name en-only">Dr. Nora Khaled</h3><div class="staff-title ar-only">أخصائية التخدير والعناية المركزة</div><div class="staff-title en-only">Anesthesiology Specialist</div><p class="staff-bio ar-only">متخصصة في التخدير الموضعي والعام لجراحات المسالك المعقدة.</p><p class="staff-bio en-only">Specialized in local and general anesthesia for complex urological surgeries.</p><div class="staff-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div></div><div class="staff-card"><div class="staff-img-placeholder"><i class="fas fa-user-md"></i></div><div class="staff-info"><h3 class="staff-name ar-only">د. عمرو سامي</h3><h3 class="staff-name en-only">Dr. Amr Sami</h3><div class="staff-title ar-only">أخصائي جراحة الأوعية الدموية</div><div class="staff-title en-only">Vascular Surgery Specialist</div><p class="staff-bio ar-only">خبرة في جراحات الأوعية الدموية الدقيقة وتركيب الدعامات الوريدية.</p><p class="staff-bio en-only">Expert in microvascular surgery and venous stent placement.</p><div class="staff-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div></div></div></div></section>
+  <!-- Surgery Video Section -->
+  <section id="surgery-video">
+    <div class="container">
+      <div class="video-section-inner reveal">
+
+        <!-- Video Player -->
+        <div class="video-wrapper">
+          <video id="surgeryVideoEl" poster="Screenshot 2026-05-14 050459.png" preload="metadata">
+            <!-- ضع رابط الفيديو هنا / Add your video source here -->
+            <source src="WhatsApp Video 2026-05-14 at 2.04.33 AM.mp4" type="video/mp4">
+          </video>
+          <div class="video-play-overlay" id="videoPlayOverlay" onclick="toggleSurgeryVideo()">
+            <div class="video-play-btn" id="videoPlayBtn">
+              <i class="fas fa-play" id="videoPlayIcon"></i>
+            </div>
+          </div>
+          <div class="video-badge">
+            <span class="video-badge-dot"></span>
+            <span class="ar-only">تسجيل حي من غرفة العمليات</span>
+            <span class="en-only">Live OR Recording</span>
+          </div>
+          <div class="video-glow"></div>
+        </div>
+
+        <!-- Video Content -->
+        <div class="video-content">
+          <span class="video-eyebrow ar-only">داخل غرفة العمليات</span>
+          <span class="video-eyebrow en-only">Inside the Operating Room</span>
+
+          <h2 class="video-title ar-only">دقة جراحية<br><em>لا تقبل المساومة</em></h2>
+          <h2 class="video-title en-only">Surgical Precision<br><em>Beyond Compare</em></h2>
+
+          <p class="video-desc ar-only">
+            شاهد الدكتور محمد عماد الدين أثناء أداء جراحات المسالك البولية التعيدية داخل غرفة العمليات. كل تفصيلة تعكس سنوات من التخصص والخبرة الدقيقة في ترميم مجرى البول وتركيب الدعامات والغرسات الذكرية المعقدة.
+          </p>
+          <p class="video-desc en-only">
+            Watch Dr. Mohamed Emad in action — performing complex reconstructive urology procedures inside the operating room. Every detail reflects years of specialized expertise in urethral reconstruction, stent placement, and advanced prosthetic urology.
+          </p>
+
+          <div class="video-features">
+            <div class="video-feature">
+              <div class="video-feature-icon"><i class="fas fa-cut"></i></div>
+              <div class="video-feature-text">
+                <h4 class="ar-only">تقنيات جراحية متقدمة</h4>
+                <h4 class="en-only">Advanced Surgical Techniques</h4>
+                <p class="ar-only">رأب الإحليل وإصلاح الناسور وجراحات الغرسات بأعلى دقة</p>
+                <p class="en-only">Urethroplasty, fistula repair, and prosthetic surgery with utmost precision</p>
+              </div>
+            </div>
+            <div class="video-feature">
+              <div class="video-feature-icon"><i class="fas fa-microscope"></i></div>
+              <div class="video-feature-text">
+                <h4 class="ar-only">تركيب الدعامات بالمنظار</h4>
+                <h4 class="en-only">Endoscopic Stent Placement</h4>
+                <p class="ar-only">تركيب دعامات الحالب والمجاري البولية المعقدة بأحدث التقنيات التنظيرية</p>
+                <p class="en-only">Complex ureteral and urinary stent placement using state-of-the-art endoscopic methods</p>
+              </div>
+            </div>
+            <div class="video-feature">
+              <div class="video-feature-icon"><i class="fas fa-hand-sparkles"></i></div>
+              <div class="video-feature-text">
+                <h4 class="ar-only">خبرة أكثر من ١٢ عاماً</h4>
+                <h4 class="en-only">Over 12 Years of Experience</h4>
+                <p class="ar-only">أكثر من ٤٥٠ حالة جراحية ناجحة في قسم المسالك البولية بجامعة بني سويف</p>
+                <p class="en-only">Over 450 successful surgical cases at Beni-Suef University Urology Department</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Staff Section — Full-width banner -->
+  <section id="staff">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-eyebrow ar-only">فريقنا الطبي</span>
+        <span class="section-eyebrow en-only">Our Medical Team</span>
+        <h2 class="section-title ar-only">كفاءات <em>موثوقة</em></h2>
+        <h2 class="section-title en-only">Trusted <em>Excellence</em></h2>
+      </div>
+      <div class="staff-banner reveal">
+        <!-- Staff Photo — Replace src with your team photo -->
+        <img
+          class="staff-banner-img"
+          id="staffBannerImg"
+          src="ChatGPT Image May 13, 2026, 07_18_58 AM.png"
+          alt="فريق د. محمد عماد الدين الطبي"
+        >
+
+        <!-- Upload hint -->
+        <div class="staff-upload-hint" onclick="triggerStaffImageUpload()" title="تغيير صورة الفريق">
+          <i class="fas fa-camera"></i>
+          <span class="ar-only">تغيير صورة الفريق</span>
+          <span class="en-only">Change Team Photo</span>
+        </div>
+
+        <!-- Overlay content -->
+        <div class="staff-banner-overlay">
+          <span class="staff-banner-label ar-only">وحدة المسالك البولية — جامعة بني سويف</span>
+          <span class="staff-banner-label en-only">Urology Unit — Beni-Suef University</span>
+
+          <h3 class="staff-banner-title ar-only">
+            فريق متخصص من أفضل كفاءات<br>المسالك البولية والجراحة الترميمية في مصر
+          </h3>
+          <h3 class="staff-banner-title en-only">
+            A Specialized Team of Egypt's Finest<br>Urology & Reconstructive Surgery Experts
+          </h3>
+
+          <p class="staff-banner-desc ar-only">
+            نعمل كفريق متكامل يجمع بين التخصص الدقيق والخبرة العملية. كل عضو في الفريق مُختار بعناية لضمان أعلى مستويات الرعاية الجراحية والطبية، من غرفة العمليات إلى متابعة ما بعد الجراحة. هدفنا الأول دائماً: سلامة المريض وجودة النتائج.
+          </p>
+          <p class="staff-banner-desc en-only">
+            We operate as an integrated team combining deep specialization and hands-on expertise. Every member is carefully selected to ensure the highest standards of surgical and medical care — from the operating room to post-operative follow-up. Our primary goal is always patient safety and outcome excellence.
+          </p>
+
+          <div class="staff-banner-members">
+            <div class="staff-member-chip">
+              <div class="chip-avatar">مع</div>
+              <div class="chip-info">
+                <div class="chip-name ar-only">د. محمد عماد الدين</div>
+                <div class="chip-name en-only">Dr. Mohamed Emad</div>
+                <div class="chip-role ar-only">مدرس المسالك البولية</div>
+                <div class="chip-role en-only">Lecturer of Urology</div>
+              </div>
+            </div>
+            <div class="staff-member-chip">
+              <div class="chip-avatar">أي</div>
+              <div class="chip-info">
+                <div class="chip-name ar-only">د. أحمد ياسر</div>
+                <div class="chip-name en-only">Dr. Ahmed Yasser</div>
+                <div class="chip-role ar-only">استشاري المسالك</div>
+                <div class="chip-role en-only">Consultant Urologist</div>
+              </div>
+            </div>
+            <div class="staff-member-chip">
+              <div class="chip-avatar">نخ</div>
+              <div class="chip-info">
+                <div class="chip-name ar-only">د. نورا خالد</div>
+                <div class="chip-name en-only">Dr. Nora Khaled</div>
+                <div class="chip-role ar-only">أخصائية التخدير</div>
+                <div class="chip-role en-only">Anesthesiology</div>
+              </div>
+            </div>
+            <div class="staff-member-chip">
+              <div class="chip-avatar">عس</div>
+              <div class="chip-info">
+                <div class="chip-name ar-only">د. عمرو سامي</div>
+                <div class="chip-name en-only">Dr. Amr Sami</div>
+                <div class="chip-role ar-only">جراحة الأوعية</div>
+                <div class="chip-role en-only">Vascular Surgery</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section id="portfolio"><div class="container"><div class="section-header reveal"><span class="section-eyebrow ar-only">أعمالي</span><span class="section-eyebrow en-only">Portfolio</span><h2 class="section-title ar-only">أعمال <em>مختارة</em></h2><h2 class="section-title en-only">Selected <em>Works</em></h2></div><div class="portfolio-filters reveal"><button class="filter-btn active" onclick="filterPortfolio('all', this)" data-cat="all">الكل / All</button><button class="filter-btn" onclick="filterPortfolio('illustration', this)" data-cat="illustration">رسوم / Illustrations</button><button class="filter-btn" onclick="filterPortfolio('case', this)" data-cat="case">حالات / Cases</button></div><div class="portfolio-grid reveal" id="portfolio-grid"><div class="portfolio-item" data-cat="illustration" onclick="openModal(0)"><div class="portfolio-item-inner"><div class="portfolio-item-num">01</div><div class="portfolio-item-label ar-only">وضع خزان المضخة القضيبية</div><div class="portfolio-item-label en-only">Ectopic Reservoir Placement</div></div><div class="portfolio-item-overlay"><div><span class="portfolio-item-cat ar-only">رسم طبي</span><span class="portfolio-item-cat en-only">Medical Illustration</span><div class="portfolio-item-title ar-only">وضع الخزان تحت العضلة المائلة</div><div class="portfolio-item-title en-only">Ectopic Reservoir Placement</div></div></div></div><div class="portfolio-item" data-cat="illustration" onclick="openModal(1)"><div class="portfolio-item-inner"><div class="portfolio-item-num">02</div><div class="portfolio-item-label ar-only">تخفيف الضغط القضيبي</div><div class="portfolio-item-label en-only">Penoscrotal Decompression</div></div><div class="portfolio-item-overlay"><div><span class="portfolio-item-cat ar-only">رسم طبي</span><span class="portfolio-item-cat en-only">Medical Illustration</span><div class="portfolio-item-title ar-only">علاج الانتصاب المؤلم</div><div class="portfolio-item-title en-only">Priapism Decompression</div></div></div></div><div class="portfolio-item" data-cat="illustration" onclick="openModal(2)"><div class="portfolio-item-inner"><div class="portfolio-item-num">03</div><div class="portfolio-item-label ar-only">خياطة تثبيت الحشفة المزدوجة</div><div class="portfolio-item-label en-only">Double Distal Anchoring Stitch</div></div><div class="portfolio-item-overlay"><div><span class="portfolio-item-cat ar-only">غلاف مجلة Sexual Medicine</span><span class="portfolio-item-cat en-only">Journal Cover — Sexual Medicine</span><div class="portfolio-item-title ar-only">تقنية منع انحراف الغرسات</div><div class="portfolio-item-title en-only">Anchoring Stitch Technique</div></div></div></div><div class="portfolio-item" data-cat="case" onclick="openModal(3)"><div class="portfolio-item-inner"><div class="portfolio-item-num">04</div><div class="portfolio-item-label ar-only">إغلاق الناسور بعد الإحليل التحتي</div><div class="portfolio-item-label en-only">Post Hypospadias Fistula Closure</div></div><div class="portfolio-item-overlay"><div><span class="portfolio-item-cat ar-only">حالة جراحية</span><span class="portfolio-item-cat en-only">Surgical Case</span><div class="portfolio-item-title ar-only">إغلاق الناسور الإحليلي</div><div class="portfolio-item-title en-only">Hypospadias Fistula Closure</div></div></div></div><div class="portfolio-item" data-cat="illustration" onclick="openModal(4)"><div class="portfolio-item-inner"><div class="portfolio-item-num">05</div><div class="portfolio-item-label ar-only">بضع الكهف ذو الثماني نقاط</div><div class="portfolio-item-label en-only">Eight-dot Extended Corporotomy</div></div><div class="portfolio-item-overlay"><div><span class="portfolio-item-cat ar-only">رسم طبي</span><span class="portfolio-item-cat en-only">Medical Illustration</span><div class="portfolio-item-title ar-only">لزراعة المضخة القضيبية المرنة</div><div class="portfolio-item-title en-only">Extended Corporotomy</div></div></div></div><div class="portfolio-item" data-cat="case" onclick="openModal(5)"><div class="portfolio-item-inner"><div class="portfolio-item-num">06</div><div class="portfolio-item-label ar-only">حالات ترميم مجرى البول الأنثوي</div><div class="portfolio-item-label en-only">Female Urethroplasty Series</div></div><div class="portfolio-item-overlay"><div><span class="portfolio-item-cat ar-only">سلسلة حالات جراحية</span><span class="portfolio-item-cat en-only">Surgical Case Series</span><div class="portfolio-item-title ar-only">ترميم مجرى البول عند السيدات</div><div class="portfolio-item-title en-only">Female Urethroplasty</div></div></div></div></div></div></section>
 
   <section id="experience"><div class="container"><div class="section-header reveal"><span class="section-eyebrow ar-only">المسيرة المهنية</span><span class="section-eyebrow en-only">Journey</span><h2 class="section-title ar-only"><em>مسار</em> التميز</h2><h2 class="section-title en-only">The <em>Path</em> Forward</h2></div><div class="timeline reveal"><div class="timeline-line"></div><div class="timeline-item"><div class="timeline-content"><span class="timeline-year">2015</span><div class="timeline-role ar-only">بكالوريوس الطب والجراحة</div><div class="timeline-role en-only">Medical Degree</div><div class="timeline-org">جامعة بني سويف / Beni-Suef University</div></div><div class="timeline-center"><div class="timeline-dot"></div></div><div class="timeline-empty"></div></div><div class="timeline-item"><div class="timeline-empty"></div><div class="timeline-center"><div class="timeline-dot"></div></div><div class="timeline-content"><span class="timeline-year">2017</span><div class="timeline-role ar-only">الإقامة في المسالك البولية</div><div class="timeline-role en-only">Urology Residency</div><div class="timeline-org">مستشفى جامعة بني سويف</div></div></div><div class="timeline-item"><div class="timeline-content"><span class="timeline-year">2019</span><div class="timeline-role ar-only">مدرس مساعد المسالك البولية</div><div class="timeline-role en-only">Assistant Lecturer of Urology</div><div class="timeline-org">جامعة بني سويف</div></div><div class="timeline-center"><div class="timeline-dot"></div></div><div class="timeline-empty"></div></div><div class="timeline-item"><div class="timeline-empty"></div><div class="timeline-center"><div class="timeline-dot"></div></div><div class="timeline-content"><span class="timeline-year">2024</span><div class="timeline-role ar-only">غلاف مجلة Sexual Medicine</div><div class="timeline-role en-only">Journal of Sexual Medicine — Cover</div><div class="timeline-org">رسام الغلاف، المجلد 21، العدد 10</div></div></div><div class="timeline-item"><div class="timeline-content"><span class="timeline-year">2025</span><div class="timeline-role ar-only">مدرس المسالك البولية</div><div class="timeline-role en-only">Lecturer of Urology</div><div class="timeline-org">جامعة بني سويف</div></div><div class="timeline-center"><div class="timeline-dot"></div></div><div class="timeline-empty"></div></div><div class="timeline-item"><div class="timeline-empty"></div><div class="timeline-center"><div class="timeline-dot"></div></div><div class="timeline-content"><span class="timeline-year">2026</span><div class="timeline-role ar-only">الرسام الرسمي لـ GURS</div><div class="timeline-role en-only">GURS Official Illustrator</div><div class="timeline-org">الجمعية العالمية لجراحي المسالك والتناسلية</div></div></div></div></div></section>
 
-  <section id="testimonials"><div class="container"><div class="section-header reveal"><span class="section-eyebrow ar-only">التقدير</span><span class="section-eyebrow en-only">Recognition</span><h2 class="section-title ar-only">ماذا يقول عني <em>الخبراء</em></h2><h2 class="section-title en-only">What <em>Experts</em> Say</h2></div><div class="testimonial-slider reveal"><div class="testimonial-track"><div class="testimonial-slides" id="testimonial-slides"><div class="testimonial-slide"><span class="quote-mark">"</span><p class="testimonial-quote ar-only">موهوب بشكل لا يصدق كفنان وجراح. إذا أراد أي شخص مساعدة في الرسوم الجراحية، فهو رجلُك!</p><p class="testimonial-quote en-only">An incredibly talented artist and urologist. If anyone wants help with surgical drawings, he's your guy!</p><div class="testimonial-author"><div class="author-avatar">FY</div><div><div class="author-name">Faysal A. Yafi, MD</div><div class="author-role">UCI Urology</div></div></div></div><div class="testimonial-slide"><span class="quote-mark">"</span><p class="testimonial-quote ar-only">حالات ترميمية معقدة ورسوم توضيحية جميلة مرسومة يدوياً. عمل ممتاز!</p><p class="testimonial-quote en-only">Complex reconstructive cases and beautiful hand-drawn illustrations. Excellent work!</p><div class="testimonial-author"><div class="author-avatar">ST</div><div><div class="author-name">Stacy Tanaka</div><div class="author-role">@AmerUrological</div></div></div></div><div class="testimonial-slide"><span class="quote-mark">"</span><p class="testimonial-quote ar-only">رسوم توضيحية رائعة! هذا المقال سيسهل فهمي لإدارة الانتصاب المؤلم.</p><p class="testimonial-quote en-only">Fantastic illustrations! This article will greatly facilitate my understanding of priapism management.</p><div class="testimonial-author"><div class="author-avatar">TS</div><div><div class="author-name">International Medical Community</div><div class="author-role">Zoladex_PCA</div></div></div></div></div></div><div class="slider-controls"><button class="slider-btn" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button><div class="slider-dots" id="slider-dots"><div class="dot active" onclick="goToSlide(0)"></div><div class="dot" onclick="goToSlide(1)"></div><div class="dot" onclick="goToSlide(2)"></div></div><button class="slider-btn" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button></div></div></div></section>
+  <section id="testimonials"><div class="container"><div class="section-header reveal"><span class="section-eyebrow ar-only">التقدير</span><span class="section-eyebrow en-only">Recognition</span><h2 class="section-title ar-only">ماذا يقول عني <em>الخبراء</em></h2><h2 class="section-title en-only">What <em>Experts</em> Say</h2></div><div class="testimonial-slider reveal"><div class="testimonial-track"><div class="testimonial-slides" id="testimonial-slides">
 
-  <section id="booking"><div class="container"><div class="section-header reveal"><span class="section-eyebrow ar-only">احجز</span><span class="section-eyebrow en-only">Book</span><h2 class="section-title ar-only">لنعمل <em>معاً</em></h2><h2 class="section-title en-only">Let's Work <em>Together</em></h2></div><div class="booking-wrapper"><div class="booking-info reveal"><h3 class="ar-only">ابدأ استشارتك</h3><h3 class="en-only">Begin your consultation</h3><p class="ar-only">سواء كنت مريضاً أو جراحاً أو مؤسسة — الدكتور عماد يرحب بالتعاون العالمي.</p><p class="en-only">Whether you're a patient, surgeon, or institution — Dr. Emad welcomes global collaboration.</p><div class="contact-methods"><a href="tel:+201027870022" class="contact-method"><div class="method-icon"><i class="fas fa-phone-alt"></i></div><div><span class="method-label">Phone</span><span class="method-value">+2-010-2787-0022</span></div></a><a href="mailto:mohamedemadeldin@med.bsu.edu.eg" class="contact-method"><div class="method-icon"><i class="fas fa-envelope"></i></div><div><span class="method-label">Email</span><span class="method-value">mohamedemadeldin@med.bsu.edu.eg</span></div></a><a href="https://wa.me/201027870022" class="contact-method" target="_blank"><div class="method-icon"><i class="fab fa-whatsapp"></i></div><div><span class="method-label">WhatsApp</span><span class="method-value ar-only">تواصل مباشر</span><span class="method-value en-only">Chat Directly</span></div></a></div></div><div class="booking-form reveal"><div class="form-row"><div class="form-group"><label class="ar-only">الاسم الأول</label><label class="en-only">First Name</label><input type="text" id="bookingFirstName"></div><div class="form-group"><label class="ar-only">اسم العائلة</label><label class="en-only">Last Name</label><input type="text" id="bookingLastName"></div></div><div class="form-group"><label class="ar-only">البريد الإلكتروني</label><label class="en-only">Email</label><input type="email" id="bookingEmail"></div><div class="form-group"><label class="ar-only">رقم الهاتف</label><label class="en-only">Phone</label><input type="tel" id="bookingPhone"></div><div class="form-group"><label class="ar-only">نوع الاستفسار</label><label class="en-only">Inquiry Type</label><select id="bookingType"><option value="Patient Consultation">استشارة مريض</option><option value="Medical Illustration">رسم طبي</option><option value="Stent Placement">تركيب دعامات</option><option value="Workshop">ورشة عمل</option></select></div><div class="form-group"><label class="ar-only">تاريخ الحجز</label><label class="en-only">Booking Date</label><input type="date" id="bookingDate"></div><div class="form-group"><label class="ar-only">الرسالة</label><label class="en-only">Message</label><textarea id="bookingMessage" placeholder="..."></textarea></div><button class="form-submit" onclick="submitBooking()"><span class="ar-only">إرسال الطلب</span><span class="en-only">Send Request</span></button><div id="bookingSuccessMsg" class="booking-success"></div></div></div></div></section>
+<div class="testimonial-slide">
+  <span class="quote-mark">"</span>
+  <p class="testimonial-quote ar-only">موهبة استثنائية نادراً ما تجتمع في شخص واحد — جراح بارع ورسام طبي محترف. إن كنت تبحث عن مساعدة في رسوم الجراحة، فهو الخيار الأمثل بلا منازع.</p>
+  <p class="testimonial-quote en-only">An incredibly talented artist and urologist. If anyone wants help with surgical drawings, he's your guy!</p>
+  <div class="testimonial-author"><div class="author-avatar">FY</div><div><div class="author-name">Faysal A. Yafi, MD</div><div class="author-role">UCI Urology</div></div></div>
+</div>
+
+<div class="testimonial-slide">
+  <span class="quote-mark">"</span>
+  <p class="testimonial-quote ar-only">حالات ترميمية بالغة التعقيد، وفي الوقت ذاته رسوم توضيحية مبهرة رُسمت باليد بدقة متناهية. عمل يستحق كل الإشادة والتقدير.</p>
+  <p class="testimonial-quote en-only">Complex reconstructive cases and beautiful hand-drawn illustrations. Excellent work!</p>
+  <div class="testimonial-author"><div class="author-avatar">ST</div><div><div class="author-name">Stacy Tanaka</div><div class="author-role">@AmerUrological</div></div></div>
+</div>
+
+<div class="testimonial-slide">
+  <span class="quote-mark">"</span>
+  <p class="testimonial-quote ar-only">رسوم توضيحية مذهلة تفوق كل التوقعات! هذا البحث سيُحدث نقلة نوعية في فهمنا لأساليب التعامل مع حالات الانتصاب المؤلم وعلاجها.</p>
+  <p class="testimonial-quote en-only">Fantastic illustrations! This article will greatly facilitate my understanding of priapism management.</p>
+  <div class="testimonial-author"><div class="author-avatar">TS</div><div><div class="author-name">International Medical Community</div><div class="author-role">Zoladex_PCA</div></div></div>
+</div>
+
+</div></div><div class="slider-controls"><button class="slider-btn" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button><div class="slider-dots" id="slider-dots"><div class="dot active" onclick="goToSlide(0)"></div><div class="dot" onclick="goToSlide(1)"></div><div class="dot" onclick="goToSlide(2)"></div></div><button class="slider-btn" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button></div></div></div></section>
+
+  <!-- Booking Form with Country Code Selector -->
+  <section id="booking">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-eyebrow ar-only">احجز</span>
+        <span class="section-eyebrow en-only">Book</span>
+        <h2 class="section-title ar-only">لنعمل <em>معاً</em></h2>
+        <h2 class="section-title en-only">Let's Work <em>Together</em></h2>
+      </div>
+      <div class="booking-wrapper">
+        <div class="booking-info reveal">
+          <h3 class="ar-only">ابدأ استشارتك</h3>
+          <h3 class="en-only">Begin your consultation</h3>
+          <p class="ar-only">سواء كنت مريضاً أو جراحاً أو مؤسسة — الدكتور عماد يرحب بالتعاون العالمي.</p>
+          <p class="en-only">Whether you're a patient, surgeon, or institution — Dr. Emad welcomes global collaboration.</p>
+          <div class="contact-methods">
+            <a href="tel:+201027870022" class="contact-method"><div class="method-icon"><i class="fas fa-phone-alt"></i></div><div><span class="method-label">Phone</span><span class="method-value">+2-010-2787-0022</span></div></a>
+            <a href="mailto:mohamedemadeldin@med.bsu.edu.eg" class="contact-method"><div class="method-icon"><i class="fas fa-envelope"></i></div><div><span class="method-label">Email</span><span class="method-value">mohamedemadeldin@med.bsu.edu.eg</span></div></a>
+            <a href="https://wa.me/201027870022" class="contact-method" target="_blank"><div class="method-icon"><i class="fab fa-whatsapp"></i></div><div><span class="method-label">WhatsApp</span><span class="method-value ar-only">تواصل مباشر</span><span class="method-value en-only">Chat Directly</span></div></a>
+          </div>
+        </div>
+        
+        <div class="booking-form reveal">
+          <div class="form-row">
+            <div class="form-group"><label class="ar-only">الاسم الأول</label><label class="en-only">First Name</label><input type="text" id="bookingFirstName"></div>
+            <div class="form-group"><label class="ar-only">اسم العائلة</label><label class="en-only">Last Name</label><input type="text" id="bookingLastName"></div>
+          </div>
+          <div class="form-group"><label class="ar-only">البريد الإلكتروني</label><label class="en-only">Email</label><input type="email" id="bookingEmail"></div>
+          
+          <!-- Phone Group: Country Code + Number -->
+          <div class="form-group">
+            <label class="ar-only">رقم الهاتف (واتساب)</label><label class="en-only">Phone (WhatsApp)</label>
+            <div class="phone-group">
+              <div class="country-picker" id="countryPicker">
+                <div class="country-picker-btn" id="countryPickerBtn" onclick="toggleCountryPicker(event)">
+                  <span class="flag" id="selectedFlag">🇪🇬</span>
+                  <span class="dial" id="selectedDial">+20</span>
+                  <span class="caret">&#9660;</span>
+                </div>
+                <div class="country-dropdown" id="countryDropdown">
+                  <div class="country-search-wrap">
+                    <input class="country-search" id="countrySearch" type="text" placeholder="Search country..." autocomplete="off" oninput="filterCountries(this.value)">
+                  </div>
+                  <div class="country-list" id="countryList"></div>
+                </div>
+              </div>
+              <input type="hidden" id="bookingCountryCode" value="20">
+              <input type="tel" id="bookingPhoneNumber" class="phone-number" placeholder="1012345678" dir="ltr">
+            </div>
+            <small style="color: rgba(250,250,250,0.4); font-size: 0.7rem; display: block; margin-top: 6px;">
+              أدخل رقم الهاتف بدون صفر البداية (مثال: 1012345678)
+            </small>
+          </div>
+
+          <div class="form-group"><label class="ar-only">نوع الاستفسار</label><label class="en-only">Inquiry Type</label>
+            <select id="bookingType">
+              <option value="Patient Consultation">استشارة مريض</option>
+              <option value="Medical Illustration">رسم طبي</option>
+              <option value="Stent Placement">تركيب دعامات</option>
+              <option value="Workshop">ورشة عمل</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="ar-only">تاريخ الحجز</label><label class="en-only">Booking Date</label><input type="date" id="bookingDate"></div>
+          <div class="form-group"><label class="ar-only">الرسالة</label><label class="en-only">Message</label><textarea id="bookingMessage" placeholder="..."></textarea></div>
+          <button class="form-submit" onclick="submitBooking()"><span class="ar-only">إرسال الطلب</span><span class="en-only">Send Request</span></button>
+          <div id="bookingSuccessMsg" class="booking-success"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <footer><div class="container"><div class="footer-top"><div><span class="footer-logo ar-only">د. محمد <span>عماد الدين</span></span><span class="footer-logo en-only">Dr. Mohamed <span>Emad</span></span><div class="footer-tagline ar-only">المسالك البولية · الترميم · تركيب الدعامات · الرسم الطبي</div><div class="footer-tagline en-only">Urology · Reconstruction · Stent Placement · Illustration</div></div><div class="footer-social"><a href="#" class="social-link"><i class="fab fa-twitter"></i></a><a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a><a href="#" class="social-link"><i class="fab fa-instagram"></i></a><a href="https://wa.me/201027870022" class="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a></div></div><div class="footer-bottom"><p class="footer-copy">© 2026 د. محمد عماد الدين — جراحة المسالك وتركيب الدعامات والرسم الطبي</p><div class="footer-gurs"><span class="ar-only">عضو رسمي</span><span class="en-only">Official Member</span><span class="gurs-badge">GURS</span></div></div></div></footer>
 </div>
@@ -1117,168 +1716,317 @@
 <div id="modal"><button onclick="closeModal()">✕</button><div id="modal-content"><span id="modal-cat"></span><h2 id="modal-title"></h2><p id="modal-desc"></p></div></div>
 
 <script>
-// Particle Canvas
+// Particle Canvas (unchanged)
 (function(){const c=document.getElementById('cosmos'),ctx=c.getContext('2d');let W,H,p=[],m={x:-9999,y:-9999};function r(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}function cp(){return{x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*0.1,vy:(Math.random()-0.5)*0.1,r:Math.random()*1+0.3,alpha:Math.random()*0.4+0.1}}function i(){r();p=Array.from({length:100},cp)}function d(){ctx.clearRect(0,0,W,H);for(let i=0;i<p.length;i++)for(let j=i+1;j<p.length;j++){const dx=p[i].x-p[j].x,dy=p[i].y-p[j].y,dist=Math.hypot(dx,dy);if(dist<100){ctx.beginPath();ctx.strokeStyle=`rgba(200,200,200,${0.03*(1-dist/100)})`;ctx.lineWidth=0.5;ctx.moveTo(p[i].x,p[i].y);ctx.lineTo(p[j].x,p[j].y);ctx.stroke()}}p.forEach(pa=>{const dx=pa.x-m.x,dy=pa.y-m.y,md=Math.hypot(dx,dy);if(md<100){const f=(100-md)/100*0.3;pa.vx+=dx/md*f;pa.vy+=dy/md*f}pa.vx*=0.99;pa.vy*=0.99;pa.x+=pa.vx;pa.y+=pa.vy;if(pa.x<0)pa.x=W;if(pa.x>W)pa.x=0;if(pa.y<0)pa.y=H;if(pa.y>H)pa.y=0;ctx.beginPath();ctx.fillStyle=`rgba(220,220,220,${pa.alpha})`;ctx.arc(pa.x,pa.y,pa.r,0,Math.PI*2);ctx.fill()});requestAnimationFrame(d)}window.addEventListener('resize',r);window.addEventListener('mousemove',e=>{m.x=e.clientX;m.y=e.clientY});i();d()})();
 
-// Bookings Array - In-memory storage (no localStorage needed)
-let bookings = [];
+// ======================================================
+// BOOKINGS — localStorage (persistent) + Formspree email
+// ======================================================
+// 🔧 SETUP: Go to https://formspree.io → create free account
+//   → New Form → copy your Form ID and paste it below
+const FORMSPREE_ID = 'xeendkgq'; // e.g. 'xpzgkwqr'
+// ======================================================
 
-// Save bookings (in-memory only)
+function loadBookings() {
+  try { return JSON.parse(localStorage.getItem('drEmadBookings') || '[]'); } catch(e) { return []; }
+}
 function saveBookings() {
-  if (document.getElementById('dashboard-page') && document.getElementById('dashboard-page').style.display === 'block') {
-    renderDashboardTable();
-  }
+  localStorage.setItem('drEmadBookings', JSON.stringify(bookings));
+  if (document.getElementById('dashboard-page')?.style.display === 'block') renderDashboardTable();
 }
 
-// Submit Booking Function
-function submitBooking() {
-  const firstName = document.getElementById('bookingFirstName')?.value;
-  const lastName = document.getElementById('bookingLastName')?.value;
-  const email = document.getElementById('bookingEmail')?.value;
-  const phone = document.getElementById('bookingPhone')?.value;
-  const type = document.getElementById('bookingType')?.value;
-  const date = document.getElementById('bookingDate')?.value;
-  const message = document.getElementById('bookingMessage')?.value;
+let bookings = loadBookings();
+
+// Helper function to get formatted phone number with country code
+function getFullPhoneNumber() {
+  let countryCode = document.getElementById('bookingCountryCode').value;
+  let localNumber = document.getElementById('bookingPhoneNumber')?.value.trim().replace(/^0+/, '');
+  if (!localNumber) return '';
+  localNumber = localNumber.replace(/\D/g, '');
+  if (!localNumber) return '';
   
-  if (!firstName || !lastName || !email) {
-    const successMsg = document.getElementById('bookingSuccessMsg');
+  // Return full international format: e.g., 201012345678
+  return `${countryCode}${localNumber}`;
+}
+
+// Submit Booking — sends to Formspree (email) AND saves locally
+async function submitBooking() {
+  const firstName = document.getElementById('bookingFirstName')?.value.trim();
+  const lastName  = document.getElementById('bookingLastName')?.value.trim();
+  const email     = document.getElementById('bookingEmail')?.value.trim();
+  const fullRawPhone = getFullPhoneNumber();
+  const type      = document.getElementById('bookingType')?.value;
+  const date      = document.getElementById('bookingDate')?.value;
+  const message   = document.getElementById('bookingMessage')?.value.trim();
+
+  const successMsg = document.getElementById('bookingSuccessMsg');
+  
+  // Helper function to show error message (language dependent)
+  function showError(msgAr, msgEn) {
+    const isArabic = document.body.dir === 'rtl';
     successMsg.style.display = 'block';
-    successMsg.style.background = 'rgba(220,53,69,0.2)';
-    successMsg.style.borderColor = '#dc3545';
-    successMsg.style.color = '#dc3545';
-    successMsg.innerHTML = '⚠️ Please fill all required fields (Name, Email)';
-    setTimeout(() => { successMsg.style.display = 'none'; successMsg.style.background = ''; successMsg.style.borderColor = ''; successMsg.style.color = ''; }, 3000);
+    successMsg.style.cssText += ';background:rgba(220,53,69,0.2);border-color:#dc3545;color:#dc3545;display:block';
+    successMsg.innerHTML = isArabic ? msgAr : msgEn;
+    setTimeout(() => { successMsg.style.display = 'none'; }, 4000);
+  }
+
+  // --- VALIDATION: All fields required ---
+  if (!firstName) {
+    showError('⚠️ الرجاء إدخال الاسم الأول.', '⚠️ Please enter your first name.');
     return;
   }
+  if (!lastName) {
+    showError('⚠️ الرجاء إدخال اسم العائلة.', '⚠️ Please enter your last name.');
+    return;
+  }
+  if (!email) {
+    showError('⚠️ الرجاء إدخال البريد الإلكتروني.', '⚠️ Please enter your email address.');
+    return;
+  }
+  // Basic email format check
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) {
+    showError('⚠️ الرجاء إدخال بريد إلكتروني صحيح (مثال: name@domain.com).', '⚠️ Please enter a valid email address (e.g., name@domain.com).');
+    return;
+  }
+  if (!fullRawPhone) {
+    showError('⚠️ الرجاء إدخال رقم الهاتف (واتساب) بشكل صحيح.', '⚠️ Please enter a valid WhatsApp phone number.');
+    return;
+  }
+  if (!type) {
+    showError('⚠️ الرجاء اختيار نوع الاستفسار.', '⚠️ Please select an inquiry type.');
+    return;
+  }
+  if (!date) {
+    showError('⚠️ الرجاء تحديد تاريخ الحجز.', '⚠️ Please select a booking date.');
+    return;
+  }
+
+  // Format phone for display (add +)
+  const displayPhone = `+${fullRawPhone}`;
   
+  const submitBtn = document.querySelector('.form-submit');
+  if (submitBtn) { submitBtn.disabled = true; submitBtn.style.opacity = '0.6'; }
+
+  // 1️⃣ Send to Formspree (email notification to doctor)
+  let emailSent = false;
+  if (FORMSPREE_ID !== 'YOUR_FORM_ID') {
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: `${firstName} ${lastName}`,
+          email, phone: displayPhone,
+          inquiry_type: type,
+          appointment_date: date || 'لم يُحدد',
+          message: message || 'لا توجد رسالة',
+          _subject: `🏥 حجز جديد من ${firstName} ${lastName} — د. محمد عماد الدين`
+        })
+      });
+      emailSent = res.ok;
+    } catch(e) { emailSent = false; }
+  }
+
+  // 2️⃣ Save locally (always works)
   const newBooking = {
     id: Date.now(),
-    name: firstName + ' ' + lastName,
-    email: email,
-    phone: phone || 'N/A',
-    type: type,
-    date: date || new Date().toISOString().split('T')[0],
+    name: `${firstName} ${lastName}`,
+    email, phone: displayPhone,
+    type, date: date || new Date().toISOString().split('T')[0],
     message: message || 'No message',
     status: 'pending',
     createdAt: new Date().toISOString()
   };
-  
   bookings.unshift(newBooking);
   saveBookings();
-  
-  document.getElementById('bookingFirstName').value = '';
-  document.getElementById('bookingLastName').value = '';
-  document.getElementById('bookingEmail').value = '';
-  document.getElementById('bookingPhone').value = '';
-  document.getElementById('bookingDate').value = '';
-  document.getElementById('bookingMessage').value = '';
-  
-  const successMsg = document.getElementById('bookingSuccessMsg');
-  successMsg.style.display = 'block';
-  successMsg.style.background = 'rgba(40,167,69,0.2)';
-  successMsg.style.borderColor = '#28a745';
-  successMsg.style.color = '#28a745';
-  successMsg.innerHTML = '✓ Your booking has been sent successfully! Dr. Emad will contact you soon.';
-  setTimeout(() => { successMsg.style.display = 'none'; }, 5000);
-  
-  console.log('New booking saved:', newBooking);
+
+  // Clear form
+  ['bookingFirstName','bookingLastName','bookingEmail','bookingDate','bookingMessage']
+    .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  document.getElementById('bookingPhoneNumber').value = '';
+  document.getElementById('bookingCountryCode').value = '20'; // reset to Egypt
+
+  if (submitBtn) { submitBtn.disabled = false; submitBtn.style.opacity = '1'; }
+
+  // --- Success Message (Language Dependent) ---
+  const isArabic = document.body.dir === 'rtl';
+  successMsg.style.cssText = 'display:block;background:rgba(40,167,69,0.2);border:1px solid #28a745;color:#28a745;padding:14px;border-radius:10px;margin-top:20px;text-align:center';
+  if (isArabic) {
+    successMsg.innerHTML = '✅ تم إرسال طلب الحجز بنجاح! سيتواصل معك الدكتور عماد قريباً.';
+  } else {
+    successMsg.innerHTML = '✅ Booking request sent successfully! Dr. Emad will contact you soon.';
+  }
+  setTimeout(() => { successMsg.style.display = 'none'; }, 6000);
 }
 
 // Dashboard Functions
 let currentFilter = '';
 
-function renderDashboardTable() {
-  const tbody = document.getElementById('bookingsTableBody');
-  if (!tbody) return;
-  
-  // bookings already in memory
-  
-  let filtered = [...bookings];
-  const searchTerm = document.getElementById('searchBookings')?.value.toLowerCase() || '';
-  if (searchTerm) {
-    filtered = filtered.filter(b => b.name.toLowerCase().includes(searchTerm) || b.email.toLowerCase().includes(searchTerm));
-  }
-  
-  if (filtered.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding:40px;">📭 No bookings found</td></tr>';
-  } else {
-    tbody.innerHTML = filtered.map((b, idx) => `
-      <tr>
-        <td>${idx + 1}</td>
-        <td>${escapeHtml(b.name)}</td>
-        <td>${escapeHtml(b.email)}</td>
-        <td>${escapeHtml(b.phone)}</td>
-        <td>${escapeHtml(b.type)}</td>
-        <td>${b.date}</td>
-        <td style="max-width:200px; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(b.message.substring(0, 50))}${b.message.length > 50 ? '...' : ''}</td>
-        <td><span class="status-badge status-${b.status}">${b.status}</span></td>
-        <td>
-          <button class="action-btn" onclick="updateBookingStatus(${b.id}, 'confirmed')">✓ Confirm</button>
-          <button class="action-btn" onclick="updateBookingStatus(${b.id}, 'completed')">✔ Complete</button>
-          <button class="action-btn" onclick="updateBookingStatus(${b.id}, 'cancelled')">✗ Cancel</button>
-        </td>
-      </tr>
-    `).join('');
-  }
-  
-  updateStats();
-}
-
-function escapeHtml(str) {
-  if (!str) return '';
-  return str.replace(/[&<>]/g, function(m) {
-    if (m === '&') return '&amp;';
-    if (m === '<') return '&lt;';
-    if (m === '>') return '&gt;';
-    return m;
-  });
-}
-
-function updateStats() {
-  const total = bookings.length;
-  const pending = bookings.filter(b => b.status === 'pending').length;
-  const confirmed = bookings.filter(b => b.status === 'confirmed').length;
-  const completed = bookings.filter(b => b.status === 'completed').length;
-  
-  const totalEl = document.getElementById('totalBookings');
-  const pendingEl = document.getElementById('pendingBookings');
-  const confirmedEl = document.getElementById('confirmedBookings');
-  const completedEl = document.getElementById('completedBookings');
-  
-  if (totalEl) totalEl.textContent = total;
-  if (pendingEl) pendingEl.textContent = pending;
-  if (confirmedEl) confirmedEl.textContent = confirmed;
-  if (completedEl) completedEl.textContent = completed;
-}
-
-function updateBookingStatus(id, newStatus) {
-  const booking = bookings.find(b => b.id === id);
-  if (booking) {
-    booking.status = newStatus;
+function deleteBooking(id) {
+  if (confirm('هل أنت متأكد من حذف هذا الحجز؟')) {
+    bookings = bookings.filter(b => b.id !== id);
     saveBookings();
     renderDashboardTable();
   }
 }
 
-function filterBookings() {
-  renderDashboardTable();
+function renderDashboardTable() {
+  const tbody = document.getElementById('bookingsTableBody');
+  if (!tbody) return;
+  bookings = loadBookings(); // always re-read from localStorage
+
+  let filtered = [...bookings];
+  const searchTerm = document.getElementById('searchBookings')?.value.toLowerCase() || '';
+  if (searchTerm) {
+    filtered = filtered.filter(b =>
+      b.name.toLowerCase().includes(searchTerm) ||
+      b.email.toLowerCase().includes(searchTerm) ||
+      b.phone.toLowerCase().includes(searchTerm)
+    );
+  }
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:40px;">📭 لا توجد حجوزات</td></tr>';
+  } else {
+    tbody.innerHTML = filtered.map((b, idx) => {
+      // Extract numeric part from phone for WhatsApp (remove + and any non-digit)
+      let rawPhone = b.phone.replace(/[^0-9]/g, '');
+      const phoneDisplay = b.phone;
+      const waMsg = encodeURIComponent(
+        `مرحباً ${b.name} 👋\n\n` +
+        `يسعدنا إخبارك بأن حجزك لدى عيادة د. محمد عماد الدين قد تم تأكيده ✅\n\n` +
+        `📅 الموعد: ${b.date}\n🩺 نوع الخدمة: ${b.type}\n\n` +
+        `نرجو الحضور قبل موعدك بـ 15 دقيقة.\n` +
+        `شكراً لثقتك — د. محمد عماد الدين 🏥`
+      );
+      // WhatsApp opens auto on confirm
+        
+      const isConfirmHighlight = b.status === 'confirmed';
+      const highlightClass = isConfirmHighlight ? 'highlight-row' : '';
+      
+      // Copy phone number function inline
+      const copyPhoneFunc = `copyToClipboard('${phoneDisplay.replace(/'/g, "\\'")}')`;
+      
+      return `
+        <tr id="row-${b.id}" class="${highlightClass}">
+          <td>${idx + 1}</td>
+          <td>${escapeHtml(b.name)}</td>
+          <td>${escapeHtml(b.email)}</td>
+          <td>${escapeHtml(phoneDisplay)} <button class="copy-btn" onclick="${copyPhoneFunc}" title="نسخ الرقم"><i class="fas fa-copy"></i></button></td>
+          <td>${escapeHtml(b.type)}</td>
+          <td>${b.date}</td>
+          <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;">${escapeHtml((b.message||'').substring(0,50))}${(b.message||'').length > 50 ? '…' : ''}</td>
+          <td><span class="status-badge status-${b.status}">${b.status}</span></td>
+          <td style="white-space:nowrap">
+            <button class="action-btn" onclick="updateBookingStatus(${b.id},'confirmed')">✓ Confirm</button>
+            <button class="action-btn" onclick="updateBookingStatus(${b.id},'completed')">✔ Done</button>
+            <button class="action-btn" onclick="updateBookingStatus(${b.id},'cancelled')">✗ Cancel</button>
+            <button class="action-btn delete-btn" onclick="deleteBooking(${b.id})"><i class="fas fa-trash-alt"></i> Delete</button>
+          </td>
+        </tr>`;
+    }).join('');
+  }
+  updateStats();
 }
 
-function showDashboardLogin() {
-  document.getElementById('dashboardLoginModal').style.display = 'flex';
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    alert('تم نسخ الرقم: ' + text);
+  }).catch(() => {
+    alert('فشل نسخ الرقم');
+  });
 }
+
+function openWaModalWithNumber(phoneNumber, name, date, type) {
+  const msgText =
+    `مرحباً ${name} 👋\n\n` +
+    `يسعدنا إخبارك بأن حجزك لدى عيادة د. محمد عماد الدين قد تم تأكيده ✅\n\n` +
+    `📅 الموعد: ${date}\n` +
+    `🩺 نوع الخدمة: ${type}\n\n` +
+    `نرجو الحضور قبل موعدك بـ 15 دقيقة.\n` +
+    `في حال رغبتك في التعديل أو الإلغاء، يُرجى التواصل معنا مسبقاً.\n\n` +
+    `شكراً لثقتك — د. محمد عماد الدين 🏥`;
+
+  document.getElementById('waModalMsg').textContent = msgText;
+  document.getElementById('waModalSub').textContent = `سترسل إلى: ${name} — ${phoneNumber}`;
+  document.getElementById('waModalLink').href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(msgText)}`;
+  document.getElementById('waModal').classList.add('open');
+}
+
+// Override old openWaModal for backward compatibility
+window.openWaModal = function(bookingId) {
+  const b = bookings.find(x => x.id === bookingId);
+  if (!b) return;
+  let rawPhone = b.phone.replace(/[^0-9]/g, '');
+  if (rawPhone.length >= 10) openWaModalWithNumber(rawPhone, b.name, b.date, b.type);
+  else alert("رقم الهاتف غير مكتمل أو غير صحيح لإرسال واتساب.");
+};
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
+}
+
+function updateStats() {
+  const total     = bookings.length;
+  const pending   = bookings.filter(b => b.status === 'pending').length;
+  const confirmed = bookings.filter(b => b.status === 'confirmed').length;
+  const completed = bookings.filter(b => b.status === 'completed').length;
+  ['totalBookings','pendingBookings','confirmedBookings','completedBookings']
+    .forEach((id, i) => { const el = document.getElementById(id); if(el) el.textContent = [total,pending,confirmed,completed][i]; });
+}
+
+function updateBookingStatus(id, newStatus) {
+  bookings = loadBookings();
+  const booking = bookings.find(b => b.id === id);
+  if (booking) {
+    booking.status = newStatus;
+    saveBookings();
+    renderDashboardTable();
+    // Auto-open WhatsApp directly on confirm
+    if (newStatus === 'confirmed') {
+      let rawPhone = booking.phone.replace(/[^0-9]/g, '');
+      if (rawPhone.length >= 10) {
+        const waMsg = buildConfirmMsg(booking.name, booking.date, booking.type);
+        window.open('https://wa.me/' + rawPhone + '?text=' + encodeURIComponent(waMsg), '_blank');
+      }
+    } else {
+      // Remove highlight if status changed from confirmed to something else
+      const row = document.getElementById(`row-${id}`);
+      if (row) row.classList.remove('highlight-row');
+    }
+  }
+}
+
+function filterBookings() { renderDashboardTable(); }
+
+function showDashboardLogin() { document.getElementById('dashboardLoginModal').style.display = 'flex'; }
 
 function loginToDashboard() {
   const password = document.getElementById('dashboardPassword').value;
+  const errEl = document.getElementById('loginError');
   if (password === 'admin123') {
     document.getElementById('dashboardLoginModal').style.display = 'none';
     document.getElementById('dashboard-page').style.display = 'block';
     document.getElementById('home-page').style.display = 'none';
-    // bookings already in memory
     renderDashboardTable();
   } else {
-    document.getElementById('loginError').textContent = 'Invalid password. Try: admin123';
+    if (errEl) {
+      errEl.textContent = 'Incorrect password. Please try again.';
+      errEl.style.animation = 'none';
+      void errEl.offsetWidth;
+      errEl.style.animation = '';
+    }
   }
+}
+
+function toggleLoginPwVis() {
+  const inp = document.getElementById('dashboardPassword');
+  const ico = document.getElementById('loginEyeIcon');
+  if (!inp) return;
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+  if (ico) ico.className = inp.type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
 }
 
 function logoutFromDashboard() {
@@ -1319,7 +2067,7 @@ document.addEventListener('keydown', function(e) {
 const observer = new IntersectionObserver(e => { e.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-const counterObserver = new IntersectionObserver(e => { e.forEach(entry => { if (entry.isIntersecting) { const el = entry.target, target = parseInt(el.dataset.target), duration = 1800, step = target / (duration / 16); let cur = 0; const t = setInterval(() => { cur = Math.min(cur + step, target); el.textContent = Math.floor(cur); if (cur >= target) clearInterval(t); }, 16); counterObserver.unobserve(el); } }); }, { threshold: 0.5 });
+const counterObserver = new IntersectionObserver(e => { e.forEach(entry => { if (entry.isIntersecting) { const el = entry.target, target = parseInt(el.dataset.target), duration = 1800, step = target / (duration / 16); let cur = 0; const t = setInterval(() => { cur = Math.min(cur + step, target); cur = Math.floor(cur); el.textContent = cur; if (cur >= target) clearInterval(t); }, 16); counterObserver.unobserve(el); } }); }, { threshold: 0.5 });
 document.querySelectorAll('.counter').forEach(c => counterObserver.observe(c));
 
 let slideIndex = 0; const slides = document.getElementById('testimonial-slides'); const totalSlides = document.querySelectorAll('.testimonial-slide').length;
@@ -1353,13 +2101,65 @@ function toggleMobileNav() { const l = document.querySelector('.nav-links'), c =
 const langButtons = document.querySelectorAll('.lang-btn');
 function setLanguage(lang) { if (lang === 'en') { document.body.dir = "ltr"; document.body.style.textAlign = "left"; } else { document.body.dir = "rtl"; document.body.style.textAlign = "right"; } langButtons.forEach(btn => { if (btn.dataset.lang === lang) btn.classList.add('active'); else btn.classList.remove('active'); }); localStorage.setItem('preferred_lang', lang); }
 langButtons.forEach(btn => { btn.addEventListener('click', () => setLanguage(btn.dataset.lang)); });
-setLanguage('ar');
+setLanguage('en');
 
 let currentMode = 'grid'; const toggleBtn = document.getElementById('displayModeToggle'); const toggleIcon = toggleBtn.querySelector('i');
 function setDisplayMode(mode) { document.body.classList.remove('grid-mode', 'list-mode'); document.body.classList.add(mode + '-mode'); currentMode = mode; localStorage.setItem('portfolioDisplayMode', mode); toggleIcon.className = mode === 'grid' ? 'fas fa-th-large' : 'fas fa-list-ul'; }
 toggleBtn.addEventListener('click', () => { setDisplayMode(currentMode === 'grid' ? 'list' : 'grid'); });
 const savedMode = localStorage.getItem('portfolioDisplayMode'); setDisplayMode(savedMode === 'list' ? 'list' : 'grid');
 
+// Surgery Video Toggle
+function toggleSurgeryVideo() {
+  const video = document.getElementById('surgeryVideoEl');
+  const overlay = document.getElementById('videoPlayOverlay');
+  const icon = document.getElementById('videoPlayIcon');
+  if (!video) return;
+  if (video.paused) {
+    video.play();
+    overlay.style.opacity = '0';
+    overlay.style.pointerEvents = 'none';
+    icon.className = 'fas fa-pause';
+  } else {
+    video.pause();
+    overlay.style.opacity = '1';
+    overlay.style.pointerEvents = 'auto';
+    icon.className = 'fas fa-play';
+  }
+}
+const surgeryVideoEl = document.getElementById('surgeryVideoEl');
+if (surgeryVideoEl) {
+  surgeryVideoEl.addEventListener('ended', () => {
+    const overlay = document.getElementById('videoPlayOverlay');
+    const icon = document.getElementById('videoPlayIcon');
+    if (overlay) { overlay.style.opacity = '1'; overlay.style.pointerEvents = 'auto'; }
+    if (icon) icon.className = 'fas fa-play';
+  });
+  surgeryVideoEl.addEventListener('click', toggleSurgeryVideo);
+}
+
+// Staff Image Upload
+function triggerStaffImageUpload() {
+  const fileInput = document.createElement('input');
+  fileInput.type = 'file';
+  fileInput.accept = 'image/*';
+  fileInput.style.display = 'none';
+  document.body.appendChild(fileInput);
+  fileInput.click();
+  fileInput.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const img = document.getElementById('staffBannerImg');
+        if (img) img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+    document.body.removeChild(fileInput);
+  });
+}
+
+// Service Image Upload
 function triggerImageUpload(serviceId) {
   const fileInput = document.createElement('input');
   fileInput.type = 'file';
@@ -1380,6 +2180,139 @@ function triggerImageUpload(serviceId) {
     document.body.removeChild(fileInput);
   });
 }
+
+// ── Build WhatsApp confirmation message ──────────────────────
+function buildConfirmMsg(name, date, type) {
+  return (
+    'مرحباً ' + name + ' 👋\n\n' +
+    'نبشركم بأن موعدكم لدى عيادة د. محمد عماد الدين تم تأكيده بنجاح ✅\n\n' +
+    '━━━━━━━━━━━━━━━━━━━━━\n' +
+    '📅 التاريخ: ' + date + '\n' +
+    '🩺 الخدمة: ' + type + '\n' +
+    '━━━━━━━━━━━━━━━━━━━━━\n\n' +
+    '🕐 يُرجى الحضور قبل موعدكم بـ 15 دقيقة.\n' +
+    '📞 للاستفسار أو التعديل: +201027870022\n\n' +
+    'شكراً لثقتكم الغالية 🏥\n' +
+    '— د. محمد عماد الدين\n' +
+    'مدرس المسالك البولية — جامعة بني سويف'
+  );
+}
+
+// ── Country Picker ──────────────────────────────────────────
+const COUNTRIES = [
+  { code:'20',  flag:'🇪🇬', name:'Egypt',          dial:'+20'  },
+  { code:'966', flag:'🇸🇦', name:'Saudi Arabia',   dial:'+966' },
+  { code:'971', flag:'🇦🇪', name:'UAE',            dial:'+971' },
+  { code:'974', flag:'🇶🇦', name:'Qatar',          dial:'+974' },
+  { code:'965', flag:'🇰🇼', name:'Kuwait',         dial:'+965' },
+  { code:'973', flag:'🇧🇭', name:'Bahrain',        dial:'+973' },
+  { code:'968', flag:'🇴🇲', name:'Oman',           dial:'+968' },
+  { code:'962', flag:'🇯🇴', name:'Jordan',         dial:'+962' },
+  { code:'961', flag:'🇱🇧', name:'Lebanon',        dial:'+961' },
+  { code:'218', flag:'🇱🇾', name:'Libya',          dial:'+218' },
+  { code:'216', flag:'🇹🇳', name:'Tunisia',        dial:'+216' },
+  { code:'212', flag:'🇲🇦', name:'Morocco',        dial:'+212' },
+  { code:'213', flag:'🇩🇿', name:'Algeria',        dial:'+213' },
+  { code:'249', flag:'🇸🇩', name:'Sudan',          dial:'+249' },
+  { code:'967', flag:'🇾🇪', name:'Yemen',          dial:'+967' },
+  { code:'964', flag:'🇮🇶', name:'Iraq',           dial:'+964' },
+  { code:'963', flag:'🇸🇾', name:'Syria',          dial:'+963' },
+  { code:'1',   flag:'🇺🇸', name:'United States',  dial:'+1'   },
+  { code:'44',  flag:'🇬🇧', name:'United Kingdom', dial:'+44'  },
+  { code:'49',  flag:'🇩🇪', name:'Germany',        dial:'+49'  },
+  { code:'33',  flag:'🇫🇷', name:'France',         dial:'+33'  },
+  { code:'39',  flag:'🇮🇹', name:'Italy',          dial:'+39'  },
+  { code:'34',  flag:'🇪🇸', name:'Spain',          dial:'+34'  },
+  { code:'90',  flag:'🇹🇷', name:'Turkey',         dial:'+90'  },
+  { code:'91',  flag:'🇮🇳', name:'India',          dial:'+91'  },
+  { code:'86',  flag:'🇨🇳', name:'China',          dial:'+86'  },
+  { code:'1-CA',flag:'🇨🇦', name:'Canada',         dial:'+1'   },
+  { code:'55',  flag:'🇧🇷', name:'Brazil',         dial:'+55'  },
+  { code:'61',  flag:'🇦🇺', name:'Australia',      dial:'+61'  },
+];
+
+let selectedCountry = COUNTRIES[0];
+let filteredCountries = [...COUNTRIES];
+
+function renderCountryList(list) {
+  const el = document.getElementById('countryList');
+  if (!el) return;
+  el.innerHTML = list.map(c =>
+    '<div class="country-option' + (c.code === selectedCountry.code ? ' selected' : '') + '" onclick="selectCountry(\'' + c.code + '\')">' +
+    '<span class="opt-flag">' + c.flag + '</span>' +
+    '<span class="opt-name">' + c.name + '</span>' +
+    '<span class="opt-code">' + c.dial + '</span>' +
+    '</div>'
+  ).join('');
+}
+
+function selectCountry(code) {
+  const country = COUNTRIES.find(c => c.code === code);
+  if (!country) return;
+  selectedCountry = country;
+  const flagEl = document.getElementById('selectedFlag');
+  const dialEl = document.getElementById('selectedDial');
+  if (flagEl) flagEl.textContent = country.flag;
+  if (dialEl) dialEl.textContent = country.dial;
+  const dialCode = country.code.replace(/[^0-9]/g, '');
+  document.getElementById('bookingCountryCode').value = dialCode;
+  closeCountryPicker();
+  renderCountryList(filteredCountries);
+}
+
+function filterCountries(q) {
+  const query = q.toLowerCase();
+  filteredCountries = query
+    ? COUNTRIES.filter(c => c.name.toLowerCase().includes(query) || c.dial.includes(query))
+    : [...COUNTRIES];
+  renderCountryList(filteredCountries);
+}
+
+function toggleCountryPicker(e) {
+  if (e) e.stopPropagation();
+  const picker = document.getElementById('countryPicker');
+  if (picker.classList.contains('open')) { closeCountryPicker(); return; }
+  picker.classList.add('open');
+  const search = document.getElementById('countrySearch');
+  if (search) { search.value = ''; filterCountries(''); setTimeout(() => search.focus(), 50); }
+}
+
+function closeCountryPicker() {
+  const picker = document.getElementById('countryPicker');
+  if (picker) picker.classList.remove('open');
+}
+
+document.addEventListener('click', function(e) {
+  const picker = document.getElementById('countryPicker');
+  if (picker && !picker.contains(e.target)) closeCountryPicker();
+});
+
+// Init country list
+renderCountryList(COUNTRIES);
+// ── End Country Picker ──────────────────────────────────────
+// Optional: Show a small hint on mobile that admin button exists
+if (window.innerWidth <= 768) {
+  setTimeout(() => {
+    const btn = document.getElementById('mobileAdminBtn');
+    if (btn) {
+      btn.style.animation = 'pulse 1s ease-in-out 3';
+    }
+  }, 2000);
+}
+
+// Add pulse animation
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220,220,220,0.4); }
+    50% { transform: scale(1.15); box-shadow: 0 0 0 8px rgba(220,220,220,0); }
+  }
+`;
+document.head.appendChild(style);
 </script>
+<!-- Floating Admin Button (for mobile) -->
+<button id="mobileAdminBtn" class="mobile-admin-btn" onclick="showDashboardLogin()">
+  <i class="fas fa-shield-alt"></i>
+</button>
 </body>
 </html>
